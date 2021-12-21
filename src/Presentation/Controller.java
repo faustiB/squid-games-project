@@ -1,5 +1,6 @@
 package Presentation;
 
+import Business.TrialManager;
 import Presentation.Menu;
 
 /**
@@ -8,8 +9,15 @@ import Presentation.Menu;
  */
 public class Controller {
 
-    private static final int SHOW_PROGRESS = 1;
-    private static final int EXIT_MENU = 2;
+    private static final int MANAGE_TRIALS = 1;
+    private static final int MANAGE_EDITIONS = 2;
+    private static final int EXIT_COMPOSER_MENU = 3;
+
+    private static final String CREATE_TRIAL = "a";
+    private static final String LIST_TRIALS = "b";
+    private static final String DELETE_TRIAL = "c";
+    private static final String EXIT_TRIAL_MENU = "d";
+
 
     private final Menu menu;
 
@@ -24,11 +32,11 @@ public class Controller {
 
     /**
      * Method used to control of the program correctly.
-     *
      */
     public void run() {
 
         int option;
+        boolean exit = false;
 
         //true for I, false for II
         if (menu.checkPersistanceInput()) {
@@ -38,31 +46,58 @@ public class Controller {
         }
 
         //true for A, false for B
+        menu.showBanner();
         if (menu.checkRoleInput()) {
-            menu.showMessage("Entering management mode...");
+            menu.showMessage("\nEntering management mode...\n");
+
+            do {
+                menu.showComposerMenu();
+                option = menu.getOptionComposerMenu();
+
+
+                switch (option) {
+
+                    case MANAGE_TRIALS -> manageTrials();
+                    //TODO: Cambiar los exits por las opciones que tocan.
+                    case MANAGE_EDITIONS -> exit = true;
+                    case EXIT_COMPOSER_MENU -> exit = true;
+                }
+
+            } while (!exit);
+
         } else {
-            menu.showMessage("Entering execution mode...");
+            menu.showMessage("\nEntering execution mode...\n");
         }
 
-        menu.showBanner();
-        do {
-            option = menu.askForInteger("Enter an option: ");
+        exitMenu();
 
-            runOption(option);
-        } while (option != EXIT_MENU);
     }
 
     /**
-     * Method used to invoke the functions desired by the user.
-     *
-     * @param option: option chosen by the user.
+     * Method to manage the trials.
      */
-    private void runOption(int option){
-        switch (option) {
-            case SHOW_PROGRESS -> menu.showMessage("");
-            case EXIT_MENU -> exitMenu();
-            default -> menu.showMessage("Wrong option. Enter a number from 1 to 2, both included");
-        }
+
+    private void manageTrials() {
+        boolean exit = false;
+        TrialManager tm = new TrialManager();
+        do {
+            menu.showTrialMenu();
+            String optionTrial = menu.getTrialOption();
+
+
+            switch (optionTrial) {
+                case CREATE_TRIAL -> {
+                    menu.showTrialTypes();
+                    int trialType = menu.getTrialType();
+
+                    tm.createTrial(trialType);
+                }
+
+                case LIST_TRIALS -> tm.listTrials();
+                case DELETE_TRIAL -> tm.deleteTrial();
+                case EXIT_TRIAL_MENU -> exit = true;
+            }
+        } while (!exit);
     }
 
     /**
@@ -70,6 +105,7 @@ public class Controller {
      */
     private void exitMenu() {
         menu.spacing();
-        menu.showMessage("");
+        menu.showMessage("Shutting down...");
+        menu.closeScanner();
     }
 }
