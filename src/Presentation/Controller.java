@@ -80,10 +80,13 @@ public class Controller {
     private void manageTrials() {
         boolean exit = false;
         TrialManager tm = new TrialManager();
+
+        //TODO: cuando añadimos trials en el trialmanager y salimos de ahi, no hay persistencia, se borran los trials
+        // que hemos creado. Se deberían devolver al hacer exit y guardarlos de alguna manera? Variable en el controller?
+
         do {
             menu.showTrialMenu();
             String optionTrial = menu.getTrialOption();
-
 
             switch (optionTrial) {
                 case CREATE_TRIAL -> {

@@ -2,11 +2,12 @@ package Business;
 
 import Presentation.Menu;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class TrialManager {
 
     Menu m = new Menu();
+    LinkedList<Trial> trials = new LinkedList<>();
 
     private static final int ARTICLE = 1;
     private static final int MASTER = 2;
@@ -35,6 +36,7 @@ public class TrialManager {
         int denyProbability = m.askForInteger("Enter the rejection probability: ");
 
         Article article = new Article(name, journalName, magazineQuartile, acceptProbability, revisionProbability, denyProbability);
+        trials.add(article);
     }
 
     private void createMasterTrial() {
@@ -44,6 +46,7 @@ public class TrialManager {
         int creditPass = m.askForInteger("Enter the credit pass probability: ");
 
         Master master = new Master(name, masterName, ects, creditPass);
+        trials.add(master);
     }
 
     private void createThesisTrial() {
@@ -52,6 +55,7 @@ public class TrialManager {
         int difficulty = m.askForInteger("Enter the defense difficulty: ");
 
         Thesis thesis = new Thesis(name, thesisName, difficulty);
+        trials.add(thesis);
     }
 
     private void createBudgetTrial() {
@@ -60,10 +64,16 @@ public class TrialManager {
         int amount = m.askForInteger("Enter the budget amount: ");
 
         Budget budget = new Budget(name, budgetName, amount);
+        trials.add(budget);
     }
 
     //TODO: Implementar metodo y posibles cambios en el controler, puesto para compilar.
     public void listTrials() {
+        if (trials.size() != 0) {
+            for (Trial trial : trials) {
+                System.out.println(trial.name);
+            }
+        } else m.showMessage("No trials created yet...");
     }
     //TODO: Implementar metodo y posibles cambios en el controler, puesto para compilar.
     public void deleteTrial() {
