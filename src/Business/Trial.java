@@ -1,5 +1,7 @@
 package Business;
 
+import java.util.HashMap;
+
 public class Trial {
     protected String name;
 
@@ -7,7 +9,9 @@ public class Trial {
         this.name = name;
     }
 
-    public void printInformation() {
-        System.out.println("Trial: "+ name);
+    public HashMap<String, String> getDetails() {
+        HashMap<String,String> map = new HashMap<>();
+        map.put("name",this.name);
+        return map;
     }
 }

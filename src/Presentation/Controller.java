@@ -20,6 +20,7 @@ public class Controller {
 
 
     private final Menu menu;
+    private final TrialManager tm = new TrialManager();
 
     /**
      * Constructor to generate a Presentation.Controller
@@ -79,7 +80,7 @@ public class Controller {
 
     private void manageTrials() {
         boolean exit = false;
-        TrialManager tm = new TrialManager();
+
 
         //TODO: cuando añadimos trials en el trialmanager y salimos de ahi, no hay persistencia, se borran los trials
         // que hemos creado. Se deberían devolver al hacer exit y guardarlos de alguna manera? Variable en el controller?
@@ -110,5 +111,7 @@ public class Controller {
         menu.spacing();
         menu.showMessage("Shutting down...");
         menu.closeScanner();
+
+        //Escribir en el fichero .
     }
 }

@@ -1,6 +1,10 @@
 package Presentation;
 
+import Business.*;
+
+import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -141,6 +145,31 @@ public class Menu {
         }
     }
 
+    public String askForQuartile(String message) {
+        String quartile;
+        while (true) {
+            try {
+                System.out.print(message);
+                quartile = scanner.nextLine();
+                if (checkQuartile(quartile)) {
+                    return quartile;
+                } else {
+                    showMessage("\nPlease introduce a valid quartile (Q1, Q2, Q3, Q4\n");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong input, please enter the one of the desired options. ");
+            }
+        }
+    }
+
+    public boolean checkQuartile(String quartile) {
+        return  quartile.equals("Q1") ||
+                quartile.equals("Q2") ||
+                quartile.equals("Q3") ||
+                quartile.equals("Q4");
+    }
+
+
     /**
      * Method that processes and checks that an integer has been entered by the user.
      *
@@ -159,6 +188,32 @@ public class Menu {
             }
         }
     }
+
+    /**
+     * Ask for integer between a delimeter
+     *
+     * @param message message to be shown
+     * @param num1    low delimeter
+     * @param num2    high delimeter
+     * @return number entered.
+     */
+    public int askForIntegerBetweenDelimeters(String message, int num1, int num2) {
+        int number;
+        while (true) {
+            try {
+                System.out.print(message);
+                number = scanner.nextInt();
+                if (checkBetweenNumbersType(number, num1, num2)) {
+                    return number;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("That's not a valid integer, try again!");
+            } finally {
+                scanner.nextLine();
+            }
+        }
+    }
+
 
     /**
      * Closing of Scanner.
@@ -196,7 +251,7 @@ public class Menu {
             System.out.print("\nEnter an option: ");
             try {
                 opt = scanner.nextInt();
-                if (checkBetweenNumbersType(opt,1,3)) {
+                if (checkBetweenNumbersType(opt, 1, 3)) {
                     check = true;
                 }
             } catch (NumberFormatException | InputMismatchException e) {
@@ -207,21 +262,6 @@ public class Menu {
         } while (!check);
 
         return opt;
-    }
-
-    /**
-     * Checking that the option selected is an available one.
-     *
-     * @param opt option
-     * @return true if it is okay , false if it is not okay
-     */
-    public boolean checkOptComposerMenu(int opt) {
-        if (opt > 0 && opt < 4) {
-            return true;
-        } else {
-            System.out.println("\nEnter a number between 1 and 3 included.\n");
-            return false;
-        }
     }
 
 
@@ -257,7 +297,7 @@ public class Menu {
      * @return boolean that determines if input is valid.
      */
     public boolean checkOptTrialMenu(String opt) {
-        if (opt.equals("a") || opt.equals("b") || opt.equals("c") || opt.equals("d")) {
+        if (opt.equalsIgnoreCase("a") || opt.equalsIgnoreCase("b") || opt.equalsIgnoreCase("c") || opt.equalsIgnoreCase("d")) {
             return true;
         } else {
             System.out.println("\nWorng option entered, only valid: 'a', 'b' , 'c' or 'd'.\n");
@@ -267,6 +307,7 @@ public class Menu {
 
     /**
      * Method to get the trial type number
+     *
      * @return trial type.
      */
     public int getTrialType() {
@@ -274,7 +315,7 @@ public class Menu {
         int trialType;
         do {
             trialType = askForInteger("Enter the trial's type: ");
-            if (checkBetweenNumbersType(trialType, 1,4)) {
+            if (checkBetweenNumbersType(trialType, 1, 4)) {
                 check = true;
             }
         } while (!check);
@@ -285,19 +326,45 @@ public class Menu {
 
     /**
      * Method to check if an option is between two numbers
+     *
      * @param option value to be checked
-     * @param num1 first delimiter
-     * @param num2 second delimiter
+     * @param num1   first delimiter
+     * @param num2   second delimiter
      * @return boolean that determines if option is between the delimiters.
      */
-    public boolean checkBetweenNumbersType(int option, int num1, int num2){
+    public boolean checkBetweenNumbersType(int option, int num1, int num2) {
         if (option == num1 || option == num2 || (option > num1 && option < num2)) {
             return true;
         } else {
-            System.out.println("\nEnter a number between "+ num1 +" and "+ num2 + " included.\n");
+            System.out.println("\nEnter a number between " + num1 + " and " + num2 + " included.\n");
             return false;
         }
     }
 
 
+    public void showDetailsArticle(Article article) {
+
+        HashMap<String, String> map = article.getDetails();
+
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (!entry.getKey().equals("% acceptance") && !entry.getKey().equals("revision") && !entry.getKey().equals("% rejection")) {
+                showMessage(entry.getKey() + " : " + entry.getValue());
+            }
+        }
+
+        showMessage("Chances: " + map.get("% acceptance") + "% acceptance. " + map.get("revision") + "% revision, " + map.get("% rejection") + "% rejection");
+
+    }
+
+    public void showDetailsThesis(Thesis thesis) {
+        //TODO rellenar
+    }
+
+    public void showDetailsMaster(Master master) {
+        //TODO rellenar
+    }
+
+    public void showDetailsBudget(Budget budget) {
+        //TODO rellenar
+    }
 }

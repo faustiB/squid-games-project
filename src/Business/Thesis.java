@@ -1,19 +1,28 @@
 package Business;
 
-public class Thesis extends Trial {
-    private String campEstudis;
-    private int dificultat;
+import java.util.HashMap;
 
-    public Thesis(String name, String campEstudis, int dificultat) {
+public class Thesis extends Trial {
+    private String studyField;
+    private int difficulty;
+
+    public Thesis(String name, String studyField, int dificultat) {
         super(name);
-        this.campEstudis = campEstudis;
-        this.dificultat = dificultat;
+        this.studyField = studyField;
+        this.difficulty = dificultat;
     }
 
     @Override
-    public void printInformation() {
+    public HashMap<String, String> getDetails() {
+        HashMap<String,String> map = new HashMap<>();
+        map.put("Trial",super.name);
+        map.put("Field",this.studyField);
+        map.put("Difficulty",String.valueOf(this.difficulty));
+        /*
         System.out.println("Trial: "+ super.name);
-        System.out.println("Field: "+ this.campEstudis);
-        System.out.println("Difficulty: " + this.dificultat);
+        System.out.println("Field: "+ this.studyField);
+        System.out.println("Difficulty: " + this.difficulty);*/
+
+        return map;
     }
 }
