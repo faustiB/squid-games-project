@@ -6,4 +6,8 @@ public class Trial {
     public Trial(String name) {
         this.name = name;
     }
+
+    public void printInformation() {
+        System.out.println("Trial: "+ name);
+    }
 }

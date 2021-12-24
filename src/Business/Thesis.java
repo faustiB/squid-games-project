@@ -9,4 +9,11 @@ public class Thesis extends Trial {
         this.campEstudis = campEstudis;
         this.dificultat = dificultat;
     }
+
+    @Override
+    public void printInformation() {
+        System.out.println("Trial: "+ super.name);
+        System.out.println("Field: "+ this.campEstudis);
+        System.out.println("Difficulty: " + this.dificultat);
+    }
 }

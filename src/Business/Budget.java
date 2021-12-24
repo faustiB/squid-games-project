@@ -9,4 +9,11 @@ public class Budget extends Trial {
         this.entityName = entityName;
         this.budgetQuantity = budgetQuantity;
     }
+
+    @Override
+    public void printInformation() {
+        System.out.println("Trial: "+ super.name);
+        System.out.println("Entity: "+ this.entityName);
+        System.out.println("Budget: " + this.budgetQuantity);
+    }
 }

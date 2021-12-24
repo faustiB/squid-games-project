@@ -67,13 +67,30 @@ public class TrialManager {
         trials.add(budget);
     }
 
-    //TODO: Implementar metodo y posibles cambios en el controler, puesto para compilar.
     public void listTrials() {
+        int option, i = 0;
+
         if (trials.size() != 0) {
-            for (Trial trial : trials) {
-                System.out.println(trial.name);
+            for (i = 0; i < trials.size(); i++) {
+                m.showMessage(i+1 + ") "+ trials.get(i).name);
             }
+            m.spacing();
+            m.showMessage(i+1 + ") Back");
         } else m.showMessage("No trials created yet...");
+
+        option = m.askForInteger("Enter an option: ");
+        option--;
+
+        //TODO: no se si la logica esta bien hecha, revisar porque hace cosas raras...
+        while (option < 1 && option != i+1) {
+            if (option < i+1) {
+                trials.get(option).printInformation();
+                break;
+            } else {
+                m.showMessage("There is no trial with that number... ");
+                option = m.askForInteger("Enter an option: ");
+            }
+        }
     }
     //TODO: Implementar metodo y posibles cambios en el controler, puesto para compilar.
     public void deleteTrial() {

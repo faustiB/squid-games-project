@@ -11,4 +11,11 @@ public class Master extends Trial {
         this.numCredits = numCredits;
         this.chanceToPass = chanceToPass;
     }
+
+    @Override
+    public void printInformation() {
+        System.out.println("Trial: "+ super.name);
+        System.out.println("Master: "+ this.masterName);
+        System.out.println("ECTS: " + this.numCredits + ", with a " + this.chanceToPass + "% chance to pass each one");
+    }
 }
