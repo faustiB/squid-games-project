@@ -104,20 +104,24 @@ public class TrialManager {
 
             option = getTrialSelectedInput();
             if (menu.checkBetweenNumbersType(option + 1, 1, trials.size())) {
+                if (option == trials.size()) {
+                    menu.showMessage("\nGoing Back to previous menu...\n");
+                } else {
+                    if (trials.get(option) instanceof Article) {
+                        menu.showDetailsArticle((Article) trials.get(option));
 
-                if (trials.get(option) instanceof Article) {
-                    menu.showDetailsArticle((Article) trials.get(option));
+                    } else if (trials.get(option) instanceof Thesis) {
+                        menu.showDetailsThesis((Thesis) trials.get(option));
 
-                } else if (trials.get(option) instanceof Thesis) {
-                    menu.showDetailsThesis((Thesis) trials.get(option));
+                    } else if (trials.get(option) instanceof Master) {
+                        menu.showDetailsMaster((Master) trials.get(option));
 
-                } else if (trials.get(option) instanceof Master) {
-                    menu.showDetailsMaster((Master) trials.get(option));
+                    } else if (trials.get(option) instanceof Budget) {
+                        menu.showDetailsBudget((Budget) trials.get(option));
 
-                } else if (trials.get(option) instanceof Budget) {
-                    menu.showDetailsBudget((Budget) trials.get(option));
-
+                    }
                 }
+
 
             }
         }
@@ -126,19 +130,24 @@ public class TrialManager {
     }
 
     /**
+     * showing of available trials via screen.
+     */
+    public void showingOfTrials(){
+        menu.showTrials(trials);
+    }
+
+    /**
      * Get trial selected by scren of listed trials.
      *
      * @return input selected by screen
      */
-    private int getTrialSelectedInput() {
-        int option = -1, i;
+    public int getTrialSelectedInput() {
+        int option = -1;
 
         if (trials.size() != 0) {
-            for (i = 0; i < trials.size(); i++) {
-                menu.showMessage(i + 1 + ") " + trials.get(i).name);
-            }
+            showingOfTrials();
             menu.spacing();
-            menu.showMessage(i + 1 + ") Back");
+            menu.showMessage(trials.size() + 1 + ") Back");
             option = menu.askForInteger("Enter an option: ");
             option--;
         }
@@ -146,7 +155,9 @@ public class TrialManager {
         return option;
     }
 
-
+    /**
+     * Deletion of trials.
+     */
     public void deleteTrial() {
 
         int option;

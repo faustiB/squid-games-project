@@ -3,6 +3,7 @@ package Business;
 import java.util.HashMap;
 
 public class Trial {
+
     protected String name;
 
     public Trial(String name) {
@@ -10,12 +11,19 @@ public class Trial {
     }
 
     public HashMap<String, String> getDetails() {
-        HashMap<String,String> map = new HashMap<>();
-        map.put("name",this.name);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("name", this.name);
         return map;
     }
 
-    public boolean checkName(String input){
+    public boolean checkName(String input) {
         return this.name.equals(input);
     }
+
+
+    public String getName() {
+        return name;
+    }
+
+
 }
