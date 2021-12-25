@@ -163,7 +163,7 @@ public class Menu {
     }
 
     public boolean checkQuartile(String quartile) {
-        return  quartile.equals("Q1") ||
+        return quartile.equals("Q1") ||
                 quartile.equals("Q2") ||
                 quartile.equals("Q3") ||
                 quartile.equals("Q4");
@@ -335,17 +335,24 @@ public class Menu {
     public boolean checkBetweenNumbersType(int option, int num1, int num2) {
         if (option == num1 || option == num2 || (option > num1 && option < num2)) {
             return true;
+        } else if (num1 == num2) {
+            System.out.println("\nIf you want to run it, You can only enter the number " + num1 + ".\n");
+            return false;
         } else {
             System.out.println("\nEnter a number between " + num1 + " and " + num2 + " included.\n");
             return false;
         }
     }
 
-
+    /**
+     * Showing of details of an article
+     *
+     * @param article Article input.
+     */
     public void showDetailsArticle(Article article) {
 
         HashMap<String, String> map = article.getDetails();
-
+        spacing();
         for (Map.Entry<String, String> entry : map.entrySet()) {
             if (!entry.getKey().equals("% acceptance") && !entry.getKey().equals("revision") && !entry.getKey().equals("% rejection")) {
                 showMessage(entry.getKey() + " : " + entry.getValue());
@@ -356,15 +363,53 @@ public class Menu {
 
     }
 
+    /**
+     * Showing details of thesis
+     *
+     * @param thesis Thesis input
+     */
     public void showDetailsThesis(Thesis thesis) {
-        //TODO rellenar
+
+        HashMap<String, String> map = thesis.getDetails();
+        spacing();
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            showMessage(entry.getKey() + " : " + entry.getValue());
+        }
     }
 
+    /**
+     * Showing details of Master
+     *
+     * @param master Master input
+     */
     public void showDetailsMaster(Master master) {
-        //TODO rellenar
+
+        HashMap<String, String> map = master.getDetails();
+        spacing();
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (!entry.getKey().equals("ECTS") && !entry.getKey().equals("% chance")) {
+                showMessage(entry.getKey() + " : " + entry.getValue());
+            }
+        }
+
+        showMessage("ECTS: " + map.get("ECTS") + " with a  " + map.get("% chance") + "% chance to pass each one \n");
+
     }
 
+    /**
+     * Showing of budget details.
+     *
+     * @param budget Budget Input.
+     */
     public void showDetailsBudget(Budget budget) {
-        //TODO rellenar
+        HashMap<String, String> map = budget.getDetails();
+        spacing();
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (entry.getKey().equals("Budget")) {
+                showMessage(entry.getKey() + " : " + entry.getValue() + " €");
+            } else {
+                showMessage(entry.getKey() + " : " + entry.getValue());
+            }
+        }
     }
 }

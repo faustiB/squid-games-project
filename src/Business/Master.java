@@ -21,11 +21,10 @@ public class Master extends Trial {
         map.put("Trial",super.name);
         map.put("Master",this.masterName);
         map.put("ECTS",String.valueOf(this.numCredits));
-        map.put("% chance to pass each one",String.valueOf(this.chanceToPass));
+        map.put("% chance",String.valueOf(this.chanceToPass));
         /*
         System.out.println("Trial: "+ super.name);
         System.out.println("Master: "+ this.masterName);
-        System.out.println("ECTS: " + this.numCredits + ", with a " + this.chanceToPass + "% chance to pass each one");
         */
         return map;
     }

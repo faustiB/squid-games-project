@@ -14,4 +14,8 @@ public class Trial {
         map.put("name",this.name);
         return map;
     }
+
+    public boolean checkName(String input){
+        return this.name.equals(input);
+    }
 }

@@ -19,10 +19,7 @@ public class Budget extends Trial {
         map.put("Trial",super.name);
         map.put("Entity",this.entityName);
         map.put("Budget",String.valueOf(this.budgetQuantity));
-        /*
-        System.out.println("Trial: "+ super.name);
-        System.out.println("Entity: "+ this.entityName);
-        System.out.println("Budget: " + this.budgetQuantity);*/
+
         return map;
     }
 }
