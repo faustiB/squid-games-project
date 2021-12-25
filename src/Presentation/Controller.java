@@ -1,5 +1,6 @@
 package Presentation;
 
+import Business.EditionManager;
 import Business.TrialManager;
 import Presentation.Menu;
 
@@ -18,9 +19,15 @@ public class Controller {
     private static final String DELETE_TRIAL = "c";
     private static final String EXIT_TRIAL_MENU = "d";
 
+    private static final String CREATE_EDITION = "a";
+    private static final String LIST_EDITIONS = "b";
+    private static final String DUPLICATE_EDITIONS = "c";
+    private static final String DELETE_EDITIONS = "d";
+    private static final String EXIT_EDITION_MENU = "e";
 
     private final Menu menu;
     private final TrialManager tm = new TrialManager();
+    private final EditionManager em = new EditionManager();
 
     /**
      * Constructor to generate a Presentation.Controller
@@ -55,12 +62,9 @@ public class Controller {
                 menu.showComposerMenu();
                 option = menu.getOptionComposerMenu();
 
-
                 switch (option) {
-
                     case MANAGE_TRIALS -> manageTrials();
-                    //TODO: Cambiar los exits por las opciones que tocan.
-                    case MANAGE_EDITIONS -> exit = true;
+                    case MANAGE_EDITIONS -> manageEditions();
                     case EXIT_COMPOSER_MENU -> exit = true;
                 }
 
@@ -81,10 +85,6 @@ public class Controller {
     private void manageTrials() {
         boolean exit = false;
 
-
-        //TODO: cuando añadimos trials en el trialmanager y salimos de ahi, no hay persistencia, se borran los trials
-        // que hemos creado. Se deberían devolver al hacer exit y guardarlos de alguna manera? Variable en el controller?
-
         do {
             menu.showTrialMenu();
             String optionTrial = menu.getTrialOption();
@@ -102,7 +102,30 @@ public class Controller {
                 case EXIT_TRIAL_MENU -> exit = true;
             }
         } while (!exit);
+        menu.showMessage("\nGoing Back to previous menu...\n");
     }
+
+    /**
+     *
+     */
+    private void manageEditions() {
+        boolean exit = false;
+
+        do {
+            menu.showEditionMenu();
+            String optionTrial = menu.getEditionOption();
+
+            switch (optionTrial) {
+                case CREATE_EDITION -> em.createEdition(tm);
+                case LIST_EDITIONS -> em.listEditions(tm);
+                /*case DUPLICATE_EDITIONS -> em.duplicateEditions();
+                case DELETE_EDITIONS -> em.deleteEditions();*/
+                case EXIT_EDITION_MENU -> exit = true;
+            }
+        } while (!exit);
+        menu.showMessage("\nGoing Back to previous menu...\n");
+    }
+
 
     /**
      * Option that closes the threads, shows the exit message exits the program.

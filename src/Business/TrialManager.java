@@ -3,7 +3,6 @@ package Business;
 import Presentation.Menu;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class TrialManager {
 
@@ -13,6 +12,14 @@ public class TrialManager {
     private static final int BUDGET = 4;
     Menu menu = new Menu();
     ArrayList<Trial> trials = new ArrayList<>();
+
+    public Trial getSpecificTrial(int index) {
+        return trials.get(index);
+    }
+
+    public boolean checkLengthOfTrialsIsNotZero() {
+        return getTrialsSize() != 0;
+    }
 
     public void createTrial(int trialType) {
         menu.spacing();
@@ -97,28 +104,36 @@ public class TrialManager {
      */
     public void listTrials() {
         int option;
-        if (trials.size() == 0) {
+        if (getTrialsSize() == 0) {
             menu.showMessage("\nNo trials created yet...\n");
         } else {
             menu.showMessage("\nHere are the current trials, do you want to see more details or go back ?\n");
 
             option = getTrialSelectedInput();
-            if (menu.checkBetweenNumbersType(option + 1, 1, trials.size())) {
 
-                if (trials.get(option) instanceof Article) {
-                    menu.showDetailsArticle((Article) trials.get(option));
+            if (option != getTrialsSize()) {
+                if (menu.checkBetweenNumbersType(option + 1, 1, getTrialsSize())) {
+                    //if (option == trials.size()) {
+                       // menu.showMessage("\nGoing Back to previous menu...\n");
+                    //} else {
+                        if (trials.get(option) instanceof Article) {
+                            menu.showDetailsArticle((Article) trials.get(option));
 
-                } else if (trials.get(option) instanceof Thesis) {
-                    menu.showDetailsThesis((Thesis) trials.get(option));
+                        } else if (trials.get(option) instanceof Thesis) {
+                            menu.showDetailsThesis((Thesis) trials.get(option));
 
-                } else if (trials.get(option) instanceof Master) {
-                    menu.showDetailsMaster((Master) trials.get(option));
+                        } else if (trials.get(option) instanceof Master) {
+                            menu.showDetailsMaster((Master) trials.get(option));
 
-                } else if (trials.get(option) instanceof Budget) {
-                    menu.showDetailsBudget((Budget) trials.get(option));
+                        } else if (trials.get(option) instanceof Budget) {
+                            menu.showDetailsBudget((Budget) trials.get(option));
 
+                        }
+                    //}
                 }
 
+            } else {
+                menu.showMessage("\nGoing back to the previous menu...\n");
             }
         }
 
@@ -126,38 +141,53 @@ public class TrialManager {
     }
 
     /**
+     * showing of available trials via screen.
+     */
+    public void showingOfTrials() {
+        menu.showTrials(trials);
+    }
+
+    /**
      * Get trial selected by scren of listed trials.
      *
      * @return input selected by screen
      */
-    private int getTrialSelectedInput() {
-        int option = -1, i;
+    public int getTrialSelectedInput() {
+        int option = -1;
+        boolean check = false;
 
-        if (trials.size() != 0) {
-            for (i = 0; i < trials.size(); i++) {
-                menu.showMessage(i + 1 + ") " + trials.get(i).name);
-            }
+        if (checkLengthOfTrialsIsNotZero()) {
+            showingOfTrials();
             menu.spacing();
-            menu.showMessage(i + 1 + ") Back");
-            option = menu.askForInteger("Enter an option: ");
+            menu.showMessage(getTrialsSize() + 1 + ") Back");
+
+            do {
+                option = menu.askForInteger("Enter an option: ");
+                if (menu.checkBetweenNumbersType(option ,1,getTrialsSize() + 1)){
+                    check = true;
+                }
+            } while(!check);
+
             option--;
         }
 
         return option;
     }
 
-
+    /**
+     * Deletion of trials.
+     */
     public void deleteTrial() {
 
         int option;
 
-        if (trials.size() == 0) {
+        if (getTrialsSize() == 0) {
             menu.showMessage("\nNo trials created yet...\n");
         } else {
             menu.showMessage("\nWhich trial do you want to delete ?\n");
 
             option = getTrialSelectedInput();
-            if (menu.checkBetweenNumbersType(option + 1, 1, trials.size())) {
+            if (menu.checkBetweenNumbersType(option + 1, 1, getTrialsSize())) {
 
                 String trialName = menu.askForString("\nEnter the trial's name for confimation :");
                 if (trials.get(option).checkName(trialName)) {
@@ -170,5 +200,9 @@ public class TrialManager {
         }
 
 
+    }
+
+    public int getTrialsSize() {
+        return trials.size();
     }
 }

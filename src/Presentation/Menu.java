@@ -2,10 +2,7 @@ package Presentation;
 
 import Business.*;
 
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Class created in order to implement methods that are useful for the program
@@ -47,6 +44,20 @@ public class Menu {
         System.out.println("\t\t4) Budget request");
         spacing();
     }
+
+    /**
+     * This functions prints the menu with the appropiate format.
+     */
+    public void showEditionMenu() {
+        spacing();
+        System.out.println("\ta) Create Edition");
+        System.out.println("\tb) List Editions");
+        System.out.println("\tc) Duplicate Edition");
+        System.out.println("\td) Delete Edition");
+        spacing();
+        System.out.println("\te) Back");
+    }
+
 
     /**
      * This functions prints the menu with the appropiate format.
@@ -154,7 +165,7 @@ public class Menu {
                 if (checkQuartile(quartile)) {
                     return quartile;
                 } else {
-                    showMessage("\nPlease introduce a valid quartile (Q1, Q2, Q3, Q4\n");
+                    showMessage("\nPlease introduce a valid quartile (Q1, Q2, Q3, Q4)\n");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input, please enter the one of the desired options. ");
@@ -305,6 +316,49 @@ public class Menu {
         }
     }
 
+
+    /**
+     * Getter of the option selected by screen
+     *
+     * @return integer introduced by the screen
+     */
+    public String getEditionOption() {
+        boolean check = false;
+        String opt = "";
+        do {
+            System.out.print("\nEnter an option: ");
+            try {
+                opt = scanner.next();
+                if (checkOptEditionMenu(opt)) {
+                    check = true;
+                }
+            } catch (NumberFormatException | InputMismatchException e) {
+                System.out.println("\nEnter a String please.\n");
+            } finally {
+                scanner.nextLine();
+            }
+        } while (!check);
+
+        return opt;
+    }
+
+    /**
+     * Method to check if option in trial menu is valid.
+     *
+     * @param opt option input
+     * @return boolean that determines if input is valid.
+     */
+    public boolean checkOptEditionMenu(String opt) {
+        if (opt.equalsIgnoreCase("a") || opt.equalsIgnoreCase("b") || opt.equalsIgnoreCase("c") || opt.equalsIgnoreCase("d") || opt.equalsIgnoreCase("e") ) {
+            return true;
+        } else {
+            System.out.println("\nWorng option entered, only valid: 'a', 'b' , 'c', 'd' or 'e'.\n");
+            return false;
+        }
+    }
+
+
+
     /**
      * Method to get the trial type number
      *
@@ -412,4 +466,32 @@ public class Menu {
             }
         }
     }
+
+    public void showTrials(ArrayList<Trial> trials) {
+        for (int i = 0; i < trials.size(); i++) {
+            showMessage(i + 1 + ") " + trials.get(i).getName());
+        }
+    }
+
+    public void showEditions(ArrayList<Edition> editions) {
+        for (int i = 0; i < editions.size(); i++) {
+            showTabulatedMessage(i + 1 + ") The trials " + (editions.get(i).getYear()));
+        }
+    }
+
+    public ArrayList<Trial> askForTrials(int numberOfTrials, TrialManager tm) {
+        ArrayList<Trial> trials = new ArrayList<Trial>();
+        int input;
+        for (int i = 1; i <= numberOfTrials ; i++) {
+            spacing();
+            input = askForIntegerBetweenDelimeters("Pick a trial (" + i +"/"+numberOfTrials+") : " ,1,tm.getTrialsSize());
+            trials.add (tm.getSpecificTrial(input - 1));
+        }
+        spacing();
+
+
+        return trials;
+    }
+
+
 }
