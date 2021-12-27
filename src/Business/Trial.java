@@ -26,4 +26,15 @@ public class Trial {
     }
 
 
+    public String getTextualDescription(String s) {
+        String ret = "";
+        switch (s) {
+            case "Article" -> ret = "Paper Publication";
+            case "Thesis" -> ret = "Doctoral thesis defense";
+            case "Master" -> ret = "Master studies";
+            case "Budget" -> ret = "Budget request";
+        }
+
+        return ret;
+    }
 }

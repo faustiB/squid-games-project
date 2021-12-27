@@ -349,14 +349,13 @@ public class Menu {
      * @return boolean that determines if input is valid.
      */
     public boolean checkOptEditionMenu(String opt) {
-        if (opt.equalsIgnoreCase("a") || opt.equalsIgnoreCase("b") || opt.equalsIgnoreCase("c") || opt.equalsIgnoreCase("d") || opt.equalsIgnoreCase("e") ) {
+        if (opt.equalsIgnoreCase("a") || opt.equalsIgnoreCase("b") || opt.equalsIgnoreCase("c") || opt.equalsIgnoreCase("d") || opt.equalsIgnoreCase("e")) {
             return true;
         } else {
             System.out.println("\nWorng option entered, only valid: 'a', 'b' , 'c', 'd' or 'e'.\n");
             return false;
         }
     }
-
 
 
     /**
@@ -480,12 +479,12 @@ public class Menu {
     }
 
     public ArrayList<Trial> askForTrials(int numberOfTrials, TrialManager tm) {
-        ArrayList<Trial> trials = new ArrayList<Trial>();
+        ArrayList<Trial> trials = new ArrayList<>();
         int input;
-        for (int i = 1; i <= numberOfTrials ; i++) {
+        for (int i = 1; i <= numberOfTrials; i++) {
             spacing();
-            input = askForIntegerBetweenDelimeters("Pick a trial (" + i +"/"+numberOfTrials+") : " ,1,tm.getTrialsSize());
-            trials.add (tm.getSpecificTrial(input - 1));
+            input = askForIntegerBetweenDelimeters("Pick a trial (" + i + "/" + numberOfTrials + ") : ", 1, tm.getTrialsSize());
+            trials.add(tm.getSpecificTrial(input - 1));
         }
         spacing();
 
@@ -494,4 +493,23 @@ public class Menu {
     }
 
 
+    public void showEdition(Edition edition) {
+        spacing();
+        showMessage("Year: " + edition.getYear());
+        showMessage("Players: " + edition.getNumberOfPlayers());
+        showMessage("Trials: ");
+        showTrialsOfEdition(edition.getNamesOfTrials());
+    }
+
+    private void showTrialsOfEdition(HashMap<Integer,String> names) {
+        int i = 1;
+        String[] arr;
+        for (Map.Entry<Integer, String> entry: names.entrySet()) {
+            arr = entry.getValue().split("-");
+            showTabulatedMessage(entry.getKey() + "- " +arr[1]+ " ("+arr[0]+")");
+
+        }
+        
+
+    }
 }

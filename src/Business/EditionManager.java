@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class EditionManager {
 
     Menu menu = new Menu();
-    private ArrayList<Edition> editions = new ArrayList<Edition>();
+    private ArrayList<Edition> editions = new ArrayList<>();
 
     /**
      * Creation of editions
@@ -69,11 +69,10 @@ public class EditionManager {
             option = getEditionSelectedInput();
             if (option != editions.size()){
                 if (menu.checkBetweenNumbersType(option + 1, 1, getEditionsSize() )){
-                    //if (option )
-                    System.out.println("\nKELOKE VAMO A MOTRAL \n");
+                    menu.showEdition(editions.get(option));
                 }
             } else {
-
+                menu.showMessage("\nGoing back to previous menu...\n");
             }
         }
     }
@@ -85,8 +84,7 @@ public class EditionManager {
         if (checkLengthOfEditionsIsNotZero()) {
             showingOfEditions();
             menu.spacing();
-            menu.showMessage(editions.size() + 1 + ") Back");
-            option = menu.askForInteger("Enter an option: ");
+            menu.showTabulatedMessage(editions.size() + 1 + ") Back");
 
             do {
                 option = menu.askForInteger("Enter an option: ");
@@ -94,7 +92,6 @@ public class EditionManager {
                     check = true;
                 }
             } while(!check);
-
 
             option--;
         }
