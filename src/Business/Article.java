@@ -9,8 +9,9 @@ public class Article extends Trial {
     private int revisionProbability;
     private int denyProbability;
 
-    public Article(String name, String articleName, String magazineQuartile, int acceptProbability, int revisionProbability, int denyProbability) {
-        super(name);
+    public Article(String name, int type, String articleName, String magazineQuartile, int acceptProbability,
+                   int revisionProbability, int denyProbability) {
+        super(name, type);
         this.articleName = articleName;
         this.magazineQuartile = magazineQuartile;
         this.acceptProbability = acceptProbability;

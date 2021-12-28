@@ -7,8 +7,8 @@ public class Master extends Trial {
     private int numCredits;
     private int chanceToPass;
 
-    public Master(String name, String masterName, int numCredits, int chanceToPass) {
-        super(name);
+    public Master(String name, int type, String masterName, int numCredits, int chanceToPass) {
+        super(name, type);
         this.masterName = masterName;
         this.numCredits = numCredits;
         this.chanceToPass = chanceToPass;

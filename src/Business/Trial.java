@@ -5,9 +5,11 @@ import java.util.HashMap;
 public class Trial {
 
     protected String name;
+    protected int type;
 
-    public Trial(String name) {
+    public Trial(String name, int type) {
         this.name = name;
+        this.type = type;
     }
 
     public HashMap<String, String> getDetails() {
@@ -25,6 +27,9 @@ public class Trial {
         return name;
     }
 
+    public int getType() {
+        return type;
+    }
 
     public String getTextualDescription(String s) {
         String ret = "";

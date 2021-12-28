@@ -6,8 +6,8 @@ public class Thesis extends Trial {
     private String studyField;
     private int difficulty;
 
-    public Thesis(String name, String studyField, int dificultat) {
-        super(name);
+    public Thesis(String name, int type, String studyField, int dificultat) {
+        super(name, type);
         this.studyField = studyField;
         this.difficulty = dificultat;
     }

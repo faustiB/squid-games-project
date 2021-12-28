@@ -2,7 +2,10 @@ package Presentation;
 
 import Business.EditionManager;
 import Business.TrialManager;
-import Presentation.Menu;
+import Persistance.JsonController;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Class created in order to control the flow of the program and work with the different
@@ -26,8 +29,9 @@ public class Controller {
     private static final String EXIT_EDITION_MENU = "e";
 
     private final Menu menu;
-    private final TrialManager tm = new TrialManager();
-    private final EditionManager em = new EditionManager();
+    private final JsonController jc = new JsonController();
+    private TrialManager tm ;
+    private EditionManager em;
 
     /**
      * Constructor to generate a Presentation.Controller
@@ -51,6 +55,11 @@ public class Controller {
             menu.showMessage("Loading data from CSV files...");
         } else {
             menu.showMessage("Loading data from JSON files...");
+            try {
+                tm = new TrialManager(jc.readTrials());
+            } catch (FileNotFoundException e) {
+                tm = new TrialManager();
+            }
         }
 
         //true for A, false for B
@@ -126,15 +135,22 @@ public class Controller {
         menu.showMessage("\nGoing Back to previous menu...\n");
     }
 
+    private void exportFiles() {
+        try {
+            jc.writeTrialsToFiles(tm.getTrials());
+        } catch (IOException e) {
+            menu.showMessage("Could not export the trials to Json...");
+        }
+    }
 
     /**
      * Option that closes the threads, shows the exit message exits the program.
      */
-    private void exitMenu() {
+    private void exitMenu(){
         menu.spacing();
         menu.showMessage("Shutting down...");
         menu.closeScanner();
 
-        //Escribir en el fichero .
+        exportFiles();
     }
 }

@@ -1,7 +1,6 @@
 package Business;
 
 import Presentation.Menu;
-
 import java.util.ArrayList;
 
 public class TrialManager {
@@ -11,7 +10,19 @@ public class TrialManager {
     private static final int THESIS = 3;
     private static final int BUDGET = 4;
     Menu menu = new Menu();
-    ArrayList<Trial> trials = new ArrayList<>();
+    ArrayList<Trial> trials;
+
+    public TrialManager() {
+        this.trials = new ArrayList<>();
+    }
+
+    public ArrayList<Trial> getTrials() {
+        return trials;
+    }
+
+    public TrialManager(ArrayList<Trial> trials) {
+        this.trials = trials;
+    }
 
     public Trial getSpecificTrial(int index) {
         return trials.get(index);
@@ -33,7 +44,6 @@ public class TrialManager {
         menu.showMessage("The trial was created successfully!");
     }
 
-    //TODO: Guillem -> yo leeria todo el fichero y crearia los diferentes arrays. Y dentro de ahi, ir añadiendo trials.
 
     /**
      * Creation of article trial
@@ -48,7 +58,7 @@ public class TrialManager {
         int revisionProbability = menu.askForIntegerBetweenDelimeters("Enter the revision probability: ", 0, 100 - acceptProbability);
         int denyProbability = menu.askForIntegerBetweenDelimeters("Enter the rejection probability: ", 0, 100 - (acceptProbability + revisionProbability));
 
-        Article article = new Article(name, journalName, magazineQuartile, acceptProbability, revisionProbability, denyProbability);
+        Article article = new Article(name, getTrialType("Article"), journalName, magazineQuartile, acceptProbability, revisionProbability, denyProbability);
 
         trials.add(article);
     }
@@ -64,7 +74,7 @@ public class TrialManager {
         int ects = menu.askForIntegerBetweenDelimeters("Enter the master’s ECTS number: ", 60, 120);
         int creditPass = menu.askForIntegerBetweenDelimeters("Enter the credit pass probability: ", 0, 100);
 
-        Master master = new Master(name, masterName, ects, creditPass);
+        Master master = new Master(name, getTrialType("Master"), masterName, ects, creditPass);
 
         trials.add(master);
     }
@@ -79,7 +89,7 @@ public class TrialManager {
 
         int difficulty = menu.askForIntegerBetweenDelimeters("Enter the defense difficulty: ", 1, 10);
 
-        Thesis thesis = new Thesis(name, thesisName, difficulty);
+        Thesis thesis = new Thesis(name, getTrialType("Thesis"), thesisName, difficulty);
 
         trials.add(thesis);
     }
@@ -94,7 +104,7 @@ public class TrialManager {
 
         int amount = menu.askForIntegerBetweenDelimeters("Enter the budget amount: ", 1000, 2000000000);
 
-        Budget budget = new Budget(name, budgetName, amount);
+        Budget budget = new Budget(name, getTrialType("Budget"), budgetName, amount);
 
         trials.add(budget);
     }
@@ -148,7 +158,7 @@ public class TrialManager {
     }
 
     /**
-     * Get trial selected by scren of listed trials.
+     * Get trial selected by screen of listed trials.
      *
      * @return input selected by screen
      */
@@ -204,5 +214,14 @@ public class TrialManager {
 
     public int getTrialsSize() {
         return trials.size();
+    }
+
+    private int getTrialType(String type) {
+        return switch (type) {
+            case "Article" -> 1;
+            case "Master" -> 2;
+            case "Thesis" -> 3;
+            default -> 4;
+        };
     }
 }

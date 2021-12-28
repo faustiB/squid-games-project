@@ -6,8 +6,8 @@ public class Budget extends Trial {
     private String entityName;
     private int budgetQuantity;
 
-    public Budget(String name, String entityName, int budgetQuantity) {
-        super(name);
+    public Budget(String name, int type, String entityName, int budgetQuantity) {
+        super(name, type);
         this.entityName = entityName;
         this.budgetQuantity = budgetQuantity;
     }

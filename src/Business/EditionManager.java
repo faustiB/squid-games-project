@@ -1,13 +1,29 @@
 package Business;
 
 import Presentation.Menu;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class EditionManager {
 
     Menu menu = new Menu();
-    private ArrayList<Edition> editions = new ArrayList<>();
+    private final ArrayList<Edition> editions;
+
+    public EditionManager() {
+        this.editions = new ArrayList<>();
+    }
+
+    public ArrayList<Edition> getEditions() {
+        return editions;
+    }
+
+    public EditionManager(ArrayList<Edition> editions) {
+        this.editions = editions;
+    }
 
     /**
      * Creation of editions
@@ -111,4 +127,12 @@ public class EditionManager {
         menu.showEditions(editions);
     }
 
+    public void exportToJson() throws IOException {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(editions);
+
+        FileWriter writer = new FileWriter("files/editions.json");
+        writer.write(json);
+        writer.close();
+    }
 }
