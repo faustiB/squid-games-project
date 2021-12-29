@@ -2,6 +2,7 @@ package Presentation;
 
 import Business.EditionManager;
 import Business.TrialManager;
+import Persistance.CsvController;
 import Persistance.JsonController;
 
 import java.io.FileNotFoundException;
@@ -30,6 +31,7 @@ public class Controller {
 
     private final Menu menu;
     private final JsonController jc = new JsonController();
+    private final CsvController cc = new CsvController();
     private TrialManager tm ;
     private EditionManager em;
 
@@ -138,6 +140,9 @@ public class Controller {
     private void exportFiles() {
         try {
             jc.writeTrialsToFiles(tm.getTrials());
+
+            //TODO: Activarlo para exportar CSV
+            //cc.writeTrialsToFiles(tm.getTrials());
         } catch (IOException e) {
             menu.showMessage("Could not export the trials to Json...");
         }

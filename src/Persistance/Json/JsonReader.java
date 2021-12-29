@@ -1,4 +1,4 @@
-package Persistance;
+package Persistance.Json;
 
 import Business.*;
 import com.google.gson.Gson;
