@@ -18,6 +18,12 @@ public class Edition {
         this.trials = trials;
     }
 
+    public Edition(int year, int numberOfPlayers, int numberOfTrials){
+        this.year = year;
+        this.numberOfPlayers = numberOfPlayers;
+        this.numberOfTrials = numberOfTrials;
+    }
+
     public boolean checkYear(int input) {
         return year == input;
     }
@@ -48,4 +54,11 @@ public class Edition {
         return map;
     }
 
+    public int getSizeOfTrials() {
+        return trials.size();
+    }
+
+    public void duplicateTrials(Edition edition) {
+        this.trials = edition.trials;
+    }
 }

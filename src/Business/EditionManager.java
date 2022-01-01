@@ -10,19 +10,19 @@ import java.util.ArrayList;
 
 public class EditionManager {
 
-    Menu menu = new Menu();
     private final ArrayList<Edition> editions;
+    Menu menu = new Menu();
 
     public EditionManager() {
         this.editions = new ArrayList<>();
     }
 
-    public ArrayList<Edition> getEditions() {
-        return editions;
-    }
-
     public EditionManager(ArrayList<Edition> editions) {
         this.editions = editions;
+    }
+
+    public ArrayList<Edition> getEditions() {
+        return editions;
     }
 
     /**
@@ -64,6 +64,7 @@ public class EditionManager {
 
     /**
      * Cheking if year introduced , is already created.
+     *
      * @param input year introduced
      * @return boolean that states if year is already created.
      */
@@ -77,14 +78,14 @@ public class EditionManager {
         return false;
     }
 
-    public void listEditions(TrialManager tm) {
+    public void listEditions() {
         int option;
-        if (editions.size() == 0){
+        if (editions.size() == 0) {
             menu.showMessage("\nNo editions created yet...\n");
         } else {
             option = getEditionSelectedInput();
-            if (option != editions.size()){
-                if (menu.checkBetweenNumbersType(option + 1, 1, getEditionsSize() )){
+            if (option != editions.size()) {
+                if (menu.checkBetweenNumbersType(option + 1, 1, getEditionsSize())) {
                     menu.showEdition(editions.get(option));
                 }
             } else {
@@ -92,6 +93,65 @@ public class EditionManager {
             }
         }
     }
+
+
+    public void duplicateEditions() {
+        int option;
+        boolean check = false;
+        if (editions.size() == 0) {
+            menu.showMessage("\nNo editions created yet...\n");
+        } else {
+            menu.showMessage("\nWhich edition do you want to clone ?\n");
+            option = getEditionSelectedInput();
+            if (option != editions.size()) {
+                if (menu.checkBetweenNumbersType(option + 1, 1, getEditionsSize())) {
+                    menu.spacing();
+                    int newYear = menu.askForInteger("Enter the new edition's year: ");
+                    do {
+                        if (checkIfYearIsInEditions(newYear)) {
+                            newYear = menu.askForInteger("Edition already created, please an other new edition's year: ");
+                        } else {
+                            check = true;
+                        }
+                    } while (!check);
+                    int newNumberOfPlayers = menu.askForIntegerBetweenDelimeters("Enter the  new initial number of players: ", 1, 5);
+
+                    Edition newEdition = new Edition(newYear, newNumberOfPlayers, editions.get(option).getSizeOfTrials());
+                    newEdition.duplicateTrials(editions.get(option));
+
+                    editions.add(newEdition);
+                    menu.showMessage("\nThe edition was successfully clonated.\n");
+                }
+
+
+            }
+
+        }
+
+    }
+
+    public void deleteEdition() {
+        int option;
+        if (editions.size() == 0) {
+            menu.showMessage("\nNo editions created yet...\n");
+        } else {
+            menu.showMessage("\nWhich edition do you want to delete ?\n");
+            option = getEditionSelectedInput();
+            if (option != editions.size()) {
+                if (menu.checkBetweenNumbersType(option + 1, 1, getEditionsSize())) {
+                    menu.spacing();
+                    int editionYear = menu.askForInteger("\nEnter the edition's year for confimation : ");
+                    if (editions.get(option).checkYear(editionYear)) {
+                        editions.remove(option);
+                        menu.showMessage("\nThe edition was successfully clonated.\n");
+                    } else {
+                        menu.showMessage("\nConfirmation failed, edition was not deleted. \n");
+                    }
+                }
+            }
+        }
+    }
+
 
     public int getEditionSelectedInput() {
         int option = -1;
@@ -104,10 +164,10 @@ public class EditionManager {
 
             do {
                 option = menu.askForInteger("Enter an option: ");
-                if (menu.checkBetweenNumbersType(option ,1,getEditionsSize()+1)){
+                if (menu.checkBetweenNumbersType(option, 1, getEditionsSize() + 1)) {
                     check = true;
                 }
-            } while(!check);
+            } while (!check);
 
             option--;
         }
@@ -123,7 +183,7 @@ public class EditionManager {
         return getEditionsSize() != 0;
     }
 
-    public void showingOfEditions(){
+    public void showingOfEditions() {
         menu.showEditions(editions);
     }
 

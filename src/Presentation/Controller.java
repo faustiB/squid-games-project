@@ -32,8 +32,8 @@ public class Controller {
     private final Menu menu;
     private final JsonController jc = new JsonController();
     private final CsvController cc = new CsvController();
-    private TrialManager tm ;
-    private EditionManager em;
+    private TrialManager tm = new TrialManager() ;
+    private EditionManager em = new EditionManager();
 
     /**
      * Constructor to generate a Presentation.Controller
@@ -128,9 +128,9 @@ public class Controller {
 
             switch (optionTrial) {
                 case CREATE_EDITION -> em.createEdition(tm);
-                case LIST_EDITIONS -> em.listEditions(tm);
-                /*case DUPLICATE_EDITIONS -> em.duplicateEditions();
-                case DELETE_EDITIONS -> em.deleteEditions();*/
+                case LIST_EDITIONS -> em.listEditions();
+                case DUPLICATE_EDITIONS -> em.duplicateEditions();
+                case DELETE_EDITIONS -> em.deleteEdition();
                 case EXIT_EDITION_MENU -> exit = true;
             }
         } while (!exit);

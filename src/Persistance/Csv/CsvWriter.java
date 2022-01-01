@@ -26,7 +26,7 @@ public class CsvWriter {
                 masters.add((Master) trial);
             } else if (trial instanceof Thesis) {
                 theses.add((Thesis) trial);
-            } else {
+            } else if (trial instanceof Budget){
                 budgets.add((Budget) trial);
             }
         }
