@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "masterName": "master of iniverso desc",
+    "numCredits": 67,
+    "chanceToPass": 76,
+    "name": "Master of Universo",
+    "type": 2
+  }
+]

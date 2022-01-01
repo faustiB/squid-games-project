@@ -27,7 +27,7 @@ public class JsonReader  {
         return gson.fromJson(new FileReader("files/budgets.json"), new TypeToken<ArrayList<Budget>>() {}.getType());
     }
 
-    public ArrayList<Trial> readFiles() throws FileNotFoundException {
+    public ArrayList<Trial> readFilesTrials() throws FileNotFoundException {
         ArrayList<Article> articles = processArticles();
         ArrayList<Master> masters = processMasters();
         ArrayList<Thesis> theses = processTheses();
@@ -41,4 +41,12 @@ public class JsonReader  {
 
         return trials;
     }
+
+
+    public ArrayList<Edition> readFilesEditions() throws FileNotFoundException{
+        return gson.fromJson(new FileReader("files/editions.json"), new TypeToken<ArrayList<Edition>>() {}.getType());
+    }
+
+
+
 }

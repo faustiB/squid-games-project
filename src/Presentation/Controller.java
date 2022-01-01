@@ -32,8 +32,9 @@ public class Controller {
     private final Menu menu;
     private final JsonController jc = new JsonController();
     private final CsvController cc = new CsvController();
-    private TrialManager tm = new TrialManager() ;
-    private EditionManager em = new EditionManager();
+
+    private TrialManager tm;
+    private EditionManager em;
 
     /**
      * Constructor to generate a Presentation.Controller
@@ -58,9 +59,15 @@ public class Controller {
         } else {
             menu.showMessage("Loading data from JSON files...");
             try {
+
                 tm = new TrialManager(jc.readTrials());
+                em = new EditionManager(jc.readEditions());
+
             } catch (FileNotFoundException e) {
+
                 tm = new TrialManager();
+                em = new EditionManager();
+
             }
         }
 
@@ -139,7 +146,8 @@ public class Controller {
 
     private void exportFiles() {
         try {
-            jc.writeTrialsToFiles(tm.getTrials());
+            //TODO: No se si está del todo bien esto, pero no se me ocurre como cambiarlo.
+            jc.writeTrialsToFiles(tm.getTrials(),em.getEditions());
 
             //TODO: Activarlo para exportar CSV
             //cc.writeTrialsToFiles(tm.getTrials());

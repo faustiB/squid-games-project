@@ -15,8 +15,11 @@ public class JsonWriter {
     ArrayList<Thesis> theses = new ArrayList<>();
     ArrayList<Budget> budgets = new ArrayList<>();
 
-    public JsonWriter(ArrayList<Trial> trials) {
+    ArrayList<Edition> editions;
+
+    public JsonWriter(ArrayList<Trial> trials,ArrayList<Edition> editions) {
         this.trials = trials;
+        this.editions = editions;
     }
 
     private void separateArraylist() {
@@ -37,26 +40,33 @@ public class JsonWriter {
         separateArraylist();
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String article = gson.toJson(articles);
-        String master = gson.toJson(masters);
-        String thesis = gson.toJson(theses);
-        String budget = gson.toJson(budgets);
+        String articleJson = gson.toJson(articles);
+        String masterJson = gson.toJson(masters);
+        String thesisJson = gson.toJson(theses);
+        String budgetJson = gson.toJson(budgets);
+
+        String editionJson = gson.toJson(editions);
+
 
         FileWriter writerA = new FileWriter("files/articles.json");
-        writerA.write(article);
+        writerA.write(articleJson);
         writerA.close();
 
         FileWriter writerM = new FileWriter("files/masters.json");
-        writerM.write(master);
+        writerM.write(masterJson);
         writerM.close();
 
         FileWriter writerT = new FileWriter("files/theses.json");
-        writerT.write(thesis);
+        writerT.write(thesisJson);
         writerT.close();
 
         FileWriter writerB = new FileWriter("files/budgets.json");
-        writerB.write(budget);
+        writerB.write(budgetJson);
         writerB.close();
+
+        FileWriter writerE = new FileWriter("files/editions.json");
+        writerE.write(editionJson);
+        writerE.close();
     }
 
 

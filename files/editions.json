@@ -1,0 +1,144 @@
+[
+  {
+    "year": 2022,
+    "numberOfPlayers": 4,
+    "numberOfTrials": 4,
+    "trials": [
+      {
+        "studyField": "Anulemelo",
+        "difficulty": 8,
+        "name": "Doctor",
+        "type": 3
+      },
+      {
+        "entityName": "Weiser",
+        "budgetQuantity": 4004,
+        "name": "Bud",
+        "type": 4
+      },
+      {
+        "entityName": "Weiser",
+        "budgetQuantity": 4004,
+        "name": "Bud",
+        "type": 4
+      },
+      {
+        "masterName": "master of iniverso desc",
+        "numCredits": 67,
+        "chanceToPass": 76,
+        "name": "Master of Universo",
+        "type": 2
+      }
+    ]
+  },
+  {
+    "year": 2023,
+    "numberOfPlayers": 3,
+    "numberOfTrials": 4,
+    "trials": [
+      {
+        "studyField": "Anulemelo",
+        "difficulty": 8,
+        "name": "Doctor",
+        "type": 3
+      },
+      {
+        "entityName": "Weiser",
+        "budgetQuantity": 4004,
+        "name": "Bud",
+        "type": 4
+      },
+      {
+        "entityName": "Weiser",
+        "budgetQuantity": 4004,
+        "name": "Bud",
+        "type": 4
+      },
+      {
+        "masterName": "master of iniverso desc",
+        "numCredits": 67,
+        "chanceToPass": 76,
+        "name": "Master of Universo",
+        "type": 2
+      }
+    ]
+  },
+  {
+    "year": 2030,
+    "numberOfPlayers": 5,
+    "numberOfTrials": 5,
+    "trials": [
+      {
+        "masterName": "master of iniverso desc",
+        "numCredits": 67,
+        "chanceToPass": 76,
+        "name": "Master of Universo",
+        "type": 2
+      },
+      {
+        "entityName": "Weiser",
+        "budgetQuantity": 4004,
+        "name": "Bud",
+        "type": 4
+      },
+      {
+        "masterName": "master of iniverso desc",
+        "numCredits": 67,
+        "chanceToPass": 76,
+        "name": "Master of Universo",
+        "type": 2
+      },
+      {
+        "entityName": "Weiser",
+        "budgetQuantity": 4004,
+        "name": "Bud",
+        "type": 4
+      },
+      {
+        "studyField": "Anulemelo",
+        "difficulty": 8,
+        "name": "Doctor",
+        "type": 3
+      }
+    ]
+  },
+  {
+    "year": 2031,
+    "numberOfPlayers": 2,
+    "numberOfTrials": 5,
+    "trials": [
+      {
+        "masterName": "master of iniverso desc",
+        "numCredits": 67,
+        "chanceToPass": 76,
+        "name": "Master of Universo",
+        "type": 2
+      },
+      {
+        "entityName": "Weiser",
+        "budgetQuantity": 4004,
+        "name": "Bud",
+        "type": 4
+      },
+      {
+        "masterName": "master of iniverso desc",
+        "numCredits": 67,
+        "chanceToPass": 76,
+        "name": "Master of Universo",
+        "type": 2
+      },
+      {
+        "entityName": "Weiser",
+        "budgetQuantity": 4004,
+        "name": "Bud",
+        "type": 4
+      },
+      {
+        "studyField": "Anulemelo",
+        "difficulty": 8,
+        "name": "Doctor",
+        "type": 3
+      }
+    ]
+  }
+]

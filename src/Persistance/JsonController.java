@@ -1,5 +1,6 @@
 package Persistance;
 
+import Business.Edition;
 import Business.Trial;
 import Persistance.Json.JsonReader;
 import Persistance.Json.JsonWriter;
@@ -11,11 +12,15 @@ import java.util.ArrayList;
 public class JsonController {
 
     public ArrayList<Trial> readTrials() throws FileNotFoundException {
-        return new JsonReader().readFiles();
+        return new JsonReader().readFilesTrials();
     }
 
-    public void writeTrialsToFiles(ArrayList<Trial> trials) throws IOException {
-        new JsonWriter(trials).writeFiles();
+    public ArrayList<Edition> readEditions() throws FileNotFoundException {
+        return new JsonReader().readFilesEditions();
+    }
+
+    public void writeTrialsToFiles(ArrayList<Trial> trials,ArrayList<Edition> editions) throws IOException {
+        new JsonWriter(trials,editions).writeFiles();
     }
 
 }
