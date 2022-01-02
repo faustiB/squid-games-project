@@ -4,6 +4,7 @@ import Business.EditionManager;
 import Business.TrialManager;
 import Persistance.CsvController;
 import Persistance.JsonController;
+import com.opencsv.exceptions.CsvException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -59,17 +60,19 @@ public class Controller {
 
 
 
-            //try {
+            try {
 
-                //tm = new TrialManager(cc.readTrials());
+                tm = new TrialManager(cc.readTrials());
                 //em = new EditionManager(cc.readEditions());
 
-            //} catch (FileNotFoundException e) {
+            } catch (FileNotFoundException e) {
 
                 tm = new TrialManager();
                 em = new EditionManager();
 
-            //}
+            } catch (IOException | CsvException e) {
+                e.printStackTrace();
+            }
 
 
         } else {
@@ -164,9 +167,8 @@ public class Controller {
         try {
             //TODO: No se si está del todo bien esto(Getters), pero no se me ocurre como cambiarlo.
             jc.writeTrialsToFiles(tm.getTrials(),em.getEditions());
+            cc.writeTrialsToFiles(tm.getTrials(), em.getEditions());
 
-
-            cc.writeTrialsToFiles(tm.getTrials());
         } catch (IOException e) {
             menu.showMessage("Could not export the trials to Json...");
         }

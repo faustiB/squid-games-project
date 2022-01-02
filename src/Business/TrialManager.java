@@ -221,7 +221,7 @@ public class TrialManager {
             case "Article" -> 1;
             case "Master" -> 2;
             case "Thesis" -> 3;
-            default -> 4;
+            default  -> 4;
         };
     }
 }

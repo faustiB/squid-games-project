@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "year": 2022,
+    "numberOfPlayers": 3,
+    "numberOfTrials": 3,
+    "trials": [
+      {
+        "masterName": "master",
+        "numCredits": 66,
+        "chanceToPass": 66,
+        "name": "master",
+        "type": 2
+      },
+      {
+        "masterName": "master",
+        "numCredits": 66,
+        "chanceToPass": 66,
+        "name": "master",
+        "type": 2
+      },
+      {
+        "masterName": "master",
+        "numCredits": 66,
+        "chanceToPass": 66,
+        "name": "master",
+        "type": 2
+      }
+    ]
+  }
+]

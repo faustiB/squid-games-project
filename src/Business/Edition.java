@@ -61,4 +61,8 @@ public class Edition {
     public void duplicateTrials(Edition edition) {
         this.trials = edition.trials;
     }
+
+    public String[] getArrayDescription() {
+        return new String[]{String.valueOf(year),String.valueOf(numberOfPlayers),String.valueOf(numberOfTrials)};
+    }
 }
