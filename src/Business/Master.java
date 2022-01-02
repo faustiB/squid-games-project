@@ -22,10 +22,12 @@ public class Master extends Trial {
         map.put("Master",this.masterName);
         map.put("ECTS",String.valueOf(this.numCredits));
         map.put("% chance",String.valueOf(this.chanceToPass));
-        /*
-        System.out.println("Trial: "+ super.name);
-        System.out.println("Master: "+ this.masterName);
-        */
+
         return map;
+    }
+
+    @Override
+    public String[] getArrayDescription(){
+        return new String[]{name,masterName,String.valueOf(numCredits),String.valueOf(chanceToPass)};
     }
 }

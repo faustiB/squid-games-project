@@ -30,4 +30,9 @@ public class Article extends Trial {
 
         return map;
     }
+
+    @Override
+    public String[] getArrayDescription(){
+        return new String[]{name,articleName,magazineQuartile,String.valueOf(acceptProbability),String.valueOf(revisionProbability),String.valueOf(denyProbability)};
+    }
 }

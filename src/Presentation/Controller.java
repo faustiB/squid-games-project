@@ -56,6 +56,22 @@ public class Controller {
         //true for I, false for II
         if (menu.checkPersistanceInput()) {
             menu.showMessage("Loading data from CSV files...");
+
+
+
+            //try {
+
+                //tm = new TrialManager(cc.readTrials());
+                //em = new EditionManager(cc.readEditions());
+
+            //} catch (FileNotFoundException e) {
+
+                tm = new TrialManager();
+                em = new EditionManager();
+
+            //}
+
+
         } else {
             menu.showMessage("Loading data from JSON files...");
             try {
@@ -146,11 +162,11 @@ public class Controller {
 
     private void exportFiles() {
         try {
-            //TODO: No se si está del todo bien esto, pero no se me ocurre como cambiarlo.
+            //TODO: No se si está del todo bien esto(Getters), pero no se me ocurre como cambiarlo.
             jc.writeTrialsToFiles(tm.getTrials(),em.getEditions());
 
-            //TODO: Activarlo para exportar CSV
-            //cc.writeTrialsToFiles(tm.getTrials());
+
+            cc.writeTrialsToFiles(tm.getTrials());
         } catch (IOException e) {
             menu.showMessage("Could not export the trials to Json...");
         }

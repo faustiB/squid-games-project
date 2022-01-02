@@ -14,6 +14,8 @@ public class CsvWriter {
     ArrayList<Thesis> theses = new ArrayList<>();
     ArrayList<Budget> budgets = new ArrayList<>();
 
+    ArrayList<Edition> editions;
+
     public CsvWriter(ArrayList<Trial> trials) {
         this.trials = trials;
     }
@@ -32,33 +34,56 @@ public class CsvWriter {
         }
     }
 
-    //TODO: No chuta esto, he usado una librería de csv pero no funciona...
-    /*
+
+
     public void writeFiles() throws IOException {
         separateArraylist();
 
-        CSVWriter writerA = new CSVWriter(new FileWriter("files/articles.json"));
+        FileWriter outputFileA =  new FileWriter("files/articles.csv");
+        CSVWriter writerA = new CSVWriter(outputFileA);
+
+        /*String[] headerA = {"NameTrial","NameArticle","MagazineQuartile","AcceptProbability","RevisionProbability","DenyProbability"};
+        writerA.writeNext(headerA);*/
+
         for (Article a : articles) {
-            System.out.println(a.toString());
-            writerA.writeNext(new String[]{a.toString()});
+            writerA.writeNext(a.getArrayDescription());
         }
-        //writerA.writeNext(articles.toArray(new String[0]));
         writerA.close();
 
-        CSVWriter writerM = new CSVWriter(new FileWriter("files/masters.json"));
+
+        FileWriter outputFileM =  new FileWriter("files/masters.csv");
+        CSVWriter writerM= new CSVWriter(outputFileM);
+
+        /*String[] headerA = {"NameTrial","NameArticle","MagazineQuartile","AcceptProbability","RevisionProbability","DenyProbability"};
+        writerA.writeNext(headerA);*/
+
         for (Master m : masters) {
-            System.out.println(m.toString());
-            writerM.writeNext(new String[]{m.toString()});
+            writerM.writeNext(m.getArrayDescription());
         }
-        writerM.writeNext(masters.toArray(new String[0]));
         writerM.close();
 
-        /*CSVWriter writerT = new CSVWriter(new FileWriter("files/theses.json"));
-        writerT.writeNext(theses.toArray(new String[0]));
+        FileWriter outputFileT =  new FileWriter("files/theses.csv");
+        CSVWriter writerT = new CSVWriter(outputFileT);
+
+        /*String[] headerA = {"NameTrial","NameArticle","MagazineQuartile","AcceptProbability","RevisionProbability","DenyProbability"};
+        writerA.writeNext(headerA);*/
+
+        for (Thesis t : theses) {
+            writerT.writeNext(t.getArrayDescription());
+        }
         writerT.close();
 
-        CSVWriter writerB = new CSVWriter(new FileWriter("files/budgets.json"));
-        writerB.writeNext(budgets.toArray(new String[0]));
+        FileWriter outputFileB =  new FileWriter("files/budgets.csv");
+        CSVWriter writerB = new CSVWriter(outputFileB);
+
+        /*String[] headerA = {"NameTrial","NameArticle","MagazineQuartile","AcceptProbability","RevisionProbability","DenyProbability"};
+        writerA.writeNext(headerA);*/
+
+        for (Budget b : budgets) {
+            writerB.writeNext(b.getArrayDescription());
+        }
         writerB.close();
-    }*/
+
+
+    }
 }

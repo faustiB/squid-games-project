@@ -42,4 +42,8 @@ public class Trial {
 
         return ret;
     }
+
+    public String[] getArrayDescription(){
+        return new String[]{name};
+    }
 }

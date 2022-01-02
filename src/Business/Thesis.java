@@ -21,4 +21,9 @@ public class Thesis extends Trial {
 
         return map;
     }
+
+    @Override
+    public String[] getArrayDescription(){
+        return new String[]{name,studyField,String.valueOf(difficulty)};
+    }
 }

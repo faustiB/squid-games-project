@@ -22,4 +22,8 @@ public class Budget extends Trial {
 
         return map;
     }
+    @Override
+    public String[] getArrayDescription(){
+        return new String[]{name,entityName,String.valueOf(budgetQuantity)};
+    }
 }
