@@ -58,12 +58,11 @@ public class Controller {
         if (menu.checkPersistanceInput()) {
             menu.showMessage("Loading data from CSV files...");
 
-
-
             try {
 
                 tm = new TrialManager(cc.readTrials());
-                //em = new EditionManager(cc.readEditions());
+                em = new EditionManager(cc.readEditions());
+
 
             } catch (FileNotFoundException e) {
 

@@ -9,15 +9,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class JsonWriter {
-    ArrayList<Trial> trials;
-    ArrayList<Article> articles = new ArrayList<>();
-    ArrayList<Master> masters = new ArrayList<>();
-    ArrayList<Thesis> theses = new ArrayList<>();
-    ArrayList<Budget> budgets = new ArrayList<>();
+    private ArrayList<Edition> editions;
+    private ArrayList<Trial> trials;
+    private ArrayList<Article> articles = new ArrayList<>();
+    private ArrayList<Master> masters = new ArrayList<>();
+    private ArrayList<Thesis> theses = new ArrayList<>();
+    private ArrayList<Budget> budgets = new ArrayList<>();
 
-    ArrayList<Edition> editions;
-
-    public JsonWriter(ArrayList<Trial> trials,ArrayList<Edition> editions) {
+    public JsonWriter(ArrayList<Trial> trials, ArrayList<Edition> editions) {
         this.trials = trials;
         this.editions = editions;
     }
@@ -30,7 +29,7 @@ public class JsonWriter {
                 masters.add((Master) trial);
             } else if (trial instanceof Thesis) {
                 theses.add((Thesis) trial);
-            } else if (trial instanceof Budget){
+            } else if (trial instanceof Budget) {
                 budgets.add((Budget) trial);
             }
         }

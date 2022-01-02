@@ -18,4 +18,9 @@ public class CsvController {
     public ArrayList<Trial> readTrials() throws IOException, CsvException {
         return new CsvReader().readTrials();
     }
+
+    public ArrayList<Edition> readEditions() throws IOException, CsvException {
+        return new CsvReader().readEditions();
+    }
+
 }

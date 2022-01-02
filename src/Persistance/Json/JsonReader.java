@@ -8,23 +8,27 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 
-public class JsonReader  {
-    Gson gson = new Gson();
+public class JsonReader {
+    private Gson gson = new Gson();
 
     private ArrayList<Article> processArticles() throws FileNotFoundException {
-        return gson.fromJson(new FileReader("files/articles.json"), new TypeToken<ArrayList<Article>>() {}.getType());
+        return gson.fromJson(new FileReader("files/articles.json"), new TypeToken<ArrayList<Article>>() {
+        }.getType());
     }
 
     private ArrayList<Master> processMasters() throws FileNotFoundException {
-        return gson.fromJson(new FileReader("files/masters.json"), new TypeToken<ArrayList<Master>>() {}.getType());
+        return gson.fromJson(new FileReader("files/masters.json"), new TypeToken<ArrayList<Master>>() {
+        }.getType());
     }
 
     private ArrayList<Thesis> processTheses() throws FileNotFoundException {
-        return gson.fromJson(new FileReader("files/theses.json"), new TypeToken<ArrayList<Thesis>>() {}.getType());
+        return gson.fromJson(new FileReader("files/theses.json"), new TypeToken<ArrayList<Thesis>>() {
+        }.getType());
     }
 
     private ArrayList<Budget> processBugdets() throws FileNotFoundException {
-        return gson.fromJson(new FileReader("files/budgets.json"), new TypeToken<ArrayList<Budget>>() {}.getType());
+        return gson.fromJson(new FileReader("files/budgets.json"), new TypeToken<ArrayList<Budget>>() {
+        }.getType());
     }
 
     public ArrayList<Trial> readFilesTrials() throws FileNotFoundException {
@@ -43,10 +47,10 @@ public class JsonReader  {
     }
 
 
-    public ArrayList<Edition> readFilesEditions() throws FileNotFoundException{
-        return gson.fromJson(new FileReader("files/editions.json"), new TypeToken<ArrayList<Edition>>() {}.getType());
+    public ArrayList<Edition> readFilesEditions() throws FileNotFoundException {
+        return gson.fromJson(new FileReader("files/editions.json"), new TypeToken<ArrayList<Edition>>() {
+        }.getType());
     }
-
 
 
 }

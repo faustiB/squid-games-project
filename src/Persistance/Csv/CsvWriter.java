@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CsvWriter {
-    ArrayList<Trial> trials;
-    ArrayList<Article> articles = new ArrayList<>();
-    ArrayList<Master> masters = new ArrayList<>();
-    ArrayList<Thesis> theses = new ArrayList<>();
-    ArrayList<Budget> budgets = new ArrayList<>();
+    private ArrayList<Trial> trials;
+    private ArrayList<Article> articles = new ArrayList<>();
+    private ArrayList<Master> masters = new ArrayList<>();
+    private ArrayList<Thesis> theses = new ArrayList<>();
+    private ArrayList<Budget> budgets = new ArrayList<>();
 
-    ArrayList<Edition> editions;
+    private ArrayList<Edition> editions;
 
     public CsvWriter(ArrayList<Trial> trials, ArrayList<Edition> editions) {
         this.trials = trials;
@@ -62,7 +62,7 @@ public class CsvWriter {
             for (String value : trials.values()) {
 
                 String[] arr = value.split("-");
-                String[] data = {String.valueOf(e.getYear()),arr[1],arr[0]};
+                String[] data = {String.valueOf(e.getYear()), arr[1], arr[0]};
 
                 writerEdT.writeNext(data);
             }

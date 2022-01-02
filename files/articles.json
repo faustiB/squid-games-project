@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "articleName": "artcile 1 journal",
+    "magazineQuartile": "Q3",
+    "acceptProbability": 20,
+    "revisionProbability": 20,
+    "denyProbability": 20,
+    "name": "Article1",
+    "type": 1
+  }
+]
