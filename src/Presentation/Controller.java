@@ -130,10 +130,8 @@ public class Controller {
     }
 
     private void exportFiles(Boolean choice) throws IOException {
-
             tm.writeTrialsToFiles(choice);
             em.writeEditionsToFiles(choice);
-
     }
 
     /**

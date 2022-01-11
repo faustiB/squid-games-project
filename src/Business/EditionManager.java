@@ -5,12 +5,9 @@ import Persistance.Csv.CsvWriter;
 import Persistance.Json.JsonReader;
 import Persistance.Json.JsonWriter;
 import Presentation.Menu;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.opencsv.exceptions.CsvException;
 
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -148,12 +145,8 @@ public class EditionManager {
                     editions.add(newEdition);
                     menu.showMessage("\nThe edition was successfully clonated.\n");
                 }
-
-
             }
-
         }
-
     }
 
     public void deleteEdition() {
@@ -213,23 +206,12 @@ public class EditionManager {
         menu.showEditions(editions);
     }
 
-    public void exportToJson() throws IOException {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(editions);
-
-        FileWriter writer = new FileWriter("files/editions.json");
-        writer.write(json);
-        writer.close();
-    }
-
     public ArrayList<Edition> readEditions_CSV() throws IOException, CsvException {
         return new CsvReader().readEditions();
     }
 
     public void writeEditions_CSV(ArrayList<Edition> editions) throws IOException {
-        CsvWriter cw = new CsvWriter();
-
-        cw.writeFullEditionsFiles(editions);
+        new CsvWriter().writeFullEditionsFiles(editions);
     }
 
     public ArrayList<Edition> readEditions_JSON() throws FileNotFoundException {
@@ -237,8 +219,6 @@ public class EditionManager {
     }
 
     public void writeEditions_JSON(ArrayList<Edition> editions) throws IOException {
-        JsonWriter jw = new JsonWriter();
-
-        jw.writeEditions(editions);
+        new JsonWriter().writeEditions(editions);
     }
 }

@@ -413,8 +413,8 @@ public class Menu {
             }
         }
 
-        showMessage("Chances: " + map.get("% acceptance") + "% acceptance. " + map.get("revision") + "% revision, " + map.get("% rejection") + "% rejection");
-
+        showMessage("Chances: " + map.get("% acceptance") + "% acceptance. "
+                + map.get("revision") + "% revision, " + map.get("% rejection") + "% rejection");
     }
 
     /**
@@ -484,7 +484,8 @@ public class Menu {
         int input;
         for (int i = 1; i <= numberOfTrials; i++) {
             spacing();
-            input = askForIntegerBetweenDelimeters("Pick a trial (" + i + "/" + numberOfTrials + ") : ", 1, tm.getTrialsSize());
+            input = askForIntegerBetweenDelimeters("Pick a trial (" + i + "/" + numberOfTrials + ") : "
+                    , 1, tm.getTrialsSize());
             trials.add(tm.getSpecificTrial(input - 1));
         }
         spacing();

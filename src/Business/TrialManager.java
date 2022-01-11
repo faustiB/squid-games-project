@@ -1,9 +1,7 @@
 package Business;
 
-import Persistance.Csv.CsvReader;
-import Persistance.Csv.CsvWriter;
-import Persistance.Json.JsonReader;
-import Persistance.Json.JsonWriter;
+import Persistance.Csv.*;
+import Persistance.Json.*;
 import Presentation.Menu;
 import com.opencsv.exceptions.CsvException;
 
@@ -17,6 +15,7 @@ public class TrialManager {
     private static final int MASTER = 2;
     private static final int THESIS = 3;
     private static final int BUDGET = 4;
+
     private Menu menu = new Menu();
     private ArrayList<Trial> trials;
 
@@ -41,13 +40,11 @@ public class TrialManager {
     }
 
     public void writeTrialsToFiles(Boolean choice) throws IOException {
-
         if (choice) {
             writeTrials_CSV(this.trials);
         } else {
             writeTrials_JSON(this.trials);
         }
-
     }
 
 
@@ -154,9 +151,6 @@ public class TrialManager {
 
             if (option != getTrialsSize()) {
                 if (menu.checkBetweenNumbersType(option + 1, 1, getTrialsSize())) {
-                    //if (option == trials.size()) {
-                    // menu.showMessage("\nGoing Back to previous menu...\n");
-                    //} else {
                     if (trials.get(option) instanceof Article) {
                         menu.showDetailsArticle((Article) trials.get(option));
 
@@ -170,7 +164,6 @@ public class TrialManager {
                         menu.showDetailsBudget((Budget) trials.get(option));
 
                     }
-                    //}
                 }
 
             } else {
@@ -267,8 +260,6 @@ public class TrialManager {
     }
 
     public void writeTrials_JSON(ArrayList<Trial> trials) throws IOException {
-        JsonWriter jw = new JsonWriter();
-
-        jw.writeTrials(trials);
+        new JsonWriter().writeTrials(trials);
     }
 }
