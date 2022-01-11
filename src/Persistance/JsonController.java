@@ -19,8 +19,17 @@ public class JsonController {
         return new JsonReader().readFilesEditions();
     }
 
-    public void writeTrialsToFiles(ArrayList<Trial> trials,ArrayList<Edition> editions) throws IOException {
-        new JsonWriter(trials,editions).writeFiles();
+
+    public void writeTrials(ArrayList<Trial> trials) throws IOException {
+        JsonWriter jw = new JsonWriter();
+
+        jw.writeTrials(trials);
+    }
+
+    public void writeEditions(ArrayList<Edition> editions) throws IOException {
+        JsonWriter jw = new JsonWriter();
+
+        jw.writeEditions(editions);
     }
 
 }

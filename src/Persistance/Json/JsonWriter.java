@@ -9,19 +9,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class JsonWriter {
-    private ArrayList<Edition> editions;
-    private ArrayList<Trial> trials;
+
     private ArrayList<Article> articles = new ArrayList<>();
     private ArrayList<Master> masters = new ArrayList<>();
     private ArrayList<Thesis> theses = new ArrayList<>();
     private ArrayList<Budget> budgets = new ArrayList<>();
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public JsonWriter(ArrayList<Trial> trials, ArrayList<Edition> editions) {
-        this.trials = trials;
-        this.editions = editions;
-    }
 
-    private void separateArraylist() {
+    private void separateArraylist(ArrayList<Trial> trials) {
         for (Trial trial : trials) {
             if (trial instanceof Article) {
                 articles.add((Article) trial);
@@ -35,16 +31,13 @@ public class JsonWriter {
         }
     }
 
-    public void writeFiles() throws IOException {
-        separateArraylist();
+    public void writeTrials(ArrayList<Trial> trials) throws IOException {
+        separateArraylist(trials);
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String articleJson = gson.toJson(articles);
         String masterJson = gson.toJson(masters);
         String thesisJson = gson.toJson(theses);
         String budgetJson = gson.toJson(budgets);
-
-        String editionJson = gson.toJson(editions);
 
 
         FileWriter writerA = new FileWriter("files/articles.json");
@@ -62,6 +55,12 @@ public class JsonWriter {
         FileWriter writerB = new FileWriter("files/budgets.json");
         writerB.write(budgetJson);
         writerB.close();
+
+
+    }
+
+    public void writeEditions(ArrayList<Edition> editions) throws IOException {
+        String editionJson = gson.toJson(editions);
 
         FileWriter writerE = new FileWriter("files/editions.json");
         writerE.write(editionJson);

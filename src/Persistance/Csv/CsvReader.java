@@ -28,10 +28,6 @@ public class CsvReader {
 
         ArrayList<Trial> trials = new ArrayList<>();
 
-        /*articles = readArticles();
-        masters = readMasters();
-        theses = readTheses();
-        budgets = readBudgets();*/
         readTrialsFromFile();
         trials.addAll(articles);
         trials.addAll(masters);

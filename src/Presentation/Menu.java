@@ -104,6 +104,7 @@ public class Menu {
             choice = askForString("Pick a faction: ");
         }
 
+
         return choice.equalsIgnoreCase("I");
     }
 

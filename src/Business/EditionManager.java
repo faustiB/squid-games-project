@@ -1,28 +1,66 @@
 package Business;
 
+import Persistance.CsvController;
+import Persistance.JsonController;
 import Presentation.Menu;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.opencsv.exceptions.CsvException;
 
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class EditionManager {
 
-    private final ArrayList<Edition> editions;
-    Menu menu = new Menu();
+    private ArrayList<Edition> editions;
+    private Menu menu = new Menu();
 
-    public EditionManager() {
-        this.editions = new ArrayList<>();
+    public EditionManager(Boolean choice) {
+
+
+        if (choice) {
+
+            try {
+
+                CsvController cc = new CsvController();
+                this.editions = cc.readEditions();
+
+            } catch (FileNotFoundException e) {
+
+                this.editions = new ArrayList<>();
+
+            } catch (IOException | CsvException e) {
+                e.printStackTrace();
+            }
+        } else {
+
+            try {
+
+                JsonController jc = new JsonController();
+                this.editions = jc.readEditions();
+
+            } catch (FileNotFoundException e) {
+                this.editions = new ArrayList<>();
+            }
+        }
     }
 
-    public EditionManager(ArrayList<Edition> editions) {
-        this.editions = editions;
-    }
+    public void writeEditionsToFiles(Boolean choice) throws IOException {
 
-    public ArrayList<Edition> getEditions() {
-        return editions;
+        if (choice) {
+
+            CsvController cc = new CsvController();
+            cc.writeEditions(this.editions);
+
+        } else {
+
+            JsonController jc = new JsonController();
+            jc.writeEditions(this.editions);
+
+        }
+
     }
 
     /**

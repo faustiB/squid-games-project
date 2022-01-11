@@ -1,6 +1,12 @@
 package Business;
 
+import Persistance.CsvController;
+import Persistance.JsonController;
 import Presentation.Menu;
+import com.opencsv.exceptions.CsvException;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TrialManager {
@@ -9,19 +15,55 @@ public class TrialManager {
     private static final int MASTER = 2;
     private static final int THESIS = 3;
     private static final int BUDGET = 4;
-    Menu menu = new Menu();
-    ArrayList<Trial> trials;
+    private Menu menu = new Menu();
+    private ArrayList<Trial> trials;
 
-    public TrialManager() {
-        this.trials = new ArrayList<>();
+
+    public TrialManager(Boolean choice) {
+
+
+
+
+        if (choice) {
+            try {
+
+                CsvController cc = new CsvController();
+                this.trials = cc.readTrials();
+
+            } catch (FileNotFoundException e) {
+                this.trials = new ArrayList<>();
+            } catch (IOException | CsvException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                JsonController jc = new JsonController();
+                this.trials = jc.readTrials();
+            } catch (FileNotFoundException e) {
+                this.trials = new ArrayList<>();
+            }
+        }
     }
+
+    public void writeTrialsToFiles(Boolean choice) throws IOException {
+
+        if (choice) {
+
+            CsvController cc = new CsvController();
+            cc.writeTrials(this.trials);
+
+        } else {
+
+            JsonController jc = new JsonController();
+            jc.writeTrials(this.trials);
+
+        }
+
+    }
+
 
     public ArrayList<Trial> getTrials() {
         return trials;
-    }
-
-    public TrialManager(ArrayList<Trial> trials) {
-        this.trials = trials;
     }
 
     public Trial getSpecificTrial(int index) {
@@ -124,21 +166,21 @@ public class TrialManager {
             if (option != getTrialsSize()) {
                 if (menu.checkBetweenNumbersType(option + 1, 1, getTrialsSize())) {
                     //if (option == trials.size()) {
-                       // menu.showMessage("\nGoing Back to previous menu...\n");
+                    // menu.showMessage("\nGoing Back to previous menu...\n");
                     //} else {
-                        if (trials.get(option) instanceof Article) {
-                            menu.showDetailsArticle((Article) trials.get(option));
+                    if (trials.get(option) instanceof Article) {
+                        menu.showDetailsArticle((Article) trials.get(option));
 
-                        } else if (trials.get(option) instanceof Thesis) {
-                            menu.showDetailsThesis((Thesis) trials.get(option));
+                    } else if (trials.get(option) instanceof Thesis) {
+                        menu.showDetailsThesis((Thesis) trials.get(option));
 
-                        } else if (trials.get(option) instanceof Master) {
-                            menu.showDetailsMaster((Master) trials.get(option));
+                    } else if (trials.get(option) instanceof Master) {
+                        menu.showDetailsMaster((Master) trials.get(option));
 
-                        } else if (trials.get(option) instanceof Budget) {
-                            menu.showDetailsBudget((Budget) trials.get(option));
+                    } else if (trials.get(option) instanceof Budget) {
+                        menu.showDetailsBudget((Budget) trials.get(option));
 
-                        }
+                    }
                     //}
                 }
 
@@ -173,10 +215,10 @@ public class TrialManager {
 
             do {
                 option = menu.askForInteger("Enter an option: ");
-                if (menu.checkBetweenNumbersType(option ,1,getTrialsSize() + 1)){
+                if (menu.checkBetweenNumbersType(option, 1, getTrialsSize() + 1)) {
                     check = true;
                 }
-            } while(!check);
+            } while (!check);
 
             option--;
         }
@@ -221,7 +263,7 @@ public class TrialManager {
             case "Article" -> 1;
             case "Master" -> 2;
             case "Thesis" -> 3;
-            default  -> 4;
+            default -> 4;
         };
     }
 }

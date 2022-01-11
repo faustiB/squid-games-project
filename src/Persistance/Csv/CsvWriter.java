@@ -9,20 +9,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CsvWriter {
-    private ArrayList<Trial> trials;
+
     private ArrayList<Article> articles = new ArrayList<>();
     private ArrayList<Master> masters = new ArrayList<>();
     private ArrayList<Thesis> theses = new ArrayList<>();
     private ArrayList<Budget> budgets = new ArrayList<>();
 
-    private ArrayList<Edition> editions;
 
-    public CsvWriter(ArrayList<Trial> trials, ArrayList<Edition> editions) {
-        this.trials = trials;
-        this.editions = editions;
-    }
-
-    private void separateArraylist() {
+    private void separateArraylist(ArrayList<Trial> trials) {
         for (Trial trial : trials) {
             if (trial instanceof Article) {
                 articles.add((Article) trial);
@@ -37,22 +31,14 @@ public class CsvWriter {
     }
 
 
-    public void writeFiles() throws IOException {
-        separateArraylist();
+    public void writeFullEditionsFiles(ArrayList<Edition> editions) throws IOException {
 
-        writeArticles();
-        writeMasters();
-        writeTheses();
-        writeBudgets();
-
-        writeEditions();
-
-        writeTrialsOfEditions();
-
+        writeEditions(editions);
+        writeTrialsOfEditions(editions);
 
     }
 
-    private void writeTrialsOfEditions() throws IOException {
+    private void writeTrialsOfEditions(ArrayList<Edition> editions) throws IOException {
         FileWriter outputFileEdT = new FileWriter("files/editionsTrials.csv");
         CSVWriter writerEdT = new CSVWriter(outputFileEdT);
 
@@ -71,7 +57,7 @@ public class CsvWriter {
         writerEdT.close();
     }
 
-    private void writeEditions() throws IOException {
+    private void writeEditions(ArrayList<Edition> editions) throws IOException {
         FileWriter outputFileEd = new FileWriter("files/editions.csv");
         CSVWriter writerEd = new CSVWriter(outputFileEd);
 
@@ -85,9 +71,6 @@ public class CsvWriter {
         FileWriter outputFileB = new FileWriter("files/budgets.csv");
         CSVWriter writerB = new CSVWriter(outputFileB);
 
-        /*String[] headerA = {"NameTrial","NameArticle","MagazineQuartile","AcceptProbability","RevisionProbability","DenyProbability"};
-        writerA.writeNext(headerA);*/
-
         for (Budget b : budgets) {
             writerB.writeNext(b.getArrayDescription());
         }
@@ -97,9 +80,6 @@ public class CsvWriter {
     private void writeTheses() throws IOException {
         FileWriter outputFileT = new FileWriter("files/theses.csv");
         CSVWriter writerT = new CSVWriter(outputFileT);
-
-        /*String[] headerA = {"NameTrial","NameArticle","MagazineQuartile","AcceptProbability","RevisionProbability","DenyProbability"};
-        writerA.writeNext(headerA);*/
 
         for (Thesis t : theses) {
             writerT.writeNext(t.getArrayDescription());
@@ -111,8 +91,6 @@ public class CsvWriter {
         FileWriter outputFileM = new FileWriter("files/masters.csv");
         CSVWriter writerM = new CSVWriter(outputFileM);
 
-        /*String[] headerA = {"NameTrial","NameArticle","MagazineQuartile","AcceptProbability","RevisionProbability","DenyProbability"};
-        writerA.writeNext(headerA);*/
 
         for (Master m : masters) {
             writerM.writeNext(m.getArrayDescription());
@@ -124,12 +102,21 @@ public class CsvWriter {
         FileWriter outputFileA = new FileWriter("files/articles.csv");
         CSVWriter writerA = new CSVWriter(outputFileA);
 
-        /*String[] headerA = {"NameTrial","NameArticle","MagazineQuartile","AcceptProbability","RevisionProbability","DenyProbability"};
-        writerA.writeNext(headerA);*/
-
         for (Article a : articles) {
             writerA.writeNext(a.getArrayDescription());
         }
         writerA.close();
+    }
+
+    public void writeTrials(ArrayList<Trial> trials) throws IOException {
+        separateArraylist(trials);
+
+        writeArticles();
+        writeMasters();
+        writeTheses();
+        writeBudgets();
+
+
+
     }
 }

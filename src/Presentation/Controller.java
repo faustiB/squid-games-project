@@ -2,11 +2,6 @@ package Presentation;
 
 import Business.EditionManager;
 import Business.TrialManager;
-import Persistance.CsvController;
-import Persistance.JsonController;
-import com.opencsv.exceptions.CsvException;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -31,9 +26,6 @@ public class Controller {
     private static final String EXIT_EDITION_MENU = "e";
 
     private final Menu menu;
-    private final JsonController jc = new JsonController();
-    private final CsvController cc = new CsvController();
-
     private TrialManager tm;
     private EditionManager em;
 
@@ -49,51 +41,25 @@ public class Controller {
     /**
      * Method used to control of the program correctly.
      */
-    public void run() {
+    public void run() throws IOException {
 
         int option;
         boolean exit = false;
+        boolean choiceInput = menu.checkPersistanceInput();
 
-        //true for I, false for II
-        if (menu.checkPersistanceInput()) {
+        tm = new TrialManager(choiceInput);
+        em = new EditionManager(choiceInput);
+
+        if (choiceInput){
             menu.showMessage("Loading data from CSV files...");
-
-            try {
-
-                tm = new TrialManager(cc.readTrials());
-                em = new EditionManager(cc.readEditions());
-
-
-            } catch (FileNotFoundException e) {
-
-                tm = new TrialManager();
-                em = new EditionManager();
-
-            } catch (IOException | CsvException e) {
-                e.printStackTrace();
-            }
-
-
         } else {
             menu.showMessage("Loading data from JSON files...");
-            try {
-
-                tm = new TrialManager(jc.readTrials());
-                em = new EditionManager(jc.readEditions());
-
-            } catch (FileNotFoundException e) {
-
-                tm = new TrialManager();
-                em = new EditionManager();
-
-            }
         }
 
         //true for A, false for B
         menu.showBanner();
         if (menu.checkRoleInput()) {
             menu.showMessage("\nEntering management mode...\n");
-
             do {
                 menu.showComposerMenu();
                 option = menu.getOptionComposerMenu();
@@ -108,9 +74,10 @@ public class Controller {
 
         } else {
             menu.showMessage("\nEntering execution mode...\n");
+
         }
 
-        exitMenu();
+        exitMenu(choiceInput);
 
     }
 
@@ -162,25 +129,21 @@ public class Controller {
         menu.showMessage("\nGoing Back to previous menu...\n");
     }
 
-    private void exportFiles() {
-        try {
-            //TODO: No se si está del todo bien esto(Getters), pero no se me ocurre como cambiarlo.
-            jc.writeTrialsToFiles(tm.getTrials(),em.getEditions());
-            cc.writeTrialsToFiles(tm.getTrials(), em.getEditions());
+    private void exportFiles(Boolean choice) throws IOException {
 
-        } catch (IOException e) {
-            menu.showMessage("Could not export the trials to Json...");
-        }
+            tm.writeTrialsToFiles(choice);
+            em.writeEditionsToFiles(choice);
+
     }
 
     /**
      * Option that closes the threads, shows the exit message exits the program.
      */
-    private void exitMenu(){
+    private void exitMenu(Boolean choice) throws IOException {
         menu.spacing();
         menu.showMessage("Shutting down...");
         menu.closeScanner();
 
-        exportFiles();
+        exportFiles(choice);
     }
 }

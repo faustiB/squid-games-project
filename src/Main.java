@@ -12,7 +12,7 @@ public class Main {
      * Main function of the program.
      * @param args arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Menu menu = new Menu();
 
         Controller controller = new Controller(menu);
