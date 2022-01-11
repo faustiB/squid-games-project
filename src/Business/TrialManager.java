@@ -1,7 +1,9 @@
 package Business;
 
-import Persistance.CsvController;
-import Persistance.JsonController;
+import Persistance.Csv.CsvReader;
+import Persistance.Csv.CsvWriter;
+import Persistance.Json.JsonReader;
+import Persistance.Json.JsonWriter;
 import Presentation.Menu;
 import com.opencsv.exceptions.CsvException;
 
@@ -21,15 +23,9 @@ public class TrialManager {
 
     public TrialManager(Boolean choice) {
 
-
-
-
         if (choice) {
             try {
-
-                CsvController cc = new CsvController();
-                this.trials = cc.readTrials();
-
+                this.trials = readTrials_CSV();
             } catch (FileNotFoundException e) {
                 this.trials = new ArrayList<>();
             } catch (IOException | CsvException e) {
@@ -37,8 +33,7 @@ public class TrialManager {
             }
         } else {
             try {
-                JsonController jc = new JsonController();
-                this.trials = jc.readTrials();
+                this.trials = readTrials_JSON();
             } catch (FileNotFoundException e) {
                 this.trials = new ArrayList<>();
             }
@@ -48,15 +43,9 @@ public class TrialManager {
     public void writeTrialsToFiles(Boolean choice) throws IOException {
 
         if (choice) {
-
-            CsvController cc = new CsvController();
-            cc.writeTrials(this.trials);
-
+            writeTrials_CSV(this.trials);
         } else {
-
-            JsonController jc = new JsonController();
-            jc.writeTrials(this.trials);
-
+            writeTrials_JSON(this.trials);
         }
 
     }
@@ -250,8 +239,6 @@ public class TrialManager {
                 }
             }
         }
-
-
     }
 
     public int getTrialsSize() {
@@ -265,5 +252,23 @@ public class TrialManager {
             case "Thesis" -> 3;
             default -> 4;
         };
+    }
+
+    public ArrayList<Trial> readTrials_CSV() throws IOException, CsvException {
+        return new CsvReader().readTrials();
+    }
+
+    public void writeTrials_CSV(ArrayList<Trial> trials) throws IOException {
+        new CsvWriter().writeTrials(trials);
+    }
+
+    public ArrayList<Trial> readTrials_JSON() throws FileNotFoundException {
+        return new JsonReader().readFilesTrials();
+    }
+
+    public void writeTrials_JSON(ArrayList<Trial> trials) throws IOException {
+        JsonWriter jw = new JsonWriter();
+
+        jw.writeTrials(trials);
     }
 }

@@ -1,7 +1,9 @@
 package Business;
 
-import Persistance.CsvController;
-import Persistance.JsonController;
+import Persistance.Csv.CsvReader;
+import Persistance.Csv.CsvWriter;
+import Persistance.Json.JsonReader;
+import Persistance.Json.JsonWriter;
 import Presentation.Menu;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -23,24 +25,16 @@ public class EditionManager {
         if (choice) {
 
             try {
-
-                CsvController cc = new CsvController();
-                this.editions = cc.readEditions();
-
+                this.editions = readEditions_CSV();
             } catch (FileNotFoundException e) {
-
                 this.editions = new ArrayList<>();
-
             } catch (IOException | CsvException e) {
                 e.printStackTrace();
             }
         } else {
 
             try {
-
-                JsonController jc = new JsonController();
-                this.editions = jc.readEditions();
-
+                this.editions = readEditions_JSON();
             } catch (FileNotFoundException e) {
                 this.editions = new ArrayList<>();
             }
@@ -50,15 +44,9 @@ public class EditionManager {
     public void writeEditionsToFiles(Boolean choice) throws IOException {
 
         if (choice) {
-
-            CsvController cc = new CsvController();
-            cc.writeEditions(this.editions);
-
+            writeEditions_CSV(this.editions);
         } else {
-
-            JsonController jc = new JsonController();
-            jc.writeEditions(this.editions);
-
+            writeEditions_JSON(this.editions);
         }
 
     }
@@ -232,5 +220,25 @@ public class EditionManager {
         FileWriter writer = new FileWriter("files/editions.json");
         writer.write(json);
         writer.close();
+    }
+
+    public ArrayList<Edition> readEditions_CSV() throws IOException, CsvException {
+        return new CsvReader().readEditions();
+    }
+
+    public void writeEditions_CSV(ArrayList<Edition> editions) throws IOException {
+        CsvWriter cw = new CsvWriter();
+
+        cw.writeFullEditionsFiles(editions);
+    }
+
+    public ArrayList<Edition> readEditions_JSON() throws FileNotFoundException {
+        return new JsonReader().readFilesEditions();
+    }
+
+    public void writeEditions_JSON(ArrayList<Edition> editions) throws IOException {
+        JsonWriter jw = new JsonWriter();
+
+        jw.writeEditions(editions);
     }
 }
