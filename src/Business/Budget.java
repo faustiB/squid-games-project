@@ -26,4 +26,13 @@ public class Budget extends Trial {
     public String[] getArrayDescription(){
         return new String[]{name,entityName,String.valueOf(budgetQuantity)};
     }
+
+    public boolean executeBudget(int points) {
+        return Math.log10(this.budgetQuantity)/Math.log10(2) < points;
+    }
+
+    public int getPoints(boolean result, int points) {
+        if (result) return (int) Math.ceil((double) points/2);
+        else return -2;
+    }
 }

@@ -2,6 +2,8 @@ package Business;
 
 import java.util.HashMap;
 
+import static java.lang.Math.sqrt;
+
 public class Thesis extends Trial {
     private String studyField;
     private int difficulty;
@@ -25,5 +27,21 @@ public class Thesis extends Trial {
     @Override
     public String[] getArrayDescription(){
         return new String[]{name,studyField,String.valueOf(difficulty)};
+    }
+
+    public boolean executeThesis(int pi) {
+        int result = 0;
+
+        for (int i = 1; i <= this.difficulty; i++) {
+            result = result + (2*i - 1);
+        }
+
+        return pi > sqrt(result);
+    }
+
+    //TODO: revisar master evoluciona a doctor (no guanya punts)
+    public int getPoints(boolean result) {
+        if (result) return 5;
+        else return -5;
     }
 }

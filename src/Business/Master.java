@@ -1,6 +1,7 @@
 package Business;
 
 import java.util.HashMap;
+import java.util.Random;
 
 public class Master extends Trial {
     private String masterName;
@@ -29,5 +30,26 @@ public class Master extends Trial {
     @Override
     public String[] getArrayDescription(){
         return new String[]{name,masterName,String.valueOf(numCredits),String.valueOf(chanceToPass)};
+    }
+
+    public boolean executeMaster() {
+        Random rand = new Random();
+        int creditsPassed = 0;
+
+        for (int i = 0; i < this.numCredits; i++) {
+
+            //Check if the random number between zero and 100 is in the chance to pass range.
+            if(rand.nextInt(100) < this.chanceToPass) {
+                creditsPassed++;
+            }
+        }
+
+        return creditsPassed > this.numCredits/2;
+    }
+
+    //TODO: revisar enginyer evoluciona a master (no guanya punts)
+    public int getPoints(boolean result) {
+        if (result) return 3;
+        else return -3;
     }
 }
