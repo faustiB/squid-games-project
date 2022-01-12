@@ -3,6 +3,7 @@ package Presentation;
 import Business.EditionManager;
 import Business.TrialManager;
 import java.io.IOException;
+import java.util.Calendar;
 
 /**
  * Class created in order to control the flow of the program and work with the different
@@ -74,6 +75,15 @@ public class Controller {
 
         } else {
             menu.showMessage("\nEntering execution mode...\n");
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+
+            if (em.checkEditionIsCreated(currentYear)){
+                em.startTrials(currentYear);
+            } else{
+                menu.showMessage("No edition is defined for the current year ("+ currentYear +").");
+                menu.spacing();
+
+            }
 
         }
 

@@ -70,6 +70,8 @@ public class Menu {
         System.out.println("3) Exit");
     }
 
+
+
     /**
      * This functions prints The Trials banner.
      */
@@ -514,4 +516,6 @@ public class Menu {
         
 
     }
+
+
 }

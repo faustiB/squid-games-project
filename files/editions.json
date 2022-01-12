@@ -5,29 +5,14 @@
     "numberOfTrials": 3,
     "trials": [
       {
-        "articleName": "artcile 1 journal",
-        "magazineQuartile": "Q3",
-        "acceptProbability": 20,
-        "revisionProbability": 20,
-        "denyProbability": 20,
         "name": "Article1",
         "type": 1
       },
       {
-        "articleName": "artcile 1 journal",
-        "magazineQuartile": "Q3",
-        "acceptProbability": 20,
-        "revisionProbability": 20,
-        "denyProbability": 20,
         "name": "Article1",
         "type": 1
       },
       {
-        "articleName": "artcile 1 journal",
-        "magazineQuartile": "Q3",
-        "acceptProbability": 20,
-        "revisionProbability": 20,
-        "denyProbability": 20,
         "name": "Article1",
         "type": 1
       }
@@ -39,23 +24,14 @@
     "numberOfTrials": 3,
     "trials": [
       {
-        "articleName": "artcile 1 journal",
-        "magazineQuartile": "Q3",
-        "acceptProbability": 20,
-        "revisionProbability": 20,
-        "denyProbability": 20,
         "name": "Article1",
         "type": 1
       },
       {
-        "studyField": "thesis1",
-        "difficulty": 6,
         "name": "thesis 1",
         "type": 3
       },
       {
-        "entityName": "budget1",
-        "budgetQuantity": 876783,
         "name": "budget1",
         "type": 4
       }
@@ -67,23 +43,14 @@
     "numberOfTrials": 3,
     "trials": [
       {
-        "articleName": "artcile 1 journal",
-        "magazineQuartile": "Q3",
-        "acceptProbability": 20,
-        "revisionProbability": 20,
-        "denyProbability": 20,
         "name": "Article1",
         "type": 1
       },
       {
-        "studyField": "thesis1",
-        "difficulty": 6,
         "name": "thesis 1",
         "type": 3
       },
       {
-        "entityName": "budget1",
-        "budgetQuantity": 876783,
         "name": "budget1",
         "type": 4
       }
@@ -95,27 +62,18 @@
     "numberOfTrials": 4,
     "trials": [
       {
-        "entityName": "budget1",
-        "budgetQuantity": 876783,
         "name": "budget1",
         "type": 4
       },
       {
-        "entityName": "budget1",
-        "budgetQuantity": 876783,
         "name": "budget1",
         "type": 4
       },
       {
-        "studyField": "thesis1",
-        "difficulty": 6,
         "name": "thesis 1",
         "type": 3
       },
       {
-        "masterName": "master1",
-        "numCredits": 66,
-        "chanceToPass": 66,
         "name": "master1 ",
         "type": 2
       }

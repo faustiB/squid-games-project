@@ -194,6 +194,37 @@ public class EditionManager {
         return option;
     }
 
+    public ArrayList<Player> addPlayers( int numOfPlayers) {
+        String playerName;
+        ArrayList<Player> players = new ArrayList<>();
+        menu.spacing();
+        for (int i = 0; i < numOfPlayers; i++) {
+            playerName = menu.askForString("Enter the player's name (" + (i + 1) + "/" + numOfPlayers + "): ");
+            Player p = new Player(playerName);
+            players.add(p);
+        }
+        return players;
+
+    }
+
+    public Edition getEditionByYear(int year) {
+        for (Edition e : editions) {
+            if (e.checkYear(year)) return e;
+        }
+        return null;
+    }
+
+    public void startTrials(int currentYear) {
+
+        Edition e = getEditionByYear(currentYear);
+
+        ArrayList<Player> players = addPlayers(e.getNumberOfPlayers());
+
+
+
+    }
+
+
     private int getEditionsSize() {
         return editions.size();
     }
@@ -220,5 +251,12 @@ public class EditionManager {
 
     public void writeEditions_JSON(ArrayList<Edition> editions) throws IOException {
         new JsonWriter().writeEditions(editions);
+    }
+
+    public boolean checkEditionIsCreated(int currentYear) {
+        for (Edition e : editions) {
+            if (e.checkYear(currentYear)) return true;
+        }
+        return false;
     }
 }
