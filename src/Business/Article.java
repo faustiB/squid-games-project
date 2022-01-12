@@ -3,13 +3,26 @@ package Business;
 import java.util.HashMap;
 import java.util.Random;
 
+/**
+ * Class created to manage the Article objects.
+ */
 public class Article extends Trial {
-    private String articleName;
-    private String magazineQuartile;
-    private int acceptProbability;
-    private int revisionProbability;
-    private int denyProbability;
+    private final String articleName;
+    private final String magazineQuartile;
+    private final int acceptProbability;
+    private final int revisionProbability;
+    private final int denyProbability;
 
+    /**
+     * Constructor for the article.
+     * @param name: name
+     * @param type: type of trial
+     * @param articleName: article name
+     * @param magazineQuartile: quartile of the magazine
+     * @param acceptProbability: probability of acceptance.
+     * @param revisionProbability: probability of revision.
+     * @param denyProbability: probability of denial.
+     */
     public Article(String name, int type, String articleName, String magazineQuartile, int acceptProbability,
                    int revisionProbability, int denyProbability) {
         super(name, type);
@@ -37,6 +50,10 @@ public class Article extends Trial {
         return new String[]{name,articleName,magazineQuartile,String.valueOf(acceptProbability),String.valueOf(revisionProbability),String.valueOf(denyProbability)};
     }
 
+    /**
+     * Method created to execute the article trial.
+     * @return true for win, false for loose.
+     */
     public boolean executeArticle() {
         Random rand = new Random();
 
@@ -51,6 +68,11 @@ public class Article extends Trial {
         }
     }
 
+    /**
+     * Method created to return the points won or lost by the player
+     * according to the quartile.
+     * @return true for win, false for loose.
+     */
     public int getPoints(boolean result) {
         int points = 0;
 

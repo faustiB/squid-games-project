@@ -19,7 +19,6 @@ public class TrialManager {
     private Menu menu = new Menu();
     private ArrayList<Trial> trials;
 
-
     public TrialManager(Boolean choice) {
 
         if (choice) {
@@ -47,7 +46,6 @@ public class TrialManager {
         }
     }
 
-
     public ArrayList<Trial> getTrials() {
         return trials;
     }
@@ -71,7 +69,6 @@ public class TrialManager {
         menu.spacing();
         menu.showMessage("The trial was created successfully!");
     }
-
 
     /**
      * Creation of article trial

@@ -3,11 +3,22 @@ package Business;
 import java.util.HashMap;
 import java.util.Random;
 
+/**
+ * Class created to manage the Master objects.
+ */
 public class Master extends Trial {
-    private String masterName;
-    private int numCredits;
-    private int chanceToPass;
+    private final String masterName;
+    private final int numCredits;
+    private final int chanceToPass;
 
+    /**
+     * Constructor for the master
+     * @param name: name.
+     * @param type: type of trial.
+     * @param masterName: name of the master.
+     * @param numCredits: number of credits.
+     * @param chanceToPass: chance to pass the trial.
+     */
     public Master(String name, int type, String masterName, int numCredits, int chanceToPass) {
         super(name, type);
         this.masterName = masterName;
@@ -32,6 +43,10 @@ public class Master extends Trial {
         return new String[]{name,masterName,String.valueOf(numCredits),String.valueOf(chanceToPass)};
     }
 
+    /**
+     * Method created to execute the master trial.
+     * @return true for win, false for loose.
+     */
     public boolean executeMaster() {
         Random rand = new Random();
         int creditsPassed = 0;
@@ -48,6 +63,10 @@ public class Master extends Trial {
     }
 
     //TODO: revisar enginyer evoluciona a master (no guanya punts)
+    /**
+     * Method created to return the points won or lost by the player.
+     * @return true for win, false for loose.
+     */
     public int getPoints(boolean result) {
         if (result) return 3;
         else return -3;
