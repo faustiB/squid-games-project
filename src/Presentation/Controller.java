@@ -40,13 +40,13 @@ public class Controller {
     }
 
     /**
-     * Method used to control of the program correctly.
+     * Method used to control the program correctly.
      */
     public void run() throws IOException {
 
         int option;
         boolean exit = false;
-        boolean choiceInput = menu.checkPersistanceInput();
+        boolean choiceInput = menu.checkPersistenceInput();
 
         tm = new TrialManager(choiceInput);
         em = new EditionManager(choiceInput);
@@ -86,15 +86,12 @@ public class Controller {
             }
 
         }
-
         exitMenu(choiceInput);
-
     }
 
     /**
      * Method to manage the trials.
      */
-
     private void manageTrials() {
         boolean exit = false;
 
@@ -119,7 +116,7 @@ public class Controller {
     }
 
     /**
-     *
+     * Method to manage the editions with the needed options.
      */
     private void manageEditions() {
         boolean exit = false;
@@ -139,9 +136,14 @@ public class Controller {
         menu.showMessage("\nGoing Back to previous menu...\n");
     }
 
+    /**
+     * Method used to launch the exportation of the trials and editions to the files.
+     * @param choice: true for CSV export, false for JSON
+     * @throws IOException: input output exception.
+     */
     private void exportFiles(Boolean choice) throws IOException {
-            tm.writeTrialsToFiles(choice);
-            em.writeEditionsToFiles(choice);
+        tm.writeTrialsToFiles(choice);
+        em.writeEditionsToFiles(choice);
     }
 
     /**

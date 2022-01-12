@@ -8,6 +8,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Class created in order to implement methods that help the program apply
+ * a persistence using JSON.
+ */
 public class JsonWriter {
 
     private ArrayList<Article> articles = new ArrayList<>();
@@ -16,7 +20,10 @@ public class JsonWriter {
     private ArrayList<Budget> budgets = new ArrayList<>();
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-
+    /**
+     * Method used in order to separate the trials' arraylist on different arraylists.
+     * @param trials: arraylist of trials.
+     */
     private void separateArraylist(ArrayList<Trial> trials) {
         for (Trial trial : trials) {
             if (trial instanceof Article) {
@@ -31,6 +38,11 @@ public class JsonWriter {
         }
     }
 
+    /**
+     * Method used to write the trials to the different files.
+     * @param trials: arraylist of trials.
+     * @throws IOException: input output exception.
+     */
     public void writeTrials(ArrayList<Trial> trials) throws IOException {
         separateArraylist(trials);
 
@@ -55,10 +67,13 @@ public class JsonWriter {
         FileWriter writerB = new FileWriter("files/budgets.json");
         writerB.write(budgetJson);
         writerB.close();
-
-
     }
 
+    /**
+     * Method used to write the different editions to the files.
+     * @param editions: arraylist of editions
+     * @throws IOException: input output exception.
+     */
     public void writeEditions(ArrayList<Edition> editions) throws IOException {
         String editionJson = gson.toJson(editions);
 
@@ -66,6 +81,4 @@ public class JsonWriter {
         writerE.write(editionJson);
         writerE.close();
     }
-
-
 }

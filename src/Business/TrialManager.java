@@ -82,9 +82,9 @@ public class TrialManager {
         String journalName = menu.askForString("Enter the journal’s name: ");
         String magazineQuartile = menu.askForQuartile("Enter the journal’s quartile: ");
 
-        int acceptProbability = menu.askForIntegerBetweenDelimeters("Enter the acceptance probability: ", 0, 100);
-        int revisionProbability = menu.askForIntegerBetweenDelimeters("Enter the revision probability: ", 0, 100 - acceptProbability);
-        int denyProbability = menu.askForIntegerBetweenDelimeters("Enter the rejection probability: ", 0, 100 - (acceptProbability + revisionProbability));
+        int acceptProbability = menu.askForIntegerBetweenDelimiters("Enter the acceptance probability: ", 0, 100);
+        int revisionProbability = menu.askForIntegerBetweenDelimiters("Enter the revision probability: ", 0, 100 - acceptProbability);
+        int denyProbability = menu.askForIntegerBetweenDelimiters("Enter the rejection probability: ", 0, 100 - (acceptProbability + revisionProbability));
 
         Article article = new Article(name, getTrialType("Article"), journalName, magazineQuartile, acceptProbability, revisionProbability, denyProbability);
 
@@ -99,8 +99,8 @@ public class TrialManager {
         String name = menu.askForString("Enter the trial’s name: ");
         String masterName = menu.askForString("Enter the master’s name: ");
 
-        int ects = menu.askForIntegerBetweenDelimeters("Enter the master’s ECTS number: ", 60, 120);
-        int creditPass = menu.askForIntegerBetweenDelimeters("Enter the credit pass probability: ", 0, 100);
+        int ects = menu.askForIntegerBetweenDelimiters("Enter the master’s ECTS number: ", 60, 120);
+        int creditPass = menu.askForIntegerBetweenDelimiters("Enter the credit pass probability: ", 0, 100);
 
         Master master = new Master(name, getTrialType("Master"), masterName, ects, creditPass);
 
@@ -115,7 +115,7 @@ public class TrialManager {
         String name = menu.askForString("Enter the trial’s name: ");
         String thesisName = menu.askForString("Enter the thesis' name: ");
 
-        int difficulty = menu.askForIntegerBetweenDelimeters("Enter the defense difficulty: ", 1, 10);
+        int difficulty = menu.askForIntegerBetweenDelimiters("Enter the defense difficulty: ", 1, 10);
 
         Thesis thesis = new Thesis(name, getTrialType("Thesis"), thesisName, difficulty);
 
@@ -130,7 +130,7 @@ public class TrialManager {
         String name = menu.askForString("Enter the trial’s name: ");
         String budgetName = menu.askForString("Enter the entity’s name: ");
 
-        int amount = menu.askForIntegerBetweenDelimeters("Enter the budget amount: ", 1000, 2000000000);
+        int amount = menu.askForIntegerBetweenDelimiters("Enter the budget amount: ", 1000, 2000000000);
 
         Budget budget = new Budget(name, getTrialType("Budget"), budgetName, amount);
 

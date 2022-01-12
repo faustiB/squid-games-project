@@ -67,8 +67,8 @@ public class EditionManager {
                     }
                 } while (!check);
             }
-            int numberOfPlayers = menu.askForIntegerBetweenDelimeters("Enter the Initial number of players: ", 1, 5);
-            int numberOfTrials = menu.askForIntegerBetweenDelimeters("Enter the number of trials: ", 3, 12);
+            int numberOfPlayers = menu.askForIntegerBetweenDelimiters("Enter the Initial number of players: ", 1, 5);
+            int numberOfTrials = menu.askForIntegerBetweenDelimiters("Enter the number of trials: ", 3, 12);
 
             menu.showMessage("\n\t--- Trials ---\n");
             tm.showingOfTrials();
@@ -137,7 +137,7 @@ public class EditionManager {
                             check = true;
                         }
                     } while (!check);
-                    int newNumberOfPlayers = menu.askForIntegerBetweenDelimeters("Enter the  new initial number of players: ", 1, 5);
+                    int newNumberOfPlayers = menu.askForIntegerBetweenDelimiters("Enter the  new initial number of players: ", 1, 5);
 
                     Edition newEdition = new Edition(newYear, newNumberOfPlayers, editions.get(option).getSizeOfTrials());
                     newEdition.duplicateTrials(editions.get(option));

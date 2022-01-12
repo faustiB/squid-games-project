@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Class created in order to implement methods that help the program apply
+ * a persistence using CSV.
+ */
 public class CsvWriter {
 
     private ArrayList<Article> articles = new ArrayList<>();
@@ -15,7 +19,10 @@ public class CsvWriter {
     private ArrayList<Thesis> theses = new ArrayList<>();
     private ArrayList<Budget> budgets = new ArrayList<>();
 
-
+    /**
+     * Method created to separate the arraylist of trials into the different types.
+     * @param trials: arraylist of trials.
+     */
     private void separateArraylist(ArrayList<Trial> trials) {
         for (Trial trial : trials) {
             if (trial instanceof Article) {
@@ -30,21 +37,27 @@ public class CsvWriter {
         }
     }
 
-
+    /**
+     * Method used to coordinate the writing of editions.
+     * @param editions: arraylist of editions.
+     * @throws IOException: input output exception...
+     */
     public void writeFullEditionsFiles(ArrayList<Edition> editions) throws IOException {
-
         writeEditions(editions);
         writeTrialsOfEditions(editions);
-
     }
 
+    /**
+     * Method created to write the trials of the different editions to the file.
+     * @param editions: arraylist of editions.
+     * @throws IOException: input output exception...
+     */
     private void writeTrialsOfEditions(ArrayList<Edition> editions) throws IOException {
         FileWriter outputFileEdT = new FileWriter("files/editionsTrials.csv");
         CSVWriter writerEdT = new CSVWriter(outputFileEdT);
 
         for (Edition e : editions) {
             HashMap<Integer, String> trials = e.getNamesOfTrials();
-
             for (String value : trials.values()) {
 
                 String[] arr = value.split("-");
@@ -52,11 +65,15 @@ public class CsvWriter {
 
                 writerEdT.writeNext(data);
             }
-
         }
         writerEdT.close();
     }
 
+    /**
+     * Method used to write the editions to the different files.
+     * @param editions: arraylist of editions.
+     * @throws IOException: input output exception.
+     */
     private void writeEditions(ArrayList<Edition> editions) throws IOException {
         FileWriter outputFileEd = new FileWriter("files/editions.csv");
         CSVWriter writerEd = new CSVWriter(outputFileEd);
@@ -67,6 +84,10 @@ public class CsvWriter {
         writerEd.close();
     }
 
+    /**
+     * Method used to write the budgets to the file.
+     * @throws IOException: input output exception.
+     */
     private void writeBudgets() throws IOException {
         FileWriter outputFileB = new FileWriter("files/budgets.csv");
         CSVWriter writerB = new CSVWriter(outputFileB);
@@ -77,6 +98,10 @@ public class CsvWriter {
         writerB.close();
     }
 
+    /**
+     * Method used to write the theses to the file.
+     * @throws IOException: input output exception.
+     */
     private void writeTheses() throws IOException {
         FileWriter outputFileT = new FileWriter("files/theses.csv");
         CSVWriter writerT = new CSVWriter(outputFileT);
@@ -87,10 +112,13 @@ public class CsvWriter {
         writerT.close();
     }
 
+    /**
+     * Method used to write the masters to the file.
+     * @throws IOException: input output exception.
+     */
     private void writeMasters() throws IOException {
         FileWriter outputFileM = new FileWriter("files/masters.csv");
         CSVWriter writerM = new CSVWriter(outputFileM);
-
 
         for (Master m : masters) {
             writerM.writeNext(m.getArrayDescription());
@@ -98,6 +126,10 @@ public class CsvWriter {
         writerM.close();
     }
 
+    /**
+     * Method used to write the articles to the file.
+     * @throws IOException: input output exception.
+     */
     private void writeArticles() throws IOException {
         FileWriter outputFileA = new FileWriter("files/articles.csv");
         CSVWriter writerA = new CSVWriter(outputFileA);
@@ -108,6 +140,10 @@ public class CsvWriter {
         writerA.close();
     }
 
+    /**
+     * Method used to coordinate the writing of the arraylists to the files.
+     * @throws IOException: input output exception.
+     */
     public void writeTrials(ArrayList<Trial> trials) throws IOException {
         separateArraylist(trials);
 
@@ -115,8 +151,5 @@ public class CsvWriter {
         writeMasters();
         writeTheses();
         writeBudgets();
-
-
-
     }
 }

@@ -13,14 +13,14 @@ public class Menu {
     private final Scanner scanner;
 
     /**
-     * Constructor of the menu class implementing an scanner for user input.
+     * Constructor of the menu class implementing a scanner for user input.
      */
     public Menu() {
         this.scanner = new Scanner(System.in);
     }
 
     /**
-     * This functions prints the menu with the appropiate format.
+     * This functions prints the menu with the appropriate format.
      */
     public void showTrialMenu() {
         spacing();
@@ -46,7 +46,7 @@ public class Menu {
     }
 
     /**
-     * This functions prints the menu with the appropiate format.
+     * This functions prints the menu with the appropriate format.
      */
     public void showEditionMenu() {
         spacing();
@@ -58,9 +58,8 @@ public class Menu {
         System.out.println("\te) Back");
     }
 
-
     /**
-     * This functions prints the menu with the appropiate format.
+     * This functions prints the menu with the appropriate format.
      */
     public void showComposerMenu() {
         spacing();
@@ -69,8 +68,6 @@ public class Menu {
         spacing();
         System.out.println("3) Exit");
     }
-
-
 
     /**
      * This functions prints The Trials banner.
@@ -85,7 +82,10 @@ public class Menu {
                                                            \s""".indent(1));
     }
 
-    public void showPersistanceChoice() {
+    /**
+     * Method used to print the persistence message.
+     */
+    public void showPersistenceChoice() {
         System.out.println("""
                 The IEEE needs to know where your allegiance lies.
                                 
@@ -94,22 +94,28 @@ public class Menu {
                 """);
     }
 
-    public boolean checkPersistanceInput() {
+    /**
+     * Method used to check if the persistence entered is correct.
+     * @return true for I, false for II
+     */
+    public boolean checkPersistenceInput() {
         String choice;
 
-        showPersistanceChoice();
+        showPersistenceChoice();
         choice = askForString("Pick a faction: ");
 
         while (!choice.equals("I") && !choice.equals("II")) {
             showMessage("Wrong input, enter one of the desired options.");
-            showPersistanceChoice();
+            showPersistenceChoice();
             choice = askForString("Pick a faction: ");
         }
-
 
         return choice.equalsIgnoreCase("I");
     }
 
+    /**
+     * Method used to print the role choice message.
+     */
     public void showRoleChoice() {
         System.out.println("""
                 Welcome to The Trials. Who are you?
@@ -119,6 +125,10 @@ public class Menu {
                 """);
     }
 
+    /**
+     * Method used to check the role input
+     * @return true for A, false for B.
+     */
     public boolean checkRoleInput() {
         String choice;
 
@@ -143,7 +153,7 @@ public class Menu {
     }
 
     /**
-     * Method to processes an String entered by the user.
+     * Method to processes a String entered by the user.
      *
      * @param message: string written by the user
      * @return String processed by the system.
@@ -159,6 +169,11 @@ public class Menu {
         }
     }
 
+    /**
+     * Method used to get the correct quartile input.
+     * @param message: Message input to print
+     * @return correct quartile with format
+     */
     public String askForQuartile(String message) {
         String quartile;
         while (true) {
@@ -176,13 +191,17 @@ public class Menu {
         }
     }
 
+    /**
+     * Method created to check if a quartile format is correct.
+     * @param quartile: string entered by the user
+     * @return true for correct quartile.
+     */
     public boolean checkQuartile(String quartile) {
         return quartile.equals("Q1") ||
                 quartile.equals("Q2") ||
                 quartile.equals("Q3") ||
                 quartile.equals("Q4");
     }
-
 
     /**
      * Method that processes and checks that an integer has been entered by the user.
@@ -204,14 +223,14 @@ public class Menu {
     }
 
     /**
-     * Ask for integer between a delimeter
+     * Ask for integer between a delimiter
      *
      * @param message message to be shown
-     * @param num1    low delimeter
-     * @param num2    high delimeter
+     * @param num1    low delimiter
+     * @param num2    high delimiter
      * @return number entered.
      */
-    public int askForIntegerBetweenDelimeters(String message, int num1, int num2) {
+    public int askForIntegerBetweenDelimiters(String message, int num1, int num2) {
         int number;
         while (true) {
             try {
@@ -227,7 +246,6 @@ public class Menu {
             }
         }
     }
-
 
     /**
      * Closing of Scanner.
@@ -251,7 +269,6 @@ public class Menu {
     public void spacing() {
         System.out.println();
     }
-
 
     /**
      * Getter of the option selected by screen
@@ -277,7 +294,6 @@ public class Menu {
 
         return opt;
     }
-
 
     /**
      * Getter of the option selected by screen
@@ -314,15 +330,13 @@ public class Menu {
         if (opt.equalsIgnoreCase("a") || opt.equalsIgnoreCase("b") || opt.equalsIgnoreCase("c") || opt.equalsIgnoreCase("d")) {
             return true;
         } else {
-            System.out.println("\nWorng option entered, only valid: 'a', 'b' , 'c' or 'd'.\n");
+            System.out.println("\nWong option entered, only valid: 'a', 'b' , 'c' or 'd'.\n");
             return false;
         }
     }
 
-
     /**
      * Getter of the option selected by screen
-     *
      * @return integer introduced by the screen
      */
     public String getEditionOption() {
@@ -355,15 +369,13 @@ public class Menu {
         if (opt.equalsIgnoreCase("a") || opt.equalsIgnoreCase("b") || opt.equalsIgnoreCase("c") || opt.equalsIgnoreCase("d") || opt.equalsIgnoreCase("e")) {
             return true;
         } else {
-            System.out.println("\nWorng option entered, only valid: 'a', 'b' , 'c', 'd' or 'e'.\n");
+            System.out.println("\nWong option entered, only valid: 'a', 'b' , 'c', 'd' or 'e'.\n");
             return false;
         }
     }
 
-
     /**
      * Method to get the trial type number
-     *
      * @return trial type.
      */
     public int getTrialType() {
@@ -377,15 +389,14 @@ public class Menu {
         } while (!check);
 
         return trialType;
-
     }
 
     /**
      * Method to check if an option is between two numbers
      *
-     * @param option value to be checked
-     * @param num1   first delimiter
-     * @param num2   second delimiter
+     * @param option: value to be checked
+     * @param num1: first delimiter
+     * @param num2: second delimiter
      * @return boolean that determines if option is between the delimiters.
      */
     public boolean checkBetweenNumbersType(int option, int num1, int num2) {
@@ -402,8 +413,7 @@ public class Menu {
 
     /**
      * Showing of details of an article
-     *
-     * @param article Article input.
+     * @param article: Article input.
      */
     public void showDetailsArticle(Article article) {
 
@@ -421,7 +431,6 @@ public class Menu {
 
     /**
      * Showing details of thesis
-     *
      * @param thesis Thesis input
      */
     public void showDetailsThesis(Thesis thesis) {
@@ -435,7 +444,6 @@ public class Menu {
 
     /**
      * Showing details of Master
-     *
      * @param master Master input
      */
     public void showDetailsMaster(Master master) {
@@ -454,7 +462,6 @@ public class Menu {
 
     /**
      * Showing of budget details.
-     *
      * @param budget Budget Input.
      */
     public void showDetailsBudget(Budget budget) {
@@ -469,25 +476,39 @@ public class Menu {
         }
     }
 
+    /**
+     * Method used to show the trials with correct format.
+     * @param trials: arraylist of trials
+     */
     public void showTrials(ArrayList<Trial> trials) {
         for (int i = 0; i < trials.size(); i++) {
             showMessage(i + 1 + ") " + trials.get(i).getName());
         }
     }
 
+    /**
+     * Method used to show the editions with correct format.
+     * @param editions: arraylist of editions.
+     */
     public void showEditions(ArrayList<Edition> editions) {
         for (int i = 0; i < editions.size(); i++) {
             showTabulatedMessage(i + 1 + ") The trials " + (editions.get(i).getYear()));
         }
     }
 
+    /**
+     * Method used to ask for the different trials.
+     * @param numberOfTrials: total number of trials.
+     * @param tm: trial manager object.
+     * @return arraylist of trials.
+     */
     public ArrayList<Trial> askForTrials(int numberOfTrials, TrialManager tm) {
         ArrayList<Trial> trials = new ArrayList<>();
         int input;
         for (int i = 1; i <= numberOfTrials; i++) {
             spacing();
-            input = askForIntegerBetweenDelimeters("Pick a trial (" + i + "/" + numberOfTrials + ") : "
-                    , 1, tm.getTrialsSize());
+            input = askForIntegerBetweenDelimiters("Pick a trial (" + i + "/" + numberOfTrials + ") : ",
+                    1, tm.getTrialsSize());
             trials.add(tm.getSpecificTrial(input - 1));
         }
         spacing();
@@ -496,7 +517,10 @@ public class Menu {
         return trials;
     }
 
-
+    /**
+     * Method used to show a concrete edition with correct format.
+     * @param edition: an edition
+     */
     public void showEdition(Edition edition) {
         spacing();
         showMessage("Year: " + edition.getYear());
@@ -505,17 +529,15 @@ public class Menu {
         showTrialsOfEdition(edition.getNamesOfTrials());
     }
 
+    /**
+     * Method used to show the different trials of an edition
+     * @param names: names of the trials.
+     */
     private void showTrialsOfEdition(HashMap<Integer,String> names) {
-        int i = 1;
         String[] arr;
         for (Map.Entry<Integer, String> entry: names.entrySet()) {
             arr = entry.getValue().split("-");
             showTabulatedMessage(entry.getKey() + "- " +arr[1]+ " ("+arr[0]+")");
-
         }
-        
-
     }
-
-
 }
