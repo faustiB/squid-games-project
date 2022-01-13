@@ -40,10 +40,11 @@ public class Budget extends Trial {
 
     /**
      * Method created to execute the budget trial.
-     * @return true for win, false for loose.
      */
-    public boolean executeBudget(int points) {
-        return Math.log10(this.budgetQuantity)/Math.log10(2) < points;
+    @Override
+    public void executeTrial(Player p){
+        int points = p.getPi();
+        //return Math.log10(this.budgetQuantity)/Math.log10(2) < points;
     }
 
     /**

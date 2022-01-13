@@ -5,7 +5,7 @@ package Business;
  */
 public class Player {
     private final String name;
-    private final int pi;
+    private int pi;
     private final int title; //0 for engineer, 1 for Master, 2 for PhD
 
     /**
@@ -36,5 +36,13 @@ public class Player {
             case 2 -> this.name + ", PhD";
             default -> this.name;
         };
+    }
+
+    /**
+     * Setter for the points of each player.
+     * @param points: points won or lost
+     */
+    public void setPi(int points) {
+        this.pi = this.pi + points;
     }
 }

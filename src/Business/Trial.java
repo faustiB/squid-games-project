@@ -71,7 +71,19 @@ public class Trial {
         return ret;
     }
 
+    /**
+     * Method to return the name of the trial on an array.
+     * @return string array.
+     */
     public String[] getArrayDescription(){
         return new String[]{name};
+    }
+
+    /**
+     * Overwritten method for the trials execution.
+     * @param p: player
+     */
+    public void executeTrial(Player p) {
+        System.out.println(p.getPi());
     }
 }

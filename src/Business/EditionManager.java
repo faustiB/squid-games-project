@@ -17,10 +17,7 @@ public class EditionManager {
     private Menu menu = new Menu();
 
     public EditionManager(Boolean choice) {
-
-
         if (choice) {
-
             try {
                 this.editions = readEditions_CSV();
             } catch (FileNotFoundException e) {
@@ -29,7 +26,6 @@ public class EditionManager {
                 e.printStackTrace();
             }
         } else {
-
             try {
                 this.editions = readEditions_JSON();
             } catch (FileNotFoundException e) {
@@ -39,13 +35,11 @@ public class EditionManager {
     }
 
     public void writeEditionsToFiles(Boolean choice) throws IOException {
-
         if (choice) {
             writeEditions_CSV(this.editions);
         } else {
             writeEditions_JSON(this.editions);
         }
-
     }
 
     /**
@@ -67,6 +61,7 @@ public class EditionManager {
                     }
                 } while (!check);
             }
+
             int numberOfPlayers = menu.askForIntegerBetweenDelimiters("Enter the Initial number of players: ", 1, 5);
             int numberOfTrials = menu.askForIntegerBetweenDelimiters("Enter the number of trials: ", 3, 12);
 
@@ -143,7 +138,7 @@ public class EditionManager {
                     newEdition.duplicateTrials(editions.get(option));
 
                     editions.add(newEdition);
-                    menu.showMessage("\nThe edition was successfully clonated.\n");
+                    menu.showMessage("\nThe edition was successfully cloned.\n");
                 }
             }
         }
@@ -159,10 +154,10 @@ public class EditionManager {
             if (option != editions.size()) {
                 if (menu.checkBetweenNumbersType(option + 1, 1, getEditionsSize())) {
                     menu.spacing();
-                    int editionYear = menu.askForInteger("\nEnter the edition's year for confimation : ");
+                    int editionYear = menu.askForInteger("\nEnter the edition's year for confirmation : ");
                     if (editions.get(option).checkYear(editionYear)) {
                         editions.remove(option);
-                        menu.showMessage("\nThe edition was successfully clonated.\n");
+                        menu.showMessage("\nThe edition was successfully deleted.\n");
                     } else {
                         menu.showMessage("\nConfirmation failed, edition was not deleted. \n");
                     }
@@ -215,13 +210,10 @@ public class EditionManager {
     }
 
     public void startTrials(int currentYear) {
-
         Edition e = getEditionByYear(currentYear);
-
         ArrayList<Player> players = addPlayers(e.getNumberOfPlayers());
 
-
-
+        e.executeTrials(players);
     }
 
 

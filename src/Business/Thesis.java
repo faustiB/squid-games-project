@@ -41,16 +41,16 @@ public class Thesis extends Trial {
 
     /**
      * Method created to execute the thesis trial.
-     * @return true for win, false for loose.
      */
-    public boolean executeThesis(int pi) {
+    @Override
+    public void executeTrial(Player p) {
         int result = 0;
 
         for (int i = 1; i <= this.difficulty; i++) {
             result = result + (2*i - 1);
         }
 
-        return pi > sqrt(result);
+        //return pi > sqrt(result);
     }
 
     //TODO: revisar master evoluciona a doctor (no guanya punts)

@@ -45,21 +45,20 @@ public class Master extends Trial {
 
     /**
      * Method created to execute the master trial.
-     * @return true for win, false for loose.
      */
-    public boolean executeMaster() {
+    @Override
+    public void executeTrial(Player p) {
         Random rand = new Random();
         int creditsPassed = 0;
 
         for (int i = 0; i < this.numCredits; i++) {
-
             //Check if the random number between zero and 100 is in the chance to pass range.
             if(rand.nextInt(100) < this.chanceToPass) {
                 creditsPassed++;
             }
         }
 
-        return creditsPassed > this.numCredits/2;
+        //return getPoints(creditsPassed > this.numCredits/2);
     }
 
     //TODO: revisar enginyer evoluciona a master (no guanya punts)

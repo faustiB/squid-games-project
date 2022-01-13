@@ -52,18 +52,26 @@ public class Article extends Trial {
 
     /**
      * Method created to execute the article trial.
-     * @return true for win, false for loose.
      */
-    public boolean executeArticle() {
+    @Override
+    public void executeTrial(Player p){
         Random rand = new Random();
+        boolean cont = true;
 
-        while (true) {
+        System.out.print(p.getNameAndTitle()+ " is submitting... ");
+        while (cont) {
             int prob = rand.nextInt(100);
 
-            if (prob < this.acceptProbability) {
-                return true;
-            } else if (prob > (this.acceptProbability + this.revisionProbability)) {
-                return false;
+            if (prob <= this.acceptProbability) {
+                p.setPi(getPoints(true));
+                System.out.print("Accepted! PI count: "+ p.getPi());
+                cont = false;
+            } else if (prob <= this.acceptProbability+this.revisionProbability) {
+                System.out.print("Revisions... ");
+            } else {
+                p.setPi(getPoints(false));
+                System.out.print("Rejected. PI count: "+ p.getPi());
+                cont = false;
             }
         }
     }

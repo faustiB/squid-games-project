@@ -1,5 +1,7 @@
 package Business;
 
+import Presentation.Menu;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -106,5 +108,19 @@ public class Edition {
      */
     public String[] getArrayDescription() {
         return new String[]{String.valueOf(year),String.valueOf(numberOfPlayers),String.valueOf(numberOfTrials)};
+    }
+
+    public void executeTrials(ArrayList<Player> players) {
+        Menu m = new Menu();
+
+        for (int i = 0, trialsSize = trials.size(); i < trialsSize; i++) {
+            Trial trial = trials.get(i);
+            m.showMessage("Trial #" + (i+1) + " - "+ trial.getName());
+            for (Player p: players) {
+                //Va a la clase super per defecte, no respecta la herencia...
+                trial.executeTrial(p);
+                //fer check de si un player passa a ser algo diferent.
+            }
+        }
     }
 }
