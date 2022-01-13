@@ -58,7 +58,7 @@ public class Master extends Trial {
             }
         }
 
-        //return getPoints(creditsPassed > this.numCredits/2);
+        p.setPi(getPoints(creditsPassed > this.numCredits/2));
     }
 
     //TODO: revisar enginyer evoluciona a master (no guanya punts)

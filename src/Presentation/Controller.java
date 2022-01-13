@@ -82,9 +82,7 @@ public class Controller {
             } else{
                 menu.showMessage("No edition is defined for the current year ("+ currentYear +").");
                 menu.spacing();
-
             }
-
         }
         exitMenu(choiceInput);
     }

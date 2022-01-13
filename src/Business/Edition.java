@@ -117,9 +117,8 @@ public class Edition {
             Trial trial = trials.get(i);
             m.showMessage("Trial #" + (i+1) + " - "+ trial.getName());
             for (Player p: players) {
-                //Va a la clase super per defecte, no respecta la herencia...
                 trial.executeTrial(p);
-                //fer check de si un player passa a ser algo diferent.
+                p.checkEvolution();
             }
         }
     }

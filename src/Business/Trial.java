@@ -83,7 +83,5 @@ public class Trial {
      * Overwritten method for the trials execution.
      * @param p: player
      */
-    public void executeTrial(Player p) {
-        System.out.println(p.getPi());
-    }
+    public void executeTrial(Player p) {}
 }

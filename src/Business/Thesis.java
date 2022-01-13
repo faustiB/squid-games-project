@@ -50,7 +50,7 @@ public class Thesis extends Trial {
             result = result + (2*i - 1);
         }
 
-        //return pi > sqrt(result);
+        p.setPi(getPoints(p.getPi() > sqrt(result)));
     }
 
     //TODO: revisar master evoluciona a doctor (no guanya punts)

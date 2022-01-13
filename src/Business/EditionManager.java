@@ -46,7 +46,6 @@ public class EditionManager {
      * Creation of editions
      */
     public void createEdition(TrialManager tm) {
-
         boolean check = false;
         if (tm.checkLengthOfTrialsIsNotZero()) {
             menu.spacing();

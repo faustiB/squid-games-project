@@ -41,6 +41,7 @@ public class Budget extends Trial {
     /**
      * Method created to execute the budget trial.
      */
+    //TODO: com agafem els pi de tot l'equip?
     @Override
     public void executeTrial(Player p){
         int points = p.getPi();

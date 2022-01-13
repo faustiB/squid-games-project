@@ -513,7 +513,6 @@ public class Menu {
         }
         spacing();
 
-
         return trials;
     }
 
