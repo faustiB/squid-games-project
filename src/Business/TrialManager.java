@@ -234,7 +234,7 @@ public class TrialManager {
             option = getTrialSelectedInput();
             if (menu.checkBetweenNumbersType(option + 1, 1, getTrialsSize())) {
 
-                String trialName = menu.askForString("\nEnter the trial's name for confimation :");
+                String trialName = menu.askForString("\nEnter the trial's name for confimation: ");
                 if (trials.get(option).checkName(trialName)) {
                     trials.remove(option);
                     menu.showMessage("\nThe trial was successfully deleted.\n");

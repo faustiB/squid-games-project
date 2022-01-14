@@ -67,7 +67,7 @@ public class Thesis extends Trial {
      * Method created to return the points won or lost by the player.
      * @return true for win, false for loose.
      */
-    public int getPoints(boolean result, Player p) {
+    private int getPoints(boolean result, Player p) {
         if (p.getTitle() == 1 && result){
             p.evolutePlayer();
         } else if(result){

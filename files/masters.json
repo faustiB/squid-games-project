@@ -1,9 +1,9 @@
 [
   {
-    "masterName": "",
-    "numCredits": 65,
-    "chanceToPass": 55,
-    "name": "Master",
+    "masterName": "Mtrial",
+    "numCredits": 120,
+    "chanceToPass": 58,
+    "name": "Master trial",
     "type": 2
   }
 ]

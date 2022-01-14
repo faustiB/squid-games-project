@@ -1,5 +1,6 @@
 package Business;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -41,19 +42,39 @@ public class Budget extends Trial {
     /**
      * Method created to execute the budget trial.
      */
-    //TODO: com agafem els pi de tot l'equip?
-    @Override
-    public String executeTrial(Player p){
-        int points = p.getPi();
-        //return Math.log10(this.budgetQuantity)/Math.log10(2) < points;
-        return "\t";
+    public String executeBudget(ArrayList<Player> p){
+        int points = 0;
+        String message = "\t";
+
+        for (Player player : p) {
+            if (!player.isDisqualified()) {
+                points = points + player.getPi();
+            }
+        }
+
+        boolean result =  Math.log10(this.budgetQuantity)/Math.log10(2) < points;
+
+        if(result) {
+            message = message.concat("The research group got the budget!\n");
+        } else {
+            message = message.concat("The research group did not get the budget...\n");
+        }
+
+        for (Player player : p) {
+            if (!player.isDisqualified()) {
+                player.setPi(getPoints(result, points));
+                message = message.concat("\t" + player.getNameAndTitle()+ " PI count: "+ player.getPi());
+            }
+        }
+
+        return message;
     }
 
     /**
      * Method created to return the points won or lost by the player.
      * @return true for win, false for loose.
      */
-    public int getPoints(boolean result, int points) {
+    private int getPoints(boolean result, int points) {
         if (result) return (int) Math.ceil((double) points/2);
         else return -2;
     }

@@ -143,7 +143,14 @@ public class Edition {
 
             for (Player p: players) {
                 if (!p.isDisqualified()){
-                    m.showMessage(trial.executeTrial(p));
+                    if (trial.type == 4) { //if we have a budget trial
+                        //TODO: no sé com fer que entri aqui desde el polimorfisme
+                        System.out.println("Budget trial");
+                        //budget.executeBudget(...)
+                    } else {
+                        m.showMessage(trial.executeTrial(p));
+                    }
+
                     if (p.getPi() >= 10 || p.getPi() <= 0) {
                         m.showMessage(p.checkStatus());
                     }

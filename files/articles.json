@@ -1,20 +1,11 @@
 [
   {
-    "articleName": "article",
-    "magazineQuartile": "Q2",
-    "acceptProbability": 20,
-    "revisionProbability": 20,
-    "denyProbability": 20,
-    "name": "article",
-    "type": 1
-  },
-  {
-    "articleName": "Jolina",
+    "articleName": "ATrial",
     "magazineQuartile": "Q3",
-    "acceptProbability": 20,
-    "revisionProbability": 30,
-    "denyProbability": 50,
-    "name": "Jolin",
+    "acceptProbability": 30,
+    "revisionProbability": 40,
+    "denyProbability": 30,
+    "name": "Article trial",
     "type": 1
   }
 ]
