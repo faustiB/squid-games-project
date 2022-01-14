@@ -5,33 +5,18 @@
     "numberOfTrials": 4,
     "trials": [
       {
-        "articleName": "article",
-        "magazineQuartile": "Q2",
-        "acceptProbability": 20,
-        "revisionProbability": 20,
-        "denyProbability": 20,
         "name": "article",
         "type": 1
       },
       {
-        "masterName": "",
-        "numCredits": 65,
-        "chanceToPass": 65,
         "name": "Master",
         "type": 2
       },
       {
-        "studyField": "thesis",
-        "difficulty": 6,
         "name": "thesis",
         "type": 3
       },
       {
-        "articleName": "article",
-        "magazineQuartile": "Q2",
-        "acceptProbability": 20,
-        "revisionProbability": 20,
-        "denyProbability": 20,
         "name": "article",
         "type": 1
       }

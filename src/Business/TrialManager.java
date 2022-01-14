@@ -74,14 +74,28 @@ public class TrialManager {
      * Creation of article trial
      */
     private void createArticleTrial() {
+        int acceptProbability = 0, revisionProbability = 0, denyProbability = 0, sum = 0;
 
         String name = menu.askForString("Enter the trial’s name: ");
         String journalName = menu.askForString("Enter the journal’s name: ");
         String magazineQuartile = menu.askForQuartile("Enter the journal’s quartile: ");
 
-        int acceptProbability = menu.askForIntegerBetweenDelimiters("Enter the acceptance probability: ", 0, 100);
-        int revisionProbability = menu.askForIntegerBetweenDelimiters("Enter the revision probability: ", 0, 100 - acceptProbability);
-        int denyProbability = menu.askForIntegerBetweenDelimiters("Enter the rejection probability: ", 0, 100 - (acceptProbability + revisionProbability));
+        while (sum != 100) {
+            acceptProbability = menu.askForIntegerBetweenDelimiters
+                    ("Enter the acceptance probability: ", 0, 100);
+            revisionProbability = menu.askForIntegerBetweenDelimiters
+                    ("Enter the revision probability: ", 0, 100 - acceptProbability);
+            denyProbability = menu.askForIntegerBetweenDelimiters
+                    ("Enter the rejection probability: ", 0, 100 - (acceptProbability + revisionProbability));
+
+            sum = acceptProbability + revisionProbability + denyProbability;
+
+            if (sum != 100) {
+                menu.spacing();
+                menu.showMessage("Error: the percentages entered must sum 100.");
+                menu.spacing();
+            }
+        }
 
         Article article = new Article(name, getTrialType("Article"), journalName, magazineQuartile, acceptProbability, revisionProbability, denyProbability);
 

@@ -7,5 +7,14 @@
     "denyProbability": 20,
     "name": "article",
     "type": 1
+  },
+  {
+    "articleName": "Jolina",
+    "magazineQuartile": "Q3",
+    "acceptProbability": 20,
+    "revisionProbability": 30,
+    "denyProbability": 50,
+    "name": "Jolin",
+    "type": 1
   }
 ]
