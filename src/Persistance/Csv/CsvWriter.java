@@ -57,7 +57,7 @@ public class CsvWriter {
         CSVWriter writerEdT = new CSVWriter(outputFileEdT);
 
         for (Edition e : editions) {
-            HashMap<Integer, String> trials = e.getNamesOfTrials();
+            HashMap<Integer, String> trials = e.getNamesOfTrialsForDescription();
             for (String value : trials.values()) {
 
                 String[] arr = value.split("-");

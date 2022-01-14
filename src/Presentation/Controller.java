@@ -78,7 +78,11 @@ public class Controller {
             int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 
             if (em.checkEditionIsCreated(currentYear)){
-                em.startTrials(currentYear);
+
+                menu.spacing();
+                menu.showMessage("--- THE TRIALS "+currentYear+" ---");
+
+                em.startTrials(currentYear,tm);
             } else{
                 menu.showMessage("No edition is defined for the current year ("+ currentYear +").");
                 menu.spacing();

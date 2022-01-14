@@ -259,4 +259,18 @@ public class TrialManager {
     public void writeTrials_JSON(ArrayList<Trial> trials) throws IOException {
         new JsonWriter().writeTrials(trials);
     }
+
+    public ArrayList<Trial> getSpecificTrialsByNames(ArrayList<String> names) {
+        ArrayList<Trial> trialsToReturn = new ArrayList<>();
+
+        for (String name : names) {
+            for (Trial t : this.trials) {
+                if (t.getName().equalsIgnoreCase(name)){
+                    trialsToReturn.add(t);
+                }
+            }
+        }
+
+        return trialsToReturn;
+    }
 }

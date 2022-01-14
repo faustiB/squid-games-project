@@ -1,5 +1,7 @@
 package Business;
 
+import Presentation.Menu;
+
 /**
  * Class that manages each player.
  */
@@ -7,6 +9,8 @@ public class Player {
     private final String name;
     private int pi;
     private int title; //0 for engineer, 1 for Master, 2 for PhD
+
+    private final Menu menu = new Menu();
 
     /**
      * Constructor of the player class.
@@ -61,11 +65,33 @@ public class Player {
         if(this.pi >= 10 && this.title == 0) { //engineer with 10 or more points
             this.pi = 5;
             this.title = 1;
-            System.out.println(getName()+ " is now a master (with 5 PI). ");
+            menu.showMessage(this.name+ " is now a master (with 5 PI). ");
         } else if (this.pi >= 10 && this.title == 1){ //master with 10 or more points
             this.pi = 5;
             this.title = 2;
-            System.out.println(getName()+ " is now a doctor (with 5 PI). ");
+            menu.showMessage(this.name+ " is now a doctor (with 5 PI). ");
         }
+    }
+
+    /**
+     * Evolute title of player
+     */
+    public void evolutePlayer() {
+
+        this.title++;
+
+        if (this.title == 1){
+            menu.showMessage(this.name + " is now a Master");
+        } else if (this.title == 2){
+            menu.showMessage(this.name + " is now a Doctor");
+        }
+    }
+
+    /**
+     * getter of title
+     * @return title
+     */
+    public int getTitle() {
+        return this.title;
     }
 }

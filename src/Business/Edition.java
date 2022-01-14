@@ -77,7 +77,7 @@ public class Edition {
      * This method generates a hashmap with the name of the trials.
      * @return hashmap with the name of the trials
      */
-    public HashMap<Integer,String> getNamesOfTrials(){
+    public HashMap<Integer,String> getNamesOfTrialsForDescription(){
         HashMap<Integer,String> map = new HashMap<>();
         String className;
         String[] arr;
@@ -110,11 +110,34 @@ public class Edition {
         return new String[]{String.valueOf(year),String.valueOf(numberOfPlayers),String.valueOf(numberOfTrials)};
     }
 
-    public void executeTrials(ArrayList<Player> players) {
+    /**
+     * Adding names of trials
+     * @return names of trials
+     */
+    public ArrayList<String> getNamesOfTrials(){
+        ArrayList<String> names = new ArrayList<>();
+
+        for (Trial t: trials) {
+            names.add(t.getName());
+        }
+
+        return names;
+    }
+
+    /**
+     * Execution of trials
+     * @param players players that are going to play
+     * @param tm trial manager of trials.
+     */
+    public void executeTrials(ArrayList<Player> players, TrialManager tm) {
         Menu m = new Menu();
+
+        ArrayList<String> names = getNamesOfTrials();
+        trials = tm.getSpecificTrialsByNames(names);
 
         for (int i = 0, trialsSize = trials.size(); i < trialsSize; i++) {
             Trial trial = trials.get(i);
+            m.spacing();
             m.showMessage("Trial #" + (i+1) + " - "+ trial.getName());
             for (Player p: players) {
                 trial.executeTrial(p);

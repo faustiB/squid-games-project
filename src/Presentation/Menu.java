@@ -525,7 +525,7 @@ public class Menu {
         showMessage("Year: " + edition.getYear());
         showMessage("Players: " + edition.getNumberOfPlayers());
         showMessage("Trials: ");
-        showTrialsOfEdition(edition.getNamesOfTrials());
+        showTrialsOfEdition(edition.getNamesOfTrialsForDescription());
     }
 
     /**
@@ -538,5 +538,13 @@ public class Menu {
             arr = entry.getValue().split("-");
             showTabulatedMessage(entry.getKey() + "- " +arr[1]+ " ("+arr[0]+")");
         }
+    }
+
+    /**
+     * show message without \n
+     * @param s message to be shown
+     */
+    public void print(String s) {
+        System.out.print(s);
     }
 }

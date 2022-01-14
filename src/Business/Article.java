@@ -55,6 +55,7 @@ public class Article extends Trial {
      */
     @Override
     public void executeTrial(Player p){
+
         Random rand = new Random();
         boolean cont = true;
 
@@ -64,13 +65,14 @@ public class Article extends Trial {
 
             if (prob <= this.acceptProbability) {
                 p.setPi(getPoints(true));
-                System.out.print("Accepted! PI count: "+ p.getPi());
+                //TODO:Generar String y devolverlo
+                //m.showMessage("Accepted! PI count: "+ p.getPi());
                 cont = false;
             } else if (prob <= this.acceptProbability+this.revisionProbability) {
-                System.out.print("Revisions... ");
+                //m.print("Revisions... ");
             } else {
                 p.setPi(getPoints(false));
-                System.out.print("Rejected. PI count: "+ p.getPi());
+                //m.showMessage("Rejected. PI count: "+ p.getPi());
                 cont = false;
             }
         }
@@ -81,7 +83,7 @@ public class Article extends Trial {
      * according to the quartile.
      * @return true for win, false for loose.
      */
-    public int getPoints(boolean result) {
+    private int getPoints(boolean result) {
         int points = 0;
 
         if (result) {

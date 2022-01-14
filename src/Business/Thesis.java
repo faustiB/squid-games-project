@@ -50,16 +50,23 @@ public class Thesis extends Trial {
             result = result + (2*i - 1);
         }
 
-        p.setPi(getPoints(p.getPi() > sqrt(result)));
+        p.setPi(getPoints(p.getPi() > sqrt(result),p));
     }
 
-    //TODO: revisar master evoluciona a doctor (no guanya punts)
     /**
      * Method created to return the points won or lost by the player.
      * @return true for win, false for loose.
      */
-    public int getPoints(boolean result) {
-        if (result) return 5;
-        else return -5;
+    public int getPoints(boolean result, Player p) {
+
+        if (p.getTitle() == 1){
+            p.evolutePlayer();
+        } else if(result){
+            return 5;
+        } else {
+            return -5;
+        }
+
+        return 0;
     }
 }
