@@ -1,7 +1,5 @@
 package Business;
 
-import Presentation.Menu;
-
 /**
  * Class that manages each player.
  */
@@ -10,8 +8,6 @@ public class Player {
     private int pi;
     private int title; //0 for engineer, 1 for Master, 2 for PhD
     private boolean disqualified;
-
-    private final Menu menu = new Menu();
 
     /**
      * Constructor of the player class.
