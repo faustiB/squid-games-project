@@ -1,0 +1,11 @@
+[
+  {
+    "articleName": "article",
+    "magazineQuartile": "Q2",
+    "acceptProbability": 20,
+    "revisionProbability": 20,
+    "denyProbability": 20,
+    "name": "article",
+    "type": 1
+  }
+]
