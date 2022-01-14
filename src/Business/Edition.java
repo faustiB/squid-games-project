@@ -137,11 +137,17 @@ public class Edition {
 
         for (int i = 0, trialsSize = trials.size(); i < trialsSize; i++) {
             Trial trial = trials.get(i);
+
             m.spacing();
             m.showMessage("Trial #" + (i+1) + " - "+ trial.getName());
+
             for (Player p: players) {
-                trial.executeTrial(p);
-                p.checkEvolution();
+                if (!p.isDisqualified()){
+                    m.showMessage(trial.executeTrial(p));
+                    if (p.getPi() >= 10 || p.getPi() <= 0) {
+                        m.showMessage(p.checkStatus());
+                    }
+                }
             }
         }
     }

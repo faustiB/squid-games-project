@@ -9,6 +9,7 @@ public class Player {
     private final String name;
     private int pi;
     private int title; //0 for engineer, 1 for Master, 2 for PhD
+    private boolean disqualified;
 
     private final Menu menu = new Menu();
 
@@ -20,6 +21,7 @@ public class Player {
         this.name = name;
         this.pi = 5;
         this.title = 0;
+        this.disqualified = false;
     }
 
     /**
@@ -36,6 +38,14 @@ public class Player {
      */
     public int getPi() {
         return pi;
+    }
+
+    /**
+     * Getter of the disqualified parameter.
+     * @return true for diqualified.
+     */
+    public boolean isDisqualified() {
+        return disqualified;
     }
 
     /**
@@ -61,30 +71,29 @@ public class Player {
     /**
      * Method that reviews if a player can evolute.
      */
-    public void checkEvolution() {
+    public String checkStatus() {
+        String message = "\t";
+
         if(this.pi >= 10 && this.title == 0) { //engineer with 10 or more points
             this.pi = 5;
             this.title = 1;
-            menu.showMessage(this.name+ " is now a master (with 5 PI). ");
+            message = message.concat(this.name+ " is now a master (with 5 PI). ");
         } else if (this.pi >= 10 && this.title == 1){ //master with 10 or more points
             this.pi = 5;
             this.title = 2;
-            menu.showMessage(this.name+ " is now a doctor (with 5 PI). ");
+            message = message.concat(this.name+ " is now a doctor (with 5 PI). ");
+        } else if (this.pi <= 0) {
+            message = message.concat(this.name+ " is Disqualified. ");
+            this.disqualified = true;
         }
+        return message;
     }
 
     /**
-     * Evolute title of player
+     * Evolute title of player by summing the points.
      */
     public void evolutePlayer() {
-
-        this.title++;
-
-        if (this.title == 1){
-            menu.showMessage(this.name + " is now a Master");
-        } else if (this.title == 2){
-            menu.showMessage(this.name + " is now a Doctor");
-        }
+        this.pi = 10;
     }
 
     /**

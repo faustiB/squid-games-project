@@ -83,5 +83,7 @@ public class Trial {
      * Overwritten method for the trials execution.
      * @param p: player
      */
-    public void executeTrial(Player p) {}
+    public String executeTrial(Player p) {
+        return "";
+    }
 }

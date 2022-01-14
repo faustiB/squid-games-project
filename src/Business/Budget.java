@@ -43,9 +43,10 @@ public class Budget extends Trial {
      */
     //TODO: com agafem els pi de tot l'equip?
     @Override
-    public void executeTrial(Player p){
+    public String executeTrial(Player p){
         int points = p.getPi();
         //return Math.log10(this.budgetQuantity)/Math.log10(2) < points;
+        return "\t";
     }
 
     /**

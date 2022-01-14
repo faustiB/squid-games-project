@@ -49,9 +49,10 @@ public class Master extends Trial {
      * Method created to execute the master trial.
      */
     @Override
-    public void executeTrial(Player p) {
+    public String executeTrial(Player p) {
         Random rand = new Random();
         int creditsPassed = 0;
+        String message = "\t";
 
         for (int i = 0; i < this.numCredits; i++) {
             //Check if the random number between zero and 100 is in the chance to pass range.
@@ -61,14 +62,16 @@ public class Master extends Trial {
         }
 
         p.setPi(getPoints(creditsPassed > this.numCredits / 2, p));
-        /*menu.print(p.getName() + " passed " + creditsPassed + "/" + this.numCredits);
-        //TODO: MEeter en una función dentro de menú. pasandole los dos ints.
-        if (creditsPassed >= this.numCredits) {
-            menu.print(" Congrats!");
+        message = message.concat(p.getName() + " passed " + creditsPassed + "/" + this.numCredits);
+
+        if (creditsPassed >= this.numCredits/2) {
+            message = message.concat(" Congrats! ");
         } else {
-            menu.print(" Sorry...");
+            message = message.concat(" Sorry... ");
         }
-        menu.showMessage("PI count: " + p.getPi());*/
+        message = message.concat("PI count: " + p.getPi());
+
+        return message;
     }
 
     /**
@@ -77,8 +80,7 @@ public class Master extends Trial {
      * @return true for win, false for loose.
      */
     private int getPoints(boolean result, Player p) {
-
-        if (p.getTitle() == 0) {
+        if (p.getTitle() == 0 && result) {
             p.evolutePlayer();
         } else if (result) {
             return 3;

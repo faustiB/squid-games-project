@@ -54,28 +54,29 @@ public class Article extends Trial {
      * Method created to execute the article trial.
      */
     @Override
-    public void executeTrial(Player p){
-
+    public String executeTrial(Player p){
+        String message = "\t";
         Random rand = new Random();
         boolean cont = true;
 
-        System.out.print(p.getNameAndTitle()+ " is submitting... ");
+        message = message.concat(p.getNameAndTitle()+ " is submitting... ");
         while (cont) {
             int prob = rand.nextInt(100);
 
             if (prob <= this.acceptProbability) {
                 p.setPi(getPoints(true));
-                //TODO:Generar String y devolverlo
-                //m.showMessage("Accepted! PI count: "+ p.getPi());
+                message = message.concat("Accepted! PI count: "+ p.getPi());
                 cont = false;
             } else if (prob <= this.acceptProbability+this.revisionProbability) {
-                //m.print("Revisions... ");
+                message = message.concat("Revisions... ");
             } else {
                 p.setPi(getPoints(false));
-                //m.showMessage("Rejected. PI count: "+ p.getPi());
+                message = message.concat("Rejected. PI count: "+ p.getPi());
                 cont = false;
             }
         }
+
+        return message;
     }
 
     /**

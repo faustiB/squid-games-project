@@ -43,14 +43,24 @@ public class Thesis extends Trial {
      * Method created to execute the thesis trial.
      */
     @Override
-    public void executeTrial(Player p) {
+    public String executeTrial(Player p) {
         int result = 0;
+        String message = "\t";
 
         for (int i = 1; i <= this.difficulty; i++) {
             result = result + (2*i - 1);
         }
 
-        p.setPi(getPoints(p.getPi() > sqrt(result),p));
+        boolean passed = p.getPi() > sqrt(result);
+        p.setPi(getPoints(passed, p));
+
+        if (passed) {
+            message = message.concat(p.getNameAndTitle()+ " was successful. Congrats! PI count: "+ p.getPi());
+        } else {
+            message = message.concat(p.getNameAndTitle()+ " was not successful. Sorry... PI count: "+ p.getPi());
+        }
+
+        return message;
     }
 
     /**
@@ -58,8 +68,7 @@ public class Thesis extends Trial {
      * @return true for win, false for loose.
      */
     public int getPoints(boolean result, Player p) {
-
-        if (p.getTitle() == 1){
+        if (p.getTitle() == 1 && result){
             p.evolutePlayer();
         } else if(result){
             return 5;
