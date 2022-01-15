@@ -214,6 +214,12 @@ public class EditionManager {
         ArrayList<Player> players = addPlayers(e.getNumberOfPlayers());
 
         e.executeTrials(players, tm);
+
+
+
+
+
+
     }
 
 
@@ -243,6 +249,10 @@ public class EditionManager {
 
     public void writeEditions_JSON(ArrayList<Edition> editions) throws IOException {
         new JsonWriter().writeEditions(editions);
+    }
+
+    public void writeStatusGame_JSON( ArrayList<Player> players, int position) throws IOException{
+        new JsonWriter().writeStatusGame(players,position);
     }
 
     public boolean checkEditionIsCreated(int currentYear) {

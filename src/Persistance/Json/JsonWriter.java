@@ -81,4 +81,21 @@ public class JsonWriter {
         writerE.write(editionJson);
         writerE.close();
     }
+
+
+    /**
+     * MEthod to write the current status of the game.
+     * @param players players that are playing the game
+     * @param position position of what trial we are in
+     * @throws IOException IOException
+     */
+    public void writeStatusGame(ArrayList<Player> players, int position) throws IOException {
+        String gameToJson = gson.toJson(players);
+
+        FileWriter writerG = new FileWriter("files/statusGame.json");
+        writerG.write(gameToJson);
+        writerG.write(position);
+
+        writerG.close();
+    }
 }

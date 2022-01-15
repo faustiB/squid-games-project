@@ -175,7 +175,11 @@ public class Edition {
             }
             if (!checkNotDisqualifiedPlayers(players)) break; //all player have been eliminated
             if (i != trialsSize - 1) { //we are at the end of the trials
-                if (!checkContinue(m)) break;
+                if (!checkContinue(m)){
+                    break;
+                } else {
+
+                }
             } else {
                 m.showEndMessage(checkNotDisqualifiedPlayers(players),this.year);
             }
