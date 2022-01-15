@@ -152,4 +152,20 @@ public class CsvWriter {
         writeTheses();
         writeBudgets();
     }
+
+
+    /**
+     * MEthod to write the current status of the game.
+     * @param players players that are playing the game
+     * @throws IOException IOException
+     */
+    public void writeStatusGame(ArrayList<Player> players) throws IOException {
+        FileWriter outputFileEd = new FileWriter("files/statusGame.csv");
+        CSVWriter writerEd = new CSVWriter(outputFileEd);
+
+        for (Player player : players) {
+            writerEd.writeNext(player.getArrayDescription());
+        }
+        writerEd.close();
+    }
 }

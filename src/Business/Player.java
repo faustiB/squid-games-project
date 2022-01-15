@@ -13,7 +13,7 @@ public class Player implements Runnable {
     private Trial trial;
 
     /**
-     * Constructor of the player class.
+     * Constructor of the player class. Default
      * @param name: name of the player
      */
     public Player(String name) {
@@ -21,6 +21,22 @@ public class Player implements Runnable {
         this.pi = 5;
         this.title = 0;
         this.disqualified = false;
+    }
+
+    /**
+     * Full constructor with all atributes.
+     * @param name name
+     * @param pi points
+     * @param title title
+     * @param disqualified isDisqualified?
+     * @param trial trial to be executed
+     */
+    public Player(String name, int pi, int title, boolean disqualified, Trial trial) {
+        this.name = name;
+        this.pi = pi;
+        this.title = title;
+        this.disqualified = disqualified;
+        this.trial = trial;
     }
 
     /**
@@ -119,6 +135,18 @@ public class Player implements Runnable {
         this.trial = trial;
     }
 
+    /**
+     * This method returns the description of a player.
+     *
+     * @return description of a player.
+     */
+    public String[] getArrayDescription() {
+        return new String[]{name,String.valueOf(pi), String.valueOf(title), String.valueOf(disqualified), trial.getName()};
+    }
+
+    /**
+     * Run in thread the execution of the assigned trial
+     */
     @Override
     public void run() {
         Menu m  = new Menu();

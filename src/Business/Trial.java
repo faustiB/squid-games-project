@@ -22,6 +22,14 @@ public class Trial {
     }
 
     /**
+     * Constructor of trial, without type
+     * @param name name of trial
+     */
+    public Trial(String name) {
+        this.name = name;
+    }
+
+    /**
      * Method used to get the details of the trial.
      *
      * @return hashmap of strings.

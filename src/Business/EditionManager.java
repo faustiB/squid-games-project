@@ -245,7 +245,16 @@ public class EditionManager {
         int startPosition = 0;
 
         if (formatChoice){
-            menu.showMessage("Loading data from CSV files...");
+
+            try {
+                players = readStatusGame_CSV();
+                startPosition = getLastPositionOfTrials(players, edition);
+            } catch (FileNotFoundException e) {
+                players = addPlayers(edition.getNumberOfPlayers());
+            } catch (IOException | CsvException e) {
+                e.printStackTrace();
+            }
+
         } else {
             try {
                 players = readStatusGame_JSON();
@@ -320,7 +329,7 @@ public class EditionManager {
             if (i != trialsSize - 1) { //we are at the end of the trials
                 if (!checkContinue()){
                     if(formatChoice) {
-                        menu.showMessage("This is CSV");
+                        writeStatusGame_CSV(players);
                     } else {
                         writeStatusGame_JSON(players);
                     }
@@ -431,6 +440,26 @@ public class EditionManager {
     }
 
     /**
+     * Method used to write the status of the game in csv
+     * @param players: arraylist of players
+     * @throws IOException: input output exception
+     */
+    private void writeStatusGame_CSV(ArrayList<Player> players) throws IOException {
+        new CsvWriter().writeStatusGame(players);
+    }
+
+    /**
+     * Method used to read the status of the game in CSV
+     * @return arraylist of players
+     * @throws IOException: input output exception
+     * @throws CsvException: CSV Exception
+     */
+    public ArrayList<Player> readStatusGame_CSV() throws IOException, CsvException {
+        return new CsvReader().readStatusGame();
+    }
+
+
+    /**
      * Method used to read editions from files in json
      * @return arraylist of editions
      * @throws FileNotFoundException: file not found
@@ -456,6 +485,8 @@ public class EditionManager {
     public ArrayList<Player> readStatusGame_JSON() throws IOException{
         return new JsonReader().readStatusGame();
     }
+
+
 
     /**
      * Method created to remove the status file if created.

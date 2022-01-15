@@ -1,10 +1,12 @@
 package Persistance.Csv;
 
 import Business.*;
+import com.google.gson.reflect.TypeToken;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import com.opencsv.exceptions.CsvValidationException;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -261,4 +263,30 @@ public class CsvReader {
 
         return articles;
     }
+
+    /**
+     * Method used to read the status of a past game.
+     * @return arraylist of players with the last trial they played.
+     * @throws FileNotFoundException : file not found.
+     */
+    public ArrayList<Player> readStatusGame() throws IOException, CsvException {
+
+        ArrayList<Player> players = new ArrayList<>();
+        String[] data;
+
+        FileReader fileReaderE = new FileReader("files/statusGame.csv");
+        CSVReader readerA = new CSVReader(fileReaderE);
+
+
+        while ((data = readerA.readNext()) != null) {
+
+            Trial t = new Trial(data[4]);
+
+            Player p = new Player(data[0], Integer.parseInt(data[1]), Integer.parseInt(data[2]),Boolean.parseBoolean(data[3]),t);
+            players.add(p);
+        }
+
+        return players;
+    }
+
 }

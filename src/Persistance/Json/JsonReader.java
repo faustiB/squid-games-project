@@ -90,7 +90,7 @@ public class JsonReader {
     /**
      * Method used to read the status of a past game.
      * @return arraylist of players with the last trial they played.
-     * @throws FileNotFoundException: file not found.
+     * @throws IOException: IOException.
      */
     public ArrayList<Player> readStatusGame() throws IOException {
         FileReader fileReader = new FileReader("files/statusGame.json");
