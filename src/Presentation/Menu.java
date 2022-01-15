@@ -567,9 +567,9 @@ public class Menu {
      */
     public void showEndMessage(boolean alive, int currentYear) {
         if (alive) {
-            showMessage("--- THE TRIALS "+currentYear+" HAVE ENDED - PLAYERS WON");
+            showMessage("--- THE TRIALS "+currentYear+" HAVE ENDED - PLAYERS WON ---");
         } else {
-            showMessage("--- THE TRIALS "+currentYear+" HAVE ENDED - PLAYERS LOST");
+            showMessage("--- THE TRIALS "+currentYear+" HAVE ENDED - PLAYERS LOST ---");
         }
     }
 }

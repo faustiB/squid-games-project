@@ -151,7 +151,7 @@ public class Edition {
                         m.showMessage(trial.executeTrial(p));
                     }
 
-                    if (p.getPi() >= 10 || p.getPi() <= 0) {
+                    if (p.getPi() >= 10 || p.getPi() <= 0) { //if player can evolve or has no PI left
                         m.showMessage(p.checkStatus());
                     }
                 }
@@ -178,6 +178,11 @@ public class Edition {
         return keep_playing.equalsIgnoreCase("yes");
     }
 
+    /**
+     * This method returns if there are disqualified players.
+     * @param players: arraylist of players
+     * @return true for alive players, false for not
+     */
     private boolean checkNotDisqualifiedPlayers(ArrayList<Player> players) {
         int players_not_disqualified = 0;
 
