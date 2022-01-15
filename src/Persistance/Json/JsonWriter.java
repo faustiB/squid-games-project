@@ -41,7 +41,7 @@ public class JsonWriter {
     /**
      * Method used to write the trials to the different files.
      * @param trials: arraylist of trials.
-     * @throws IOException: input output exception.
+     * @throws IOException input output exception.
      */
     public void writeTrials(ArrayList<Trial> trials) throws IOException {
         separateArraylist(trials);
@@ -72,7 +72,7 @@ public class JsonWriter {
     /**
      * Method used to write the different editions to the files.
      * @param editions: arraylist of editions
-     * @throws IOException: input output exception.
+     * @throws IOException input output exception.
      */
     public void writeEditions(ArrayList<Edition> editions) throws IOException {
         String editionJson = gson.toJson(editions);

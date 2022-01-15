@@ -60,7 +60,7 @@ public class JsonReader {
     /**
      * Method used to coordinate the processing of the files into arraylists
      * @return arraylist of trials.
-     * @throws FileNotFoundException: if the files are not found...
+     * @throws FileNotFoundException if the files are not found...
      */
     public ArrayList<Trial> readFilesTrials() throws FileNotFoundException {
         ArrayList<Article> articles = processArticles();
@@ -80,7 +80,7 @@ public class JsonReader {
     /**
      * Method used to read the different editions.
      * @return arraylist of editions
-     * @throws FileNotFoundException: if the file is not found...
+     * @throws FileNotFoundException if the file is not found...
      */
     public ArrayList<Edition> readFilesEditions() throws FileNotFoundException {
         return gson.fromJson(new FileReader("files/editions.json"), new TypeToken<ArrayList<Edition>>() {
@@ -90,7 +90,7 @@ public class JsonReader {
     /**
      * Method used to read the status of a past game.
      * @return arraylist of players with the last trial they played.
-     * @throws IOException: IOException.
+     * @throws IOException IOException.
      */
     public ArrayList<Player> readStatusGame() throws IOException {
         FileReader fileReader = new FileReader("files/statusGame.json");

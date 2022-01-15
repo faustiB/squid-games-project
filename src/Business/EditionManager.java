@@ -235,8 +235,8 @@ public class EditionManager {
      * @param currentYear: current year of the trials
      * @param tm: trial manager
      * @param formatChoice: true for csv, false for json
-     * @throws InterruptedException: interrupted exeption for threards
-     * @throws IOException: input output exception
+     * @throws InterruptedException interrupted exeption for threards
+     * @throws IOException input output exception
      */
     public void startTrials(int currentYear, TrialManager tm, boolean formatChoice)
             throws InterruptedException, IOException {
@@ -292,8 +292,8 @@ public class EditionManager {
      * @param e: this year edition
      * @param startPosition: position to start the trials array from
      * @param formatChoice: true for csv, false for json
-     * @throws InterruptedException: interrupted exception
-     * @throws IOException: input output exception
+     * @throws InterruptedException interrupted exception
+     * @throws IOException input output exception
      */
     public void executeTrials(ArrayList<Player> players, TrialManager tm, Edition e, int startPosition, boolean formatChoice)
             throws InterruptedException, IOException {
@@ -375,6 +375,7 @@ public class EditionManager {
 
     /**
      * Adding names of trials
+     * @param edition: edition
      * @return names of trials
      */
     public ArrayList<String> getNamesOfTrials(Edition edition) {
@@ -419,8 +420,8 @@ public class EditionManager {
     /**
      * Method used to read editions from CSV
      * @return arraylist of editions
-     * @throws IOException: input output exception
-     * @throws CsvException: csv exception
+     * @throws IOException input output exception
+     * @throws CsvException csv exception
      */
     public ArrayList<Edition> readEditions_CSV() throws IOException, CsvException {
         return new CsvReader().readEditions();
@@ -429,7 +430,7 @@ public class EditionManager {
     /**
      * Method used to write editions to files
      * @param choice: true for csv, false for json
-     * @throws IOException: input output exception
+     * @throws IOException input output exception
      */
     public void writeEditionsToFiles(Boolean choice) throws IOException {
         if (choice) {
@@ -451,8 +452,8 @@ public class EditionManager {
     /**
      * Method used to read the status of the game in CSV
      * @return arraylist of players
-     * @throws IOException: input output exception
-     * @throws CsvException: CSV Exception
+     * @throws IOException input output exception
+     * @throws CsvException CSV Exception
      */
     public ArrayList<Player> readStatusGame_CSV() throws IOException, CsvException {
         return new CsvReader().readStatusGame();
@@ -462,7 +463,7 @@ public class EditionManager {
     /**
      * Method used to read editions from files in json
      * @return arraylist of editions
-     * @throws FileNotFoundException: file not found
+     * @throws FileNotFoundException file not found
      */
     public ArrayList<Edition> readEditions_JSON() throws FileNotFoundException {
         return new JsonReader().readFilesEditions();
@@ -471,7 +472,7 @@ public class EditionManager {
     /**
      * Method used to write the status of the game in json
      * @param players: arraylist of players
-     * @throws IOException: input output exception
+     * @throws IOException input output exception
      */
     public void writeStatusGame_JSON( ArrayList<Player> players) throws IOException{
         new JsonWriter().writeStatusGame(players);
@@ -480,7 +481,7 @@ public class EditionManager {
     /**
      * Method used to read the status of the game in json
      * @return arraylist of players
-     * @throws IOException: input output exception
+     * @throws IOException input output exception
      */
     public ArrayList<Player> readStatusGame_JSON() throws IOException{
         return new JsonReader().readStatusGame();

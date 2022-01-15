@@ -85,6 +85,7 @@ public class Player implements Runnable {
 
     /**
      * Method that reviews if a player can evolute.
+     * @return message string
      */
     public String checkStatus() {
         String message = "\t";

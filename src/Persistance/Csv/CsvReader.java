@@ -24,8 +24,8 @@ public class CsvReader {
 
     /**
      * Method used to read the trials from the different files.
-     * @throws CsvValidationException: if the csv format is not valid...
-     * @throws IOException: input output exception.
+     * @throws CsvValidationException if the csv format is not valid...
+     * @throws IOException input output exception.
      */
     public void readTrialsFromFile() throws CsvValidationException, IOException {
         articles = readArticles();
@@ -37,8 +37,8 @@ public class CsvReader {
     /**
      * Method used to read the different trials.
      * @return arraylist of trials.
-     * @throws CsvValidationException: if the csv format is not valid...
-     * @throws IOException: input output exception.
+     * @throws IOException input output exception.
+     * @throws CsvException if the csv format is not valid...
      */
     public ArrayList<Trial> readTrials() throws IOException, CsvException {
         ArrayList<Trial> trials = new ArrayList<>();
@@ -55,8 +55,8 @@ public class CsvReader {
     /**
      * Method used to read the different editions.
      * @return arraylist of editions.
-     * @throws CsvValidationException: if the csv format is not valid...
-     * @throws IOException: input output exception.
+     * @throws CsvException if the csv format is not valid...
+     * @throws IOException input output exception.
      */
     public ArrayList<Edition> readEditions() throws IOException, CsvException {
 
@@ -267,7 +267,8 @@ public class CsvReader {
     /**
      * Method used to read the status of a past game.
      * @return arraylist of players with the last trial they played.
-     * @throws FileNotFoundException : file not found.
+     * @throws IOException IOException
+     * @throws CsvException exception with csv read
      */
     public ArrayList<Player> readStatusGame() throws IOException, CsvException {
 

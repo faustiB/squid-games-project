@@ -9,6 +9,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Class created to manage the different trials
+ */
 public class TrialManager {
 
     private static final int ARTICLE = 1;
@@ -16,11 +19,14 @@ public class TrialManager {
     private static final int THESIS = 3;
     private static final int BUDGET = 4;
 
-    private Menu menu = new Menu();
+    private final Menu menu = new Menu();
     private ArrayList<Trial> trials;
 
+    /**
+     * Constructor of the class.
+     * @param choice: true for csv, false for json
+     */
     public TrialManager(Boolean choice) {
-
         if (choice) {
             try {
                 this.trials = readTrials_CSV();
@@ -38,26 +44,57 @@ public class TrialManager {
         }
     }
 
-    public void writeTrialsToFiles(Boolean choice) throws IOException {
-        if (choice) {
-            writeTrials_CSV(this.trials);
-        } else {
-            writeTrials_JSON(this.trials);
-        }
-    }
-
+    /**
+     * Getter for the trials
+     * @return arraylist of trials
+     */
     public ArrayList<Trial> getTrials() {
         return trials;
     }
 
+    /**
+     * Getter of a trial via index
+     * @param index: index to return
+     * @return trial selected
+     */
     public Trial getSpecificTrial(int index) {
         return trials.get(index);
     }
 
+    /**
+     * Getter for the size of the trials array
+     * @return size of arrays
+     */
+    public int getTrialsSize() {
+        return trials.size();
+    }
+
+    /**
+     * Method to get the trial type
+     * @param type: name of the type
+     * @return type of trial
+     */
+    private int getTrialType(String type) {
+        return switch (type) {
+            case "Article" -> 1;
+            case "Master" -> 2;
+            case "Thesis" -> 3;
+            default -> 4;
+        };
+    }
+
+    /**
+     * Checks if the length of trials is not zero
+     * @return true for not zero
+     */
     public boolean checkLengthOfTrialsIsNotZero() {
         return getTrialsSize() != 0;
     }
 
+    /**
+     * Creates a new trial
+     * @param trialType: type of the trial
+     */
     public void createTrial(int trialType) {
         menu.spacing();
         switch (trialType) {
@@ -164,29 +201,22 @@ public class TrialManager {
                 if (menu.checkBetweenNumbersType(option + 1, 1, getTrialsSize())) {
                     if (trials.get(option) instanceof Article) {
                         menu.showDetailsArticle((Article) trials.get(option));
-
                     } else if (trials.get(option) instanceof Thesis) {
                         menu.showDetailsThesis((Thesis) trials.get(option));
-
                     } else if (trials.get(option) instanceof Master) {
                         menu.showDetailsMaster((Master) trials.get(option));
-
                     } else if (trials.get(option) instanceof Budget) {
                         menu.showDetailsBudget((Budget) trials.get(option));
-
                     }
                 }
-
             } else {
                 menu.showMessage("\nGoing back to the previous menu...\n");
             }
         }
-
-
     }
 
     /**
-     * showing of available trials via screen.
+     * Showing of available trials via screen.
      */
     public void showingOfTrials() {
         menu.showTrials(trials);
@@ -194,7 +224,6 @@ public class TrialManager {
 
     /**
      * Get trial selected by screen of listed trials.
-     *
      * @return input selected by screen
      */
     public int getTrialSelectedInput() {
@@ -245,35 +274,43 @@ public class TrialManager {
         }
     }
 
-    public int getTrialsSize() {
-        return trials.size();
-    }
-
-    private int getTrialType(String type) {
-        return switch (type) {
-            case "Article" -> 1;
-            case "Master" -> 2;
-            case "Thesis" -> 3;
-            default -> 4;
-        };
-    }
-
+    /**
+     * This method generates an arraylist of trials and returns it from csv
+     * @return ArrayList of trials
+     * @throws IOException input output exception
+     * @throws CsvException csv exception
+     */
     public ArrayList<Trial> readTrials_CSV() throws IOException, CsvException {
         return new CsvReader().readTrials();
     }
 
-    public void writeTrials_CSV(ArrayList<Trial> trials) throws IOException {
-        new CsvWriter().writeTrials(trials);
-    }
-
+    /**
+     * This method generates an arraylist of trials and returns it from json
+     * @return ArrayList of trials
+     * @throws FileNotFoundException file not found
+     */
     public ArrayList<Trial> readTrials_JSON() throws FileNotFoundException {
         return new JsonReader().readFilesTrials();
     }
 
-    public void writeTrials_JSON(ArrayList<Trial> trials) throws IOException {
-        new JsonWriter().writeTrials(trials);
+    /**
+     * This method calls the methods that write the trials to the files
+     * @param choice: true for csv, false for json
+     * @throws IOException input output exception
+     */
+    public void writeTrialsToFiles(Boolean choice) throws IOException {
+        if (choice) {
+            new CsvWriter().writeTrials(this.trials);
+        } else {
+            new JsonWriter().writeTrials(this.trials);
+        }
     }
 
+    /**
+     * Method create to return a the arraylist of trials via an arraylist of names
+     * @param names: arraylist of names
+     * @return arraylist of trials
+     */
     public ArrayList<Trial> getSpecificTrialsByNames(ArrayList<String> names) {
         ArrayList<Trial> trialsToReturn = new ArrayList<>();
 

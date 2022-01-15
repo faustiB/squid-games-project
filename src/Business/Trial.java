@@ -7,7 +7,13 @@ import java.util.HashMap;
  * Master class of the trials. The different trials get inheritance from this class.
  */
 public class Trial {
+    /**
+     * Protected string name
+     */
     protected String name;
+    /**
+     * Protected int type
+     */
     protected int type;
 
     /**
@@ -96,18 +102,18 @@ public class Trial {
     }
 
     /**
-     * Overwritten method for the trials execution.
-     *
-     * @param p: player
+     * Overwritten method for executeTrial
+     * @param p player
+     * @return string with the message
      */
     public String executeTrial(Player p) {
         return null;
     }
 
     /**
-     * Overwritten method for the budget execution.
-     *
-     * @param p: player
+     * Overwritten method for executeBudget
+     * @param p player
+     * @return string with the message
      */
     public String executeBudget(ArrayList<Player> p) {
         return "";

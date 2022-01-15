@@ -10,7 +10,9 @@ import java.io.IOException;
 public class Main {
     /**
      * Main function of the program.
-     * @param args arguments
+     * @param args .
+     * @throws IOException IOException
+     * @throws InterruptedException interrupted exception
      */
     public static void main(String[] args) throws IOException, InterruptedException {
         Menu menu = new Menu();

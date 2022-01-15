@@ -40,7 +40,9 @@ public class Controller {
     }
 
     /**
-     * Method used to control the program correctly.
+     * Method used to control the flow of the application
+     * @throws IOException IOException
+     * @throws InterruptedException interrupted exception
      */
     public void run() throws IOException, InterruptedException {
 

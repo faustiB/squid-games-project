@@ -40,7 +40,7 @@ public class CsvWriter {
     /**
      * Method used to coordinate the writing of editions.
      * @param editions: arraylist of editions.
-     * @throws IOException: input output exception...
+     * @throws IOException input output exception...
      */
     public void writeFullEditionsFiles(ArrayList<Edition> editions) throws IOException {
         writeEditions(editions);
@@ -142,7 +142,8 @@ public class CsvWriter {
 
     /**
      * Method used to coordinate the writing of the arraylists to the files.
-     * @throws IOException: input output exception.
+     * @param trials: arraylist of trials
+     * @throws IOException input output exception.
      */
     public void writeTrials(ArrayList<Trial> trials) throws IOException {
         separateArraylist(trials);
