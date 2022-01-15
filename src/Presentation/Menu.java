@@ -330,7 +330,7 @@ public class Menu {
         if (opt.equalsIgnoreCase("a") || opt.equalsIgnoreCase("b") || opt.equalsIgnoreCase("c") || opt.equalsIgnoreCase("d")) {
             return true;
         } else {
-            System.out.println("\nWong option entered, only valid: 'a', 'b' , 'c' or 'd'.\n");
+            System.out.println("\nWrong option entered, only valid: 'a', 'b' , 'c' or 'd'.\n");
             return false;
         }
     }
@@ -369,7 +369,7 @@ public class Menu {
         if (opt.equalsIgnoreCase("a") || opt.equalsIgnoreCase("b") || opt.equalsIgnoreCase("c") || opt.equalsIgnoreCase("d") || opt.equalsIgnoreCase("e")) {
             return true;
         } else {
-            System.out.println("\nWong option entered, only valid: 'a', 'b' , 'c', 'd' or 'e'.\n");
+            System.out.println("\nWrong option entered, only valid: 'a', 'b' , 'c', 'd' or 'e'.\n");
             return false;
         }
     }
@@ -541,10 +541,35 @@ public class Menu {
     }
 
     /**
-     * show message without \n
-     * @param s message to be shown
+     * Asks for the continue message and returns the correctly entered string
+     * @return string with the correct input.
      */
-    public void print(String s) {
-        System.out.print(s);
+    public String askForContinue() {
+        String opt;
+        boolean userInputCorrect;
+
+        opt = askForString("Continue the execution? [yes/no]: ");
+        userInputCorrect = opt.equalsIgnoreCase("yes") || opt.equalsIgnoreCase("no");
+
+        while (!userInputCorrect) {
+            System.out.println("\nWrong option entered, only valid: 'yes' or 'no'\n");
+            opt = askForString("Continue the execution? [yes/no]: ");
+            userInputCorrect = opt.equalsIgnoreCase("yes") || opt.equalsIgnoreCase("no");
+        }
+
+        return opt;
+    }
+
+    /**
+     * This method prints the end message for the conductor execution
+     * @param alive: true for some players alive, false for no.
+     * @param currentYear: year of the trials.
+     */
+    public void showEndMessage(boolean alive, int currentYear) {
+        if (alive) {
+            showMessage("--- THE TRIALS "+currentYear+" HAVE ENDED - PLAYERS WON");
+        } else {
+            showMessage("--- THE TRIALS "+currentYear+" HAVE ENDED - PLAYERS LOST");
+        }
     }
 }

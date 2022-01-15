@@ -129,7 +129,7 @@ public class Edition {
      * @param players players that are going to play
      * @param tm trial manager of trials.
      */
-    public void executeTrials(ArrayList<Player> players, TrialManager tm) {
+    public boolean executeTrials(ArrayList<Player> players, TrialManager tm) {
         Menu m = new Menu();
 
         ArrayList<String> names = getNamesOfTrials();
@@ -156,6 +156,37 @@ public class Edition {
                     }
                 }
             }
+
+            if (!checkNotDisqualifiedPlayers(players)) break; //all player have been eliminated
+
+            if (i != trialsSize-1) { //we are at the end of the trials
+                if(!checkContinue(m)) break;
+                //TODO: si volem parar, que no aparegui el missatge que han guanyat els players.
+            }
         }
+
+        return checkNotDisqualifiedPlayers(players);
+    }
+
+    /**
+     * Method used to see if the conductor wants to continue execution
+     * @param m menu to print messages
+     * @return true for continue, false for no.
+     */
+    private boolean checkContinue(Menu m) {
+        String keep_playing = m.askForContinue();
+        return keep_playing.equalsIgnoreCase("yes");
+    }
+
+    private boolean checkNotDisqualifiedPlayers(ArrayList<Player> players) {
+        int players_not_disqualified = 0;
+
+        for (Player p: players) {
+            if(!p.isDisqualified()) { //is not disqualified
+                players_not_disqualified++;
+            }
+        }
+
+        return players_not_disqualified > 0;
     }
 }

@@ -208,16 +208,12 @@ public class EditionManager {
         return null;
     }
 
-    public void startTrials(int currentYear, TrialManager tm) {
+    public boolean startTrials(int currentYear, TrialManager tm) {
         Edition e = getEditionByYear(currentYear);
 
         ArrayList<Player> players = addPlayers(e.getNumberOfPlayers());
 
-        e.executeTrials(players, tm);
-
-
-
-
+        return e.executeTrials(players, tm);
     }
 
 

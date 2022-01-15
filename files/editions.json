@@ -16,13 +16,13 @@
       {
         "masterName": "Mtrial",
         "numCredits": 120,
-        "chanceToPass": 58,
+        "chanceToPass": 50,
         "name": "Master trial",
         "type": 2
       },
       {
         "studyField": "Ttrial",
-        "difficulty": 4,
+        "difficulty": 6,
         "name": "Thesis trial",
         "type": 3
       },

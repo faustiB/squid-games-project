@@ -61,7 +61,7 @@ public class Master extends Trial {
             }
         }
 
-        p.setPi(getPoints(creditsPassed > this.numCredits / 2, p));
+        p.setPi(getPoints(creditsPassed >= this.numCredits / 2, p));
         message = message.concat(p.getName() + " passed " + creditsPassed + "/" + this.numCredits);
 
         if (creditsPassed >= this.numCredits/2) {

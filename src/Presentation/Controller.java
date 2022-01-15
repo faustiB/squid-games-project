@@ -45,7 +45,7 @@ public class Controller {
     public void run() throws IOException {
 
         int option;
-        boolean exit = false;
+        boolean exit = false, players_alive;
         boolean choiceInput = menu.checkPersistenceInput();
 
         tm = new TrialManager(choiceInput);
@@ -82,7 +82,9 @@ public class Controller {
                 menu.spacing();
                 menu.showMessage("--- THE TRIALS "+currentYear+" ---");
 
-                em.startTrials(currentYear,tm);
+                players_alive = em.startTrials(currentYear,tm);
+
+                menu.showEndMessage(players_alive, currentYear);
             } else{
                 menu.showMessage("No edition is defined for the current year ("+ currentYear +").");
                 menu.spacing();
