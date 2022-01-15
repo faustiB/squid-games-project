@@ -7,11 +7,17 @@ public class FileDeleter {
 
     public boolean deleteCSVFile() {
         file = new File("files/statusGame.csv");
-        return file.delete();
+        if (file.exists()) {
+            return file.delete();
+        }
+        return true;
     }
 
     public boolean deleteJsonFile() {
         file = new File("files/statusGame.json");
-        return file.delete();
+        if (file.exists()) {
+            return file.delete();
+        }
+        return true;
     }
 }

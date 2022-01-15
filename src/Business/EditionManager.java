@@ -12,11 +12,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This class is intended to manage the different editions of the games.
+ */
 public class EditionManager {
 
     private ArrayList<Edition> editions;
     private final Menu menu = new Menu();
 
+    /**
+     * Constructor of the edition manager class
+     * @param choice true for csv, false for json
+     */
     public EditionManager(Boolean choice) {
         if (choice) {
             try {
@@ -35,16 +42,9 @@ public class EditionManager {
         }
     }
 
-    public void writeEditionsToFiles(Boolean choice) throws IOException {
-        if (choice) {
-            writeEditions_CSV(this.editions);
-        } else {
-            writeEditions_JSON(this.editions);
-        }
-    }
-
     /**
-     * Creation of editions
+     * Method to generate the creation of a new edition
+     * @param tm trial manager
      */
     public void createEdition(TrialManager tm) {
         boolean check = false;
@@ -96,6 +96,9 @@ public class EditionManager {
         return false;
     }
 
+    /**
+     * Method used to print the editions.
+     */
     public void listEditions() {
         int option;
         if (editions.size() == 0) {
@@ -112,6 +115,9 @@ public class EditionManager {
         }
     }
 
+    /**
+     * Method created to duplicate editions.
+     */
     public void duplicateEditions() {
         int option;
         boolean check = false;
@@ -143,6 +149,9 @@ public class EditionManager {
         }
     }
 
+    /**
+     * Method created to delete an edition.
+     */
     public void deleteEdition() {
         int option;
         if (editions.size() == 0) {
@@ -165,13 +174,16 @@ public class EditionManager {
         }
     }
 
-
+    /**
+     * Method created to select a correct option for the menu.
+     * @return number of option
+     */
     public int getEditionSelectedInput() {
         int option = -1;
         boolean check = false;
 
         if (checkLengthOfEditionsIsNotZero()) {
-            showingOfEditions();
+            menu.showEditions(editions);
             menu.spacing();
             menu.showTabulatedMessage(editions.size() + 1 + ") Back");
 
@@ -188,6 +200,23 @@ public class EditionManager {
         return option;
     }
 
+    /**
+     * This method returns an edition by passing a year.
+     * @param year: year of the edition
+     * @return edition object
+     */
+    public Edition getEditionByYear(int year) {
+        for (Edition e : editions) {
+            if (e.checkYear(year)) return e;
+        }
+        return null;
+    }
+
+    /**
+     * Method created to generate an arraylist of players.
+     * @param numOfPlayers: number of players
+     * @return arraylist of players
+     */
     public ArrayList<Player> addPlayers( int numOfPlayers) {
         String playerName;
         ArrayList<Player> players = new ArrayList<>();
@@ -201,13 +230,14 @@ public class EditionManager {
 
     }
 
-    public Edition getEditionByYear(int year) {
-        for (Edition e : editions) {
-            if (e.checkYear(year)) return e;
-        }
-        return null;
-    }
-
+    /**
+     * Method created to control the execution of the trials.
+     * @param currentYear: current year of the trials
+     * @param tm: trial manager
+     * @param formatChoice: true for csv, false for json
+     * @throws InterruptedException: interrupted exeption for threards
+     * @throws IOException: input output exception
+     */
     public void startTrials(int currentYear, TrialManager tm, boolean formatChoice)
             throws InterruptedException, IOException {
         Edition edition = getEditionByYear(currentYear);
@@ -230,6 +260,12 @@ public class EditionManager {
         executeTrials(players, tm, edition, startPosition, formatChoice);
     }
 
+    /**
+     * Method to get the last trial that we played on a past execution
+     * @param players: arraylist of players
+     * @param edition: this year's edition
+     * @return new position to start from the trials
+     */
     private int getLastPositionOfTrials(ArrayList<Player> players, Edition edition) {
         String nameOfTrial = players.get(0).getNameOfTrial();
         ArrayList<Trial> trials = edition.getTrials();
@@ -241,10 +277,14 @@ public class EditionManager {
     }
 
     /**
-     * Execution of trials
-     *
-     * @param players players that are going to play
-     * @param tm trial manager of trials.
+     * Execution of the trials
+     * @param players: arraylist of players
+     * @param tm: trial manager
+     * @param e: this year edition
+     * @param startPosition: position to start the trials array from
+     * @param formatChoice: true for csv, false for json
+     * @throws InterruptedException: interrupted exception
+     * @throws IOException: input output exception
      */
     public void executeTrials(ArrayList<Player> players, TrialManager tm, Edition e, int startPosition, boolean formatChoice)
             throws InterruptedException, IOException {
@@ -268,10 +308,8 @@ public class EditionManager {
 
                         Thread thread = new Thread(p);
                         thread.start();
-                        //TODO: Cambiar esto por que no funcions a
                         thread.join();
 
-                        //m.showMessage(trial.executeTrial(p));
                         if (p.getPi() >= 10 || p.getPi() <= 0) { //if player can evolve or has no PI left
                             menu.showMessage(p.checkStatus());
                         }
@@ -298,18 +336,27 @@ public class EditionManager {
         }
     }
 
+    /**
+     * Getter of editions size
+     * @return size of editions
+     */
     private int getEditionsSize() {
         return editions.size();
     }
 
+    /**
+     * Method to check if an edition length is zero
+     * @return true or false
+     */
     public boolean checkLengthOfEditionsIsNotZero() {
         return getEditionsSize() != 0;
     }
 
-    public void showingOfEditions() {
-        menu.showEditions(editions);
-    }
-
+    /**
+     * Method created to check if a year has edition created
+     * @param currentYear: this year
+     * @return true for created
+     */
     public boolean checkEditionIsCreated(int currentYear) {
         for (Edition e : editions) {
             if (e.checkYear(currentYear)) return true;
@@ -360,30 +407,60 @@ public class EditionManager {
         return players_not_disqualified > 0;
     }
 
+    /**
+     * Method used to read editions from CSV
+     * @return arraylist of editions
+     * @throws IOException: input output exception
+     * @throws CsvException: csv exception
+     */
     public ArrayList<Edition> readEditions_CSV() throws IOException, CsvException {
         return new CsvReader().readEditions();
     }
 
-    public void writeEditions_CSV(ArrayList<Edition> editions) throws IOException {
-        new CsvWriter().writeFullEditionsFiles(editions);
+    /**
+     * Method used to write editions to files
+     * @param choice: true for csv, false for json
+     * @throws IOException: input output exception
+     */
+    public void writeEditionsToFiles(Boolean choice) throws IOException {
+        if (choice) {
+            new CsvWriter().writeFullEditionsFiles(this.editions);
+        } else {
+            new JsonWriter().writeEditions(this.editions);
+        }
     }
 
+    /**
+     * Method used to read editions from files in json
+     * @return arraylist of editions
+     * @throws FileNotFoundException: file not found
+     */
     public ArrayList<Edition> readEditions_JSON() throws FileNotFoundException {
         return new JsonReader().readFilesEditions();
     }
 
-    public void writeEditions_JSON(ArrayList<Edition> editions) throws IOException {
-        new JsonWriter().writeEditions(editions);
-    }
-
+    /**
+     * Method used to write the status of the game in json
+     * @param players: arraylist of players
+     * @throws IOException: input output exception
+     */
     public void writeStatusGame_JSON( ArrayList<Player> players) throws IOException{
         new JsonWriter().writeStatusGame(players);
     }
 
+    /**
+     * Method used to read the status of the game in json
+     * @return arraylist of players
+     * @throws IOException: input output exception
+     */
     public ArrayList<Player> readStatusGame_JSON() throws IOException{
         return new JsonReader().readStatusGame();
     }
 
+    /**
+     * Method created to remove the status file if created.
+     * @param formatChoice: true for csv, false for json
+     */
     private void deleteStatusFile(boolean formatChoice) {
         boolean deletion;
 

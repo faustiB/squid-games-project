@@ -48,7 +48,7 @@ public class Budget extends Trial {
         String message = "\t";
 
         for (Player player : players) {
-            if (!player.isDisqualified()) {
+            if (player.isDisqualified()) {
                 points = points + player.getPi();
             }
         }
@@ -62,7 +62,7 @@ public class Budget extends Trial {
         }
 
         for (Player player : players) {
-            if (!player.isDisqualified()) {
+            if (player.isDisqualified()) {
                 player.setPi(getPoints(result, points));
                 message = message.concat("\t" + player.getNameAndTitle()+ " PI count: "+ player.getPi()+"\n");
                 player.checkStatus();
