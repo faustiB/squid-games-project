@@ -82,7 +82,7 @@ public class Controller {
                 menu.spacing();
                 menu.showMessage("--- THE TRIALS "+currentYear+" ---");
 
-                em.startTrials(currentYear,tm);
+                em.startTrials(currentYear,tm, choiceInput);
 
 
             } else{

@@ -6,6 +6,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -84,4 +86,21 @@ public class JsonReader {
         return gson.fromJson(new FileReader("files/editions.json"), new TypeToken<ArrayList<Edition>>() {
         }.getType());
     }
+
+    /**
+     * Method used to read the status of a past game.
+     * @return arraylist of players with the last trial they played.
+     * @throws FileNotFoundException: file not found.
+     */
+    public ArrayList<Player> readStatusGame() throws IOException {
+        FileReader fileReader = new FileReader("files/statusGame.json");
+
+        ArrayList<Player> players = gson.fromJson(fileReader, new TypeToken<ArrayList<Player>>() {
+        }.getType());
+
+        fileReader.close();
+
+        return players;
+    }
+
 }

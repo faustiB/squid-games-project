@@ -44,7 +44,7 @@ public class Player implements Runnable {
      * @return true for diqualified.
      */
     public boolean isDisqualified() {
-        return disqualified;
+        return !disqualified;
     }
 
     /**
@@ -96,13 +96,25 @@ public class Player implements Runnable {
     }
 
     /**
-     * getter of title
+     * Getter of title
      * @return title
      */
     public int getTitle() {
         return this.title;
     }
 
+    /**
+     * Getter of the name of the trial
+     * @return name of the trial
+     */
+    public String getNameOfTrial() {
+        return this.trial.name;
+    }
+
+    /**
+     * Setter of trial
+     * @param trial: trial passed by parameter
+     */
     public void setTrial(Trial trial) {
         this.trial = trial;
     }

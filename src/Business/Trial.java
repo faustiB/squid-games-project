@@ -93,7 +93,7 @@ public class Trial {
      * @param p: player
      */
     public String executeTrial(Player p) {
-        return "";
+        return null;
     }
 
     /**

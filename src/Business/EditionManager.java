@@ -2,6 +2,7 @@ package Business;
 
 import Persistance.Csv.CsvReader;
 import Persistance.Csv.CsvWriter;
+import Persistance.FileDeleter;
 import Persistance.Json.JsonReader;
 import Persistance.Json.JsonWriter;
 import Presentation.Menu;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class EditionManager {
 
     private ArrayList<Edition> editions;
-    private Menu menu = new Menu();
+    private final Menu menu = new Menu();
 
     public EditionManager(Boolean choice) {
         if (choice) {
@@ -110,7 +111,6 @@ public class EditionManager {
             }
         }
     }
-
 
     public void duplicateEditions() {
         int option;
@@ -208,20 +208,95 @@ public class EditionManager {
         return null;
     }
 
-    public void startTrials(int currentYear, TrialManager tm) throws InterruptedException {
-        Edition e = getEditionByYear(currentYear);
+    public void startTrials(int currentYear, TrialManager tm, boolean formatChoice)
+            throws InterruptedException, IOException {
+        Edition edition = getEditionByYear(currentYear);
+        ArrayList<Player> players = null;
+        int startPosition = 0;
 
-        ArrayList<Player> players = addPlayers(e.getNumberOfPlayers());
+        if (formatChoice){
+            menu.showMessage("Loading data from CSV files...");
+        } else {
+            try {
+                players = readStatusGame_JSON();
+                startPosition = getLastPositionOfTrials(players, edition);
+            } catch (FileNotFoundException e) {
+                players = addPlayers(edition.getNumberOfPlayers());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
-        e.executeTrials(players, tm);
-
-
-
-
-
-
+        executeTrials(players, tm, edition, startPosition, formatChoice);
     }
 
+    private int getLastPositionOfTrials(ArrayList<Player> players, Edition edition) {
+        String nameOfTrial = players.get(0).getNameOfTrial();
+        ArrayList<Trial> trials = edition.getTrials();
+
+        for (int i = 0; i < trials.size(); i++) {
+            if(trials.get(i).getName().equalsIgnoreCase(nameOfTrial)) return i+1;
+        }
+        return 0;
+    }
+
+    /**
+     * Execution of trials
+     *
+     * @param players players that are going to play
+     * @param tm trial manager of trials.
+     */
+    public void executeTrials(ArrayList<Player> players, TrialManager tm, Edition e, int startPosition, boolean formatChoice)
+            throws InterruptedException, IOException {
+
+        ArrayList<String> names = getNamesOfTrials(e);
+        e.setTrials(tm.getSpecificTrialsByNames(names));
+
+        for (int i = startPosition, trialsSize = e.getSizeOfTrials(); i < trialsSize; i++) {
+            Trial trial = e.getSpecificTrialByID(i);
+
+            menu.spacing();
+            menu.showMessage("Trial #" + (i + 1) + " - " + trial.getName());
+
+            if (trial.type == 4) { //if we have a budget trial
+                menu.showMessage(trial.executeBudget(players));
+            } else {
+                for (Player p : players) {
+                    if (p.isDisqualified()) {
+
+                        p.setTrial(trial);
+
+                        Thread thread = new Thread(p);
+                        thread.start();
+                        //TODO: Cambiar esto por que no funcions a
+                        thread.join();
+
+                        //m.showMessage(trial.executeTrial(p));
+                        if (p.getPi() >= 10 || p.getPi() <= 0) { //if player can evolve or has no PI left
+                            menu.showMessage(p.checkStatus());
+                        }
+                    }
+                }
+            }
+            if (!checkNotDisqualifiedPlayers(players)) break; //all player have been eliminated
+            if (i != trialsSize - 1) { //we are at the end of the trials
+                if (!checkContinue()){
+                    if(formatChoice) {
+                        menu.showMessage("This is CSV");
+                    } else {
+                        writeStatusGame_JSON(players);
+                    }
+
+                    menu.spacing();
+                    menu.showMessage("Saving ...");
+                    break;
+                }
+            } else {
+                menu.showEndMessage(checkNotDisqualifiedPlayers(players), e.getYear());
+                deleteStatusFile(formatChoice);
+            }
+        }
+    }
 
     private int getEditionsSize() {
         return editions.size();
@@ -233,6 +308,56 @@ public class EditionManager {
 
     public void showingOfEditions() {
         menu.showEditions(editions);
+    }
+
+    public boolean checkEditionIsCreated(int currentYear) {
+        for (Edition e : editions) {
+            if (e.checkYear(currentYear)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Adding names of trials
+     * @return names of trials
+     */
+    public ArrayList<String> getNamesOfTrials(Edition edition) {
+        ArrayList<String> names = new ArrayList<>();
+        ArrayList<Trial> trials = edition.getTrials();
+
+        for (Trial t : trials) {
+            names.add(t.getName());
+        }
+
+        return names;
+    }
+
+    /**
+     * Method used to see if the conductor wants to continue execution
+     *
+     * @return true for continue, false for no.
+     */
+    private boolean checkContinue() {
+        String keep_playing = menu.askForContinue();
+        return keep_playing.equalsIgnoreCase("yes");
+    }
+
+    /**
+     * This method returns if there are disqualified players.
+     *
+     * @param players: arraylist of players
+     * @return true for alive players, false for not
+     */
+    private boolean checkNotDisqualifiedPlayers(ArrayList<Player> players) {
+        int players_not_disqualified = 0;
+
+        for (Player p : players) {
+            if (p.isDisqualified()) { //is not disqualified
+                players_not_disqualified++;
+            }
+        }
+
+        return players_not_disqualified > 0;
     }
 
     public ArrayList<Edition> readEditions_CSV() throws IOException, CsvException {
@@ -251,14 +376,27 @@ public class EditionManager {
         new JsonWriter().writeEditions(editions);
     }
 
-    public void writeStatusGame_JSON( ArrayList<Player> players, int position) throws IOException{
-        new JsonWriter().writeStatusGame(players,position);
+    public void writeStatusGame_JSON( ArrayList<Player> players) throws IOException{
+        new JsonWriter().writeStatusGame(players);
     }
 
-    public boolean checkEditionIsCreated(int currentYear) {
-        for (Edition e : editions) {
-            if (e.checkYear(currentYear)) return true;
+    public ArrayList<Player> readStatusGame_JSON() throws IOException{
+        return new JsonReader().readStatusGame();
+    }
+
+    private void deleteStatusFile(boolean formatChoice) {
+        boolean deletion;
+
+        if(formatChoice) {
+            deletion =  new FileDeleter().deleteCSVFile();
+        } else {
+            deletion =  new FileDeleter().deleteJsonFile();
         }
-        return false;
+
+        if(!deletion) {
+            menu.spacing();
+            menu.showMessage("Could not delete the Status File...");
+            menu.spacing();
+        }
     }
 }
