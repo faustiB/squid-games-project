@@ -1,13 +1,16 @@
 package Business;
 
+import Presentation.Menu;
+
 /**
  * Class that manages each player.
  */
-public class Player {
+public class Player implements Runnable {
     private final String name;
     private int pi;
     private int title; //0 for engineer, 1 for Master, 2 for PhD
     private boolean disqualified;
+    private Trial trial;
 
     /**
      * Constructor of the player class.
@@ -98,5 +101,16 @@ public class Player {
      */
     public int getTitle() {
         return this.title;
+    }
+
+    public void setTrial(Trial trial) {
+        this.trial = trial;
+    }
+
+    @Override
+    public void run() {
+        Menu m  = new Menu();
+        String message = trial.executeTrial(this);
+        m.showMessage(message);
     }
 }

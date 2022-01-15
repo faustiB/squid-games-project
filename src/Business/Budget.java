@@ -42,11 +42,12 @@ public class Budget extends Trial {
     /**
      * Method created to execute the budget trial.
      */
-    public String executeBudget(ArrayList<Player> p){
+    @Override
+    public String executeBudget(ArrayList<Player> players){
         int points = 0;
         String message = "\t";
 
-        for (Player player : p) {
+        for (Player player : players) {
             if (!player.isDisqualified()) {
                 points = points + player.getPi();
             }
@@ -60,10 +61,11 @@ public class Budget extends Trial {
             message = message.concat("The research group did not get the budget...\n");
         }
 
-        for (Player player : p) {
+        for (Player player : players) {
             if (!player.isDisqualified()) {
                 player.setPi(getPoints(result, points));
-                message = message.concat("\t" + player.getNameAndTitle()+ " PI count: "+ player.getPi());
+                message = message.concat("\t" + player.getNameAndTitle()+ " PI count: "+ player.getPi()+"\n");
+                player.checkStatus();
             }
         }
 

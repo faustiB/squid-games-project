@@ -1,5 +1,6 @@
 package Business;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -11,6 +12,7 @@ public class Trial {
 
     /**
      * Constructor of the trial class.
+     *
      * @param name: name of the trial.
      * @param type: type of trial.
      */
@@ -21,6 +23,7 @@ public class Trial {
 
     /**
      * Method used to get the details of the trial.
+     *
      * @return hashmap of strings.
      */
     public HashMap<String, String> getDetails() {
@@ -31,6 +34,7 @@ public class Trial {
 
     /**
      * Method created to check if the name is correct.
+     *
      * @param input: input string with name.
      * @return true for correct, false for incorrect.
      */
@@ -40,6 +44,7 @@ public class Trial {
 
     /**
      * Getter of name.
+     *
      * @return trial name.
      */
     public String getName() {
@@ -48,6 +53,7 @@ public class Trial {
 
     /**
      * Getter of type
+     *
      * @return type of trial.
      */
     public int getType() {
@@ -56,6 +62,7 @@ public class Trial {
 
     /**
      * Getter of the textual description.
+     *
      * @param type: type of trial.
      * @return textual description.
      */
@@ -73,17 +80,31 @@ public class Trial {
 
     /**
      * Method to return the name of the trial on an array.
+     *
      * @return string array.
      */
-    public String[] getArrayDescription(){
+    public String[] getArrayDescription() {
         return new String[]{name};
     }
 
     /**
      * Overwritten method for the trials execution.
+     *
      * @param p: player
      */
     public String executeTrial(Player p) {
         return "";
     }
+
+    /**
+     * Overwritten method for the budget execution.
+     *
+     * @param p: player
+     */
+    public String executeBudget(ArrayList<Player> p) {
+        return "";
+    }
+
+
 }
+

@@ -208,12 +208,12 @@ public class EditionManager {
         return null;
     }
 
-    public boolean startTrials(int currentYear, TrialManager tm) {
+    public void startTrials(int currentYear, TrialManager tm) throws InterruptedException {
         Edition e = getEditionByYear(currentYear);
 
         ArrayList<Player> players = addPlayers(e.getNumberOfPlayers());
 
-        return e.executeTrials(players, tm);
+        e.executeTrials(players, tm);
     }
 
 
