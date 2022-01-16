@@ -14,10 +14,10 @@ import java.util.HashMap;
  */
 public class CsvWriter {
 
-    private ArrayList<Article> articles = new ArrayList<>();
-    private ArrayList<Master> masters = new ArrayList<>();
-    private ArrayList<Thesis> theses = new ArrayList<>();
-    private ArrayList<Budget> budgets = new ArrayList<>();
+    private final ArrayList<Article> articles = new ArrayList<>();
+    private final ArrayList<Master> masters = new ArrayList<>();
+    private final ArrayList<Thesis> theses = new ArrayList<>();
+    private final ArrayList<Budget> budgets = new ArrayList<>();
 
     /**
      * Method created to separate the arraylist of trials into the different types.

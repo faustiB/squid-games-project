@@ -6,7 +6,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -15,7 +14,7 @@ import java.util.ArrayList;
  * using JSON persistence.
  */
 public class JsonReader {
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     /**
      * Method used to process the different articles.

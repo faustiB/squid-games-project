@@ -14,10 +14,10 @@ import java.util.ArrayList;
  */
 public class JsonWriter {
 
-    private ArrayList<Article> articles = new ArrayList<>();
-    private ArrayList<Master> masters = new ArrayList<>();
-    private ArrayList<Thesis> theses = new ArrayList<>();
-    private ArrayList<Budget> budgets = new ArrayList<>();
+    private final ArrayList<Article> articles = new ArrayList<>();
+    private final ArrayList<Master> masters = new ArrayList<>();
+    private final ArrayList<Thesis> theses = new ArrayList<>();
+    private final ArrayList<Budget> budgets = new ArrayList<>();
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     /**

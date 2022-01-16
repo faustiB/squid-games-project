@@ -541,7 +541,7 @@ public class Menu {
     }
 
     /**
-     * Asks for the continue message and returns the correctly entered string
+     * Asks for to continue message and returns the correctly entered string
      * @return string with the correct input.
      */
     public String askForContinue() {

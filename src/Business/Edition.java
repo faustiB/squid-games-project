@@ -28,7 +28,7 @@ public class Edition {
     }
 
     /**
-     * Constructor of the editions without the trials arraylist.
+     * Constructor of the editions without the trials' arraylist.
      *
      * @param year:            year of the edition.
      * @param numberOfPlayers: number of players.
@@ -71,7 +71,7 @@ public class Edition {
     /**
      * Getter for the size of the trials.
      *
-     * @return size of the trials arraylist.
+     * @return size of the trials' arraylist.
      */
     public int getSizeOfTrials() {
         return trials.size();
@@ -118,7 +118,7 @@ public class Edition {
     /**
      * This method duplicates the trials of an edition.
      *
-     * @param edition: edition choosen.
+     * @param edition: edition chosen.
      */
     public void duplicateTrials(Edition edition) {
         this.trials = edition.trials;
